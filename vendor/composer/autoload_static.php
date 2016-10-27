@@ -393,7 +393,6 @@ class ComposerStaticInit53f15bd68235b99a650cc337fbb4b473
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
         'Hospital' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_061709_hospital.php',
         'HospitalType' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_061532_hospital_type.php',
-        'Hotel' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_114755_hotel.php',
         'IlluminateQueueClosure' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
         'Laboratory' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_070541_laboratory.php',
         'LaboratoryTests' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_070438_laboratory_tests.php',
@@ -838,6 +837,11 @@ class ComposerStaticInit53f15bd68235b99a650cc337fbb4b473
         'States' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_110011_states.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
+        'Vendor' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_082750_vendor.php',
+        'VendorProductBrand' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_082130_vendor_product_brand.php',
+        'VendorProductCategory' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_082252_vendor_product_category.php',
+        'VendorProductMaster' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_082513_vendor_product_master.php',
+        'VendorProductSale' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_082922_vendor_product_sale.php',
         'Zizaco\\Entrust\\MigrationCommand' => __DIR__ . '/..' . '/zizaco/entrust/src/commands/MigrationCommand.php',
     );
 

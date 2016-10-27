@@ -115,7 +115,6 @@ return array(
     'Hamcrest\\Xml\\HasXPath' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
     'Hospital' => $baseDir . '/database/migrations/2016_10_27_061709_hospital.php',
     'HospitalType' => $baseDir . '/database/migrations/2016_10_27_061532_hospital_type.php',
-    'Hotel' => $baseDir . '/database/migrations/2016_10_21_114755_hotel.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
     'Laboratory' => $baseDir . '/database/migrations/2016_10_27_070541_laboratory.php',
     'LaboratoryTests' => $baseDir . '/database/migrations/2016_10_27_070438_laboratory_tests.php',
@@ -560,5 +559,10 @@ return array(
     'States' => $baseDir . '/database/migrations/2016_10_21_110011_states.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'Vendor' => $baseDir . '/database/migrations/2016_10_27_082750_vendor.php',
+    'VendorProductBrand' => $baseDir . '/database/migrations/2016_10_27_082130_vendor_product_brand.php',
+    'VendorProductCategory' => $baseDir . '/database/migrations/2016_10_27_082252_vendor_product_category.php',
+    'VendorProductMaster' => $baseDir . '/database/migrations/2016_10_27_082513_vendor_product_master.php',
+    'VendorProductSale' => $baseDir . '/database/migrations/2016_10_27_082922_vendor_product_sale.php',
     'Zizaco\\Entrust\\MigrationCommand' => $vendorDir . '/zizaco/entrust/src/commands/MigrationCommand.php',
 );
