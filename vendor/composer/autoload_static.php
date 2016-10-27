@@ -797,6 +797,7 @@ class ComposerStaticInit53f15bd68235b99a650cc337fbb4b473
         'Pharmacy' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_071827_pharmacy.php',
         'PharmacyMedicine' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_072002_pharmacy_medicine.php',
         'PharmacyMedicineType' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_071906_pharmacy_medicine_type.php',
+        'PharmacyProduct' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_073542_pharmacy_product.php',
         'PharmacyType' => __DIR__ . '/../..' . '/database/migrations/2016_10_27_071654_pharmacy_type.php',
         'SebastianBergmann\\Comparator\\ArrayComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ArrayComparator.php',
         'SebastianBergmann\\Comparator\\Comparator' => __DIR__ . '/..' . '/sebastian/comparator/src/Comparator.php',

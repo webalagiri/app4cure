@@ -519,6 +519,7 @@ return array(
     'Pharmacy' => $baseDir . '/database/migrations/2016_10_27_071827_pharmacy.php',
     'PharmacyMedicine' => $baseDir . '/database/migrations/2016_10_27_072002_pharmacy_medicine.php',
     'PharmacyMedicineType' => $baseDir . '/database/migrations/2016_10_27_071906_pharmacy_medicine_type.php',
+    'PharmacyProduct' => $baseDir . '/database/migrations/2016_10_27_073542_pharmacy_product.php',
     'PharmacyType' => $baseDir . '/database/migrations/2016_10_27_071654_pharmacy_type.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
