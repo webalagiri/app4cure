@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Cities extends Migration
+class Areas extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,11 @@ class Cities extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('city_name', 255);
+            $table->string('area_name', 255);
+            $table->string('area_pincode', 255);
+            $table->integer('city')->unsigned();
             $table->integer('state')->unsigned();
             $table->integer('country')->unsigned();
             $table->tinyInteger('city_status');
@@ -23,11 +25,11 @@ class Cities extends Migration
             $table->timestamps();
         });
 
-        Schema::table('cities', function(Blueprint $table){
+        Schema::table('areas', function(Blueprint $table){
             $table->foreign('country')->references('id')->on('countries')->onDelete('cascade');
             $table->foreign('state')->references('id')->on('states')->onDelete('cascade');
+            $table->foreign('city')->references('id')->on('cities')->onDelete('cascade');
         });
-
     }
 
     /**
@@ -37,6 +39,6 @@ class Cities extends Migration
      */
     public function down()
     {
-        Schema::drop('cities');
+        Schema::drop('areas');
     }
 }
