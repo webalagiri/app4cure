@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class PharmacyType extends Migration
+class PharmacyMedicineType extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class PharmacyType extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('pharmacy_type'))
+        if(!Schema::hasTable('pharmacy_medicine_type'))
         {
-            Schema::create('pharmacy_type', function (Blueprint $table) {
+            Schema::create('pharmacy_medicine_type', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('code');
                 $table->string('name');
@@ -33,6 +33,6 @@ class PharmacyType extends Migration
      */
     public function down()
     {
-        Schema::drop('pharmacy_type');
+        Schema::drop('pharmacy_medicine_type');
     }
 }
