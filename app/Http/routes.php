@@ -17,7 +17,7 @@ Route::get('/', function () {
 */
 
 Route::get('/', function () {
-    return view('portal.home');
+    return view('portal.index');
 });
 
 Route::group(['prefix' => 'common'], function()
