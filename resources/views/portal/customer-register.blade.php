@@ -41,6 +41,22 @@
 
                         <hr>
 
+                        @if (session()->has('message'))
+                            <div class="col_full login-title">
+                                <span style="color:red;">
+                                    <b>{{session('message')}}</b>
+                                </span>
+                            </div>
+                        @endif
+
+                        @if (session()->has('success'))
+                            <div class="col_full login-title">
+                                <span style="color:green;">
+                                    <b>{{session('success')}}</b>
+                                </span>
+                            </div>
+                        @endif
+
                         {!! Form::open( array( 'route' => array('customer.doregister') ,'role' => 'form' ,'method'=>'POST', 'files'=>true,'class'=>'') ) !!}
                             <div class="form-group">
                                 <label for="name-login">Name</label>

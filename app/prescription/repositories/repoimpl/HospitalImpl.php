@@ -9,6 +9,7 @@
 namespace App\prescription\repositories\repoimpl;
 
 use App\Http\ViewModels\PatientLabTestViewModel;
+use App\prescription\model\entities\Patient;
 use App\prescription\model\entities\Hospital;
 use App\prescription\model\entities\LabTestDetails;
 use App\prescription\model\entities\PatientLabTests;
@@ -21,6 +22,7 @@ use App\Http\ViewModels\PatientPrescriptionViewModel;
 
 use App\prescription\utilities\UserType;
 use App\User;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Exception;
@@ -849,7 +851,7 @@ class HospitalImpl implements HospitalInterface{
             $user->email = $patientInfo['email'];
             $user->password = \Hash::make($patientInfo['password']);
             $user->save();
-
+            $patientInfo['customer_id']=$user->id;
             $userRole = Role::find(2);
 
             if (!is_null($userRole))
@@ -858,28 +860,27 @@ class HospitalImpl implements HospitalInterface{
             }
             //dd($user);
 
-            return $status;
+            //return $status;
 
             //dd('Inside Add New Patient implementation method');
-            $pid = $this->generatePid();
+            //$pid = $this->generatePid();
             //dd($patientInfo);
             //dd('Value of pid is:'.$pid);
             //dd($pid);
-            $newPatient = new PatientInfo();
+            $newPatient = new Patient();
 
-            $newPatient->patient_id = $patientInfo['patient_id'];
-            $newPatient->first_name = $patientInfo['first_name'];
-            $newPatient->last_name = $patientInfo['last_name'];
+            $newPatient->customer_id = $patientInfo['customer_id'];
+            $newPatient->customer_name = $patientInfo['name'];
             $newPatient->email = $patientInfo['email'];
-            $newPatient->mobile = $patientInfo['mobile'];
-            $newPatient->country = $patientInfo['country'];
+            //$newPatient->mobile = $patientInfo['mobile'];
+            //$newPatient->country = $patientInfo['country'];
             //$newPatient->age = $patientInfo['age'];
             //$newPatient->gender = $patientInfo['gender'];
-            $newPatient->pid = $prefix.strval($pid);
-            $newPatient->pid_no_prefix = $pid;
-            $newPatient->creator_id = $patientInfo['patient_id'];
+            //$newPatient->pid = $prefix.strval($pid);
+            //$newPatient->pid_no_prefix = $pid;
+            //$newPatient->creator_id = $patientInfo['patient_id'];
             $newPatient->created_by = strval(100);
-            $newPatient->modified_by = strval(100);
+            $newPatient->updated_by = strval(100);
             $newPatient->created_at = date("Y-m-d H:i:s");
             $newPatient->updated_at = date("Y-m-d H:i:s");
             $newPatient->save();
@@ -889,13 +890,13 @@ class HospitalImpl implements HospitalInterface{
         {
 
             $status = false;
-            //dd($queryEx);
+            dd($queryEx);
             throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $queryEx);
         }
         catch (Exception $ex)
         {
             $status = false;
-            //dd($ex);
+            dd($ex);
             throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $ex);
         }
 

@@ -201,13 +201,13 @@ class CommonController extends Controller
             {
                 // dd("Saved successfully");
                 $sucmsg="Registration Done Successfully! Now you can login.";
-                return redirect('user/login')->with('success',$sucmsg);
+                return redirect('customer-login')->with('success',$sucmsg);
                 /*$msg = trans('messages.'.ErrorEnum::NEW_PATIENT_ADD_SUCCESS);
                 $savesuccess = Config::get('toastr.savesuccess');
                 Toastr::success($msg, $title = 'PROFILE', $savesuccess);*/
             }
             $msg="Register Details Invalid! Try Again.";
-            return redirect('user/login')->with('message',$msg);
+            return redirect('customer-login')->with('message',$msg);
 
         }
         catch (HospitalException $userExc) {
@@ -215,7 +215,7 @@ class CommonController extends Controller
             //$msg = AppendMessage::appendMessage($userExc);
             //Log::error($msg);
             $msg="Register Details Invalid! Try Again.";
-            return redirect('user/login')->with('message',$msg);
+            return redirect('customer-login')->with('message',$msg);
             //return redirect('exception')->with('message',$errorMsg." ".trans('messages.SupportTeam'));
             /*return Response::json(array(
                         'success' => false,
