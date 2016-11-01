@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>@yield('title') -  </title>
+    <title>@yield('title') - App4Cure </title>
     @section('meta')
         <meta content="IE=edge;text/html;charset=utf-8" http-equiv="X-UA-Compatible">
         <meta name="keywords" content="@yield('meta_keywords')"/>

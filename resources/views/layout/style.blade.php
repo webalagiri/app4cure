@@ -23,7 +23,7 @@
 {!!  Html::style(asset('css/owl.theme.css')) !!}
 
 
-{!! Html::style(asset('css/reser.css')) !!}
+{!! Html::style(asset('css/reset.css')) !!}
 
 @yield('styles')
 

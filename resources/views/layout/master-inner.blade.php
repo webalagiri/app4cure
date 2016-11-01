@@ -1,17 +1,17 @@
 <html>
 <head>
-    <title>@yield('title') -  </title>
+    <title>@yield('title') - App4Cure </title>
     @section('meta')
         <meta content="IE=edge;text/html;charset=utf-8" http-equiv="X-UA-Compatible">
         <meta name="keywords" content="@yield('meta_keywords')"/>
         <meta name="description" content="@yield('meta_description')">
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-    @show
+        @show
 
-<!-- STYLES -->
-    @include('layout.style')
-<!-- STYLES -->
+                <!-- STYLES -->
+        @include('layout.style')
+        <!-- STYLES -->
 
 </head>
 <body class="stretched">
@@ -20,25 +20,25 @@
 ============================================= -->
 <div id="all">
 
-<!-- HEADER-->
-    @include('portal.partials.header-logo-inner')
-<!-- HEADER-->
+    <!-- HEADER-->
+    @include('portal.partials.header-logo')
+    <!-- HEADER-->
 
-<!-- LEFT SIDE BAR-->
+    <!-- LEFT SIDE BAR-->
 
-<!-- LEFT SIDE BAR-->
+    <!-- LEFT SIDE BAR-->
 
     <!-- CONTENT-->
-        @yield('content')
+    @yield('content')
     <!-- CONTENT-->
 
-<!-- RIGHT SIDE BAR-->
+    <!-- RIGHT SIDE BAR-->
 
-<!-- RIGHT SIDE BAR-->
+    <!-- RIGHT SIDE BAR-->
 
-<!-- FOOTER -->
+    <!-- FOOTER -->
     @include('portal.partials.footer')
-<!-- FOOTER -->
+    <!-- FOOTER -->
 
 
 

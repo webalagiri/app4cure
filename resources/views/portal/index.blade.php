@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'Find and Compare Hospitals | Medical Tourism |Compare Hospitals & Facilities')
+@section('title', 'Find Medical Facilities')
 
 @section('styles')
 

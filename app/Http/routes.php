@@ -20,6 +20,30 @@ Route::get('/', function () {
     return view('portal.index');
 });
 
+Route::get('/about', function () {
+    return view('portal.about');
+});
+
+Route::get('/medical-services', function () {
+    return view('portal.medical-services');
+});
+
+Route::get('/shop', function () {
+    return view('portal.shop');
+});
+
+Route::get('/contact', function () {
+    return view('portal.contact');
+});
+
+
+Route::get('/customer-register', function () {
+    return view('portal.customer-register');
+});
+
+
+
+
 Route::group(['prefix' => 'common'], function()
 {
     Route::group(['namespace' => 'Common'], function()

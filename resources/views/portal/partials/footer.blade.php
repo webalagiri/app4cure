@@ -5,7 +5,16 @@
 
             <p>Many people doesn’t not afraid of diseases; they afraid of health care system. <a href="{{ URL::to('/') }}/about.html">Read more...</a></p>
 
-            <hr>
+
+
+            <hr class="hidden-md hidden-lg hidden-sm">
+
+        </div>
+        <!-- /.col-md-3 -->
+
+        <div class="col-md-4 col-sm-6">
+
+
 
             <h4>Join our monthly newsletter</h4>
 
@@ -31,63 +40,11 @@
 
         <div class="col-md-4 col-sm-6">
 
-            <h4>Blog</h4>
-
-            <div class="blog-entries">
-                <div class="item same-height-row clearfix">
-                    <div class="image same-height-always">
-                        <a href="#">
-                            <img class="img-responsive" src="{{ URL::to('/') }}/img/detailsquare.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="name same-height-always">
-                        <h5><a href="#blog.html">Blogger 1</a></h5>
-                    </div>
-                </div>
-
-                <div class="item same-height-row clearfix">
-                    <div class="image same-height-always">
-                        <a href="#">
-                            <img class="img-responsive" src="{{ URL::to('/') }}/img/detailsquare.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="name same-height-always">
-                        <h5><a href="#">Blogger 2</a></h5>
-                    </div>
-                </div>
-
-                <div class="item same-height-row clearfix">
-                    <div class="image same-height-always">
-                        <a href="#">
-                            <img class="img-responsive" src="{{ URL::to('/') }}/img/detailsquare.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="name same-height-always">
-                        <h5><a href="#">Blogger 3</a></h5>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="hidden-md hidden-lg">
-
-        </div>
-        <!-- /.col-md-3 -->
-
-        <div class="col-md-4 col-sm-6">
-
             <h4>Contact</h4>
-
-            <p><strong>App4Cure</strong>
-                <br>F1, 1/422A
-                , Selaiyur
-                <br>Tambaram
-                , Tamil Nadu,
-                <br>
-                <strong>India</strong>
+            <p>
+                <strong>App4Cure</strong>&nbsp; <a href="{{ URL::to('/') }}/contact.html" class="btn btn-small btn-template-main">Go</a>
+                <br>F1, 1/422A, Selaiyur, Tambaram, Tamil Nadu, India
             </p>
-
-            <a href="{{ URL::to('/') }}/contact.html" class="btn btn-small btn-template-main">Go to contact page</a>
-
             <hr class="hidden-md hidden-lg hidden-sm">
 
         </div>

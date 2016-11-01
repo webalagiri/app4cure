@@ -20,7 +20,7 @@
 
                     <div class="login">
                         <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
-                        <a href="#customer-register.html"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
+                        <a href="{{ URL::to('/') }}/customer-register"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
                     </div>
 
                 </div>
@@ -56,27 +56,28 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown active">
-                            <a href="#index.html">Home</a>
-
+                            <a href="{{ URL::to('/') }}/">Home</a>
                         </li>
                         <li class="dropdown use-yamm yamm-fw">
-                            <a href="#about.html">About Us</a>
-
+                            <a href="{{ URL::to('/') }}/about">About Us</a>
                         </li>
+                        <!--
                         <li class="dropdown use-yamm yamm-fw">
                             <a href="#Blog.html">Blog</a>
+                        </li>
+                        -->
 
+                        <li class="dropdown use-yamm yamm-fw">
+                            <a href="{{ URL::to('/') }}/medical-services">Medical Services</a>
                         </li>
                         <li class="dropdown use-yamm yamm-fw">
-                            <a href="#medical-services.html">Medical Services</a>
-
+                            <a href="{{ URL::to('/') }}/shop.html">Shop</a>
                         </li>
                         <li class="dropdown use-yamm yamm-fw">
-                            <a href="#shop.html">Shop</a>
-
+                            <a href="{{ URL::to('/') }}/contact">Contact</a>
                         </li>
 
-
+                        <!--
                         <li class="dropdown">
                             <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Contact <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -89,6 +90,7 @@
 
                             </ul>
                         </li>
+                        -->
                     </ul>
 
                 </div>
@@ -150,7 +152,7 @@
                 </form>
 
                 <p class="text-center text-muted">Not registered yet?</p>
-                <p class="text-center text-muted"><a href="#customer-register.html"><strong>Register now</strong></a>! It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!</p>
+                <p class="text-center text-muted"><a href="{{ URL::to('/') }}/customer-register"><strong>Register now</strong></a>! It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!</p>
 
             </div>
         </div>
