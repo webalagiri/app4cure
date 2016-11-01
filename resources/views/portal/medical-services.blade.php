@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.master-inner')
 
 @section('title', 'Customer Register')
 
@@ -34,7 +34,7 @@
                     <div class="box">
                         <h2 class="text-uppercase">Departments</h2>
                         <a href="neurology.html">
-                            <img src="img/department.png" class="img-responsive" border="0" /></a>
+                            <img src="{{ URL::to('/') }}/img/department.png" class="img-responsive" border="0" /></a>
                     </div>
                 </div>
 

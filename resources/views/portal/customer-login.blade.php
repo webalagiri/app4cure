@@ -13,13 +13,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <h1>New account / Sign in</h1>
+                    <h1>Sign in</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb">
                         <li><a href="{{ URL::to('/') }}/">Home</a>
                         </li>
-                        <li>New account / Sign in</li>
+                        <li>Sign in</li>
                     </ul>
 
                 </div>
@@ -31,7 +31,36 @@
         <div class="container">
 
             <div class="row">
+                <div class="col-md-3"></div>
+
                 <div class="col-md-6">
+                    <div class="box">
+                        <h2 class="text-uppercase">Login</h2>
+
+                        <p class="lead">Already our customer?</p>
+
+                        <hr>
+
+                        {!! Form::open( array( 'route' => array('customer.dologin') ,'role' => 'form' ,'method'=>'POST', 'files'=>true,'class'=>'') ) !!}
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required="required" />
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-template-main"><i class="fa fa-sign-in"></i> Log in</button>
+                        </div>
+
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+
+                <div class="col-md-6 hidden">
                     <div class="box">
                         <h2 class="text-uppercase">New account</h2>
 
@@ -61,31 +90,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="box">
-                        <h2 class="text-uppercase">Login</h2>
 
-                        <p class="lead">Already our customer?</p>
-
-                        <hr>
-
-                        {!! Form::open( array( 'route' => array('customer.dologin') ,'role' => 'form' ,'method'=>'POST', 'files'=>true,'class'=>'') ) !!}
-
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" required="required" />
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" required="required" />
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-template-main"><i class="fa fa-sign-in"></i> Log in</button>
-                            </div>
-
-                        {!! Form::close() !!}
-                    </div>
-                </div>
 
             </div>
             <!-- /.row -->

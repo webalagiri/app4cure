@@ -17,11 +17,17 @@
                         <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
                         <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                     </div>
-
+                    @if(isset(Auth::user()->id))
+                        <div class="login">
+                            <a href="{{ URL::to('/') }}/patient/{{Auth::user()->id}}/dashboard"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">My Account</span></a>
+                            <a href="{{ URL::to('/') }}/logout"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign out</span></a>
+                        </div>
+                    @else
                     <div class="login">
                         <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
                         <a href="{{ URL::to('/') }}/customer-register"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
                     </div>
+                    @endif
 
                 </div>
             </div>

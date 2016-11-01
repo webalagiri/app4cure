@@ -42,7 +42,15 @@ Route::group(['namespace' => 'Common'], function()
     Route::get('/customer-register', array('as' => 'customer.register', 'uses' => 'CommonController@registerFormPatient'));
     Route::any('/do-customer-register', array('as' => 'customer.doregister', 'uses' => 'CommonController@registerNewPatient'));
 
+    Route::any('/customer-login', array('as' => 'customer.login', 'uses' => 'CommonController@loginFormPatient'));
+    Route::any('/do-customer-login', array('as' => 'customer.dologin', 'uses' => 'CommonController@loginPatient'));
+
+    Route::any('/patient/{id}/dashboard', array('as' => 'customer.dashboard', 'uses' => 'CommonController@dashboardPatient'));
+
+    Route::any('/logout', array('as' => 'customer.login', 'uses' => 'CommonController@logoutPatient'));
 });
+
+
 
 
 /* ADMIN */
@@ -85,7 +93,7 @@ Route::group(['prefix' => 'hospital'], function()
 
 });
 
-Route::group(array('prefix' => 'patient', 'namespace' => 'Common'), function()
+Route::group(array('prefix' => 'patientx', 'namespace' => 'Common'), function()
 {
     Route::get('{id}/dashboard', function () {
         return view('portal.patient-dashboard');

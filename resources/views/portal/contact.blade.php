@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.master-inner')
 
 @section('title', 'Customer Register')
 
