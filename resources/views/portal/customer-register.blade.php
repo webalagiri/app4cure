@@ -41,23 +41,23 @@
 
                         <hr>
 
-                        <form action="customer-orders.html" method="post">
+                        {!! Form::open( array( 'route' => array('customer.doregister') ,'role' => 'form' ,'method'=>'POST', 'files'=>true,'class'=>'form-horizontal nobottommargin') ) !!}
                             <div class="form-group">
                                 <label for="name-login">Name</label>
-                                <input type="text" class="form-control" id="name-login">
+                                <input type="text" class="form-control" id="name-login" name="name" required="required" />
                             </div>
                             <div class="form-group">
                                 <label for="email-login">Email</label>
-                                <input type="text" class="form-control" id="email-login">
+                                <input type="text" class="form-control" id="email-login" name="email" required="required" />
                             </div>
                             <div class="form-group">
                                 <label for="password-login">Password</label>
-                                <input type="password" class="form-control" id="password-login">
+                                <input type="password" class="form-control" id="password-login" name="password" required="required" />
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-template-main"><i class="fa fa-user-md"></i> Register</button>
                             </div>
-                        </form>
+                        {!! Form::close() !!}
                     </div>
                 </div>
 

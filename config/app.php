@@ -163,8 +163,9 @@ return [
 
 
 
-        App\hotel\serviceprovider\reposerviceprovider\HotelRepoServiceProvider::class,
-        App\hotel\serviceprovider\servicesserviceprovider\HotelServiceProvider::class,
+
+        App\prescription\serviceprovider\reposerviceprovider\HospitalRepoServiceProvider::class,
+        App\prescription\serviceprovider\servicesserviceprovider\HospitalServiceProvider::class,
 
     ],
 
@@ -218,7 +219,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
 
 
-        'HotelServiceFacade'      => App\hotel\facades\HotellServiceFacade::class,
+        'HospitalServiceFacade'      => App\prescription\facades\HospitalServiceFacade::class,
 
     ],
 

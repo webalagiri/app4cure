@@ -18,26 +18,26 @@
         "symfony/css-selector": "2.8.*|3.0.*",
         "symfony/dom-crawler": "2.8.*|3.0.*"
     },
-    "autoload": {
-        "classmap": [
-          "app/hotel/facades",
-          "app/hotel/model/entities",
-          "app/hotel/repositories/repoimpl",
-          "app/hotel/repositories/repointerface",
-          "app/hotel/serviceprovider/reposerviceprovider",
-          "app/hotel/serviceprovider/servicesserviceprovider",
-          "app/hotel/services",
-          "app/hotel/utilities",
-          "app/hotel/utilities/Exception",
-          "app/hotel/utilities/HHSCache",
-          "app/hotel/common",
-          "app/hotel/mapper",
-          "database"
-        ],
-        "psr-4": {
-            "App\\": "app/"
-        }
-    },
+  "autoload": {
+    "classmap": [
+      "app/prescription/facades",
+      "app/prescription/model/entities",
+      "app/prescription/repositories/repoimpl",
+      "app/prescription/repositories/repointerface",
+      "app/prescription/serviceprovider/reposerviceprovider",
+      "app/prescription/serviceprovider/servicesserviceprovider",
+      "app/prescription/services",
+      "app/prescription/utilities",
+      "app/prescription/utilities/Exception",
+      "app/prescription/utilities/HHSCache",
+      "app/prescription/common",
+      "app/prescription/mapper",
+      "database"
+    ],
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php"

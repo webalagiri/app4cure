@@ -3,7 +3,7 @@
         <div class="col-md-4 col-sm-6">
             <h4>About us</h4>
 
-            <p>Many people doesn’t not afraid of diseases; they afraid of health care system. <a href="{{ URL::to('/') }}/about.html">Read more...</a></p>
+            <p>Many people doesn’t not afraid of diseases; they afraid of health care system. <a href="{{ URL::to('/') }}/about">Read more...</a></p>
 
             <hr>
 
