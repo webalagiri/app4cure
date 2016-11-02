@@ -358,7 +358,9 @@ class LabController extends Controller
 
     public function laboratoryList()
     {
+
         $patients = null;
+        return view('portal.laboratory',compact('patients'));
 
         try
         {

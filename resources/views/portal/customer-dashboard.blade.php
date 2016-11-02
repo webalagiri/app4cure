@@ -108,22 +108,22 @@ _________________________________________________________ -->
                                 <div class="col-md-3 col-sm-3">
                                     <div class="team-member" data-animate="fadeInUp">
                                         <div class="image">
-                                            <a href="team-member.html">
+                                            <a href="{{ URL::to('/') }}/laboratory">
                                                 <img src="{{ URL::to('/') }}/img/service/lab.jpg" alt="" class="img-responsive img-circle">
                                             </a>
                                         </div>
-                                        <h3><a href="team-member.html">Laboratory Tests</a></h3>
+                                        <h3><a href="{{ URL::to('/') }}/laboratory">Laboratory Tests</a></h3>
                                     </div>
                                     <!-- /.team-member -->
                                 </div>
                                 <div class="col-md-3 col-sm-3" data-animate="fadeInUp">
                                     <div class="team-member">
                                         <div class="image">
-                                            <a href="team-member.html">
+                                            <a href="#">
                                                 <img src="{{ URL::to('/') }}/img/service/medicine.jpg" alt="" class="img-responsive img-circle">
                                             </a>
                                         </div>
-                                        <h3><a href="team-member.html">Medicine Online</a></h3>
+                                        <h3><a href="#">Medicine Online</a></h3>
 
                                     </div>
                                     <!-- /.team-member -->
@@ -131,11 +131,11 @@ _________________________________________________________ -->
                                 <div class="col-md-3 col-sm-3" data-animate="fadeInUp">
                                     <div class="team-member">
                                         <div class="image">
-                                            <a href="team-member.html">
+                                            <a href="#">
                                                 <img src="{{ URL::to('/') }}/img/service/doctor.jpg" alt="" class="img-responsive img-circle">
                                             </a>
                                         </div>
-                                        <h3><a href="team-member.html">Doctor Appointment</a></h3>
+                                        <h3><a href="#">Doctor Appointment</a></h3>
 
                                     </div>
                                     <!-- /.team-member -->
