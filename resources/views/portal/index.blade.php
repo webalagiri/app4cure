@@ -28,7 +28,7 @@ _________________________________________________________ -->
                                     <br />belongs to private sector.</p>
                             </div>
                             <div class="col-sm-7">
-                                <img class="img-responsive" src="http://app4cure.co.in/img/people-globe.png" alt="">
+                                <img class="img-responsive" src="{{ URL::to('/') }}/img/people-globe.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ _________________________________________________________ -->
                         <div class="row">
 
                             <div class="col-sm-7 text-center">
-                                <img class="img-responsive" src="http://app4cure.co.in/img/waiting.png" alt="">
+                                <img class="img-responsive" src="{{ URL::to('/') }}/img/waiting.png" alt="">
                             </div>
 
                             <div class="col-sm-5">
@@ -62,14 +62,14 @@ _________________________________________________________ -->
                                 </ul>
                             </div>
                             <div class="col-sm-7">
-                                <img class="img-responsive" src="http://app4cure.co.in/img/ambulance-service.png" alt="">
+                                <img class="img-responsive" src="{{ URL::to('/') }}/img/ambulance-service.png" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="item">
                         <div class="row">
                             <div class="col-sm-7">
-                                <img class="img-responsive" src="http://app4cure.co.in/img/live-track.png" alt="">
+                                <img class="img-responsive" src="{{ URL::to('/') }}/img/live-track.png" alt="">
                             </div>
                             <div class="col-sm-5">
                                 <h1>Live tracking: </h1>

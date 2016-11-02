@@ -18,8 +18,8 @@ class Cities extends Migration
             $table->integer('state')->unsigned();
             $table->integer('country')->unsigned();
             $table->tinyInteger('city_status');
-            $table->string('created_by',255)->default('admin');
-            $table->string('modified_by',255)->default('admin');
+            $table->string('created_by',255)->default('adm');
+            $table->string('modified_by',255)->default('adm');
             $table->timestamps();
         });
 

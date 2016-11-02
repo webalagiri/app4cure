@@ -50,23 +50,31 @@ Route::group(['namespace' => 'Common'], function()
     Route::any('/logout', array('as' => 'customer.login', 'uses' => 'CommonController@logoutPatient'));
 });
 
+Route::group(['prefix' => 'laboratory'], function()
+{
+    Route::group(['namespace' => 'Lab'], function()
+    {
+        Route::any('/', array('as' => 'customer.login', 'uses' => 'LabController@laboratoryList'));
+    });
+});
+
 
 
 
 /* ADMIN */
 
-Route::get('/admin', function () {
-    return view('admin.portal.login');
+Route::get('/adm', function () {
+    return view('adm.portal.login');
 });
 
 Route::get('/login', function () {
-    return view('admin.portal.login');
+    return view('adm.portal.login');
 });
 
 Route::post('/dologin', array('as' => 'user.dologin', 'uses' => 'Doctor\DoctorController@userlogin'));
 
 Route::get('/dashboard', function () {
-    return view('admin.portal.index');
+    return view('adm.portal.index');
 });
 
 

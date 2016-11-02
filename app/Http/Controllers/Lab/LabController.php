@@ -351,4 +351,36 @@ class LabController extends Controller
 
         //return $jsonResponse;
     }
+
+
+    //VIMAL
+
+
+    public function laboratoryList()
+    {
+        $patients = null;
+
+        try
+        {
+            $laboratory = $this->labService->laboratoryList($labId, $hospitalId);
+            dd($laboratory);
+        }
+        catch(LabException $profileExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $profileExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($profileExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return view('portal.lab-patients',compact('patients'));
+
+        //return $patients;
+    }
 }

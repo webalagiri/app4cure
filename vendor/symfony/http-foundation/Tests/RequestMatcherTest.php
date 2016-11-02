@@ -95,15 +95,15 @@ class RequestMatcherTest extends \PHPUnit_Framework_TestCase
     {
         $matcher = new RequestMatcher();
 
-        $request = Request::create('/admin/foo');
+        $request = Request::create('/adm/foo');
 
-        $matcher->matchPath('/admin/.*');
+        $matcher->matchPath('/adm/.*');
         $this->assertTrue($matcher->matches($request));
 
-        $matcher->matchPath('/admin');
+        $matcher->matchPath('/adm');
         $this->assertTrue($matcher->matches($request));
 
-        $matcher->matchPath('^/admin/.*$');
+        $matcher->matchPath('^/adm/.*$');
         $this->assertTrue($matcher->matches($request));
 
         $matcher->matchMethod('/blog/.*');
@@ -123,8 +123,8 @@ class RequestMatcherTest extends \PHPUnit_Framework_TestCase
     public function testPathWithEncodedCharacters()
     {
         $matcher = new RequestMatcher();
-        $request = Request::create('/admin/fo%20o');
-        $matcher->matchPath('^/admin/fo o*$');
+        $request = Request::create('/adm/fo%20o');
+        $matcher->matchPath('^/adm/fo o*$');
         $this->assertTrue($matcher->matches($request));
     }
 
@@ -132,7 +132,7 @@ class RequestMatcherTest extends \PHPUnit_Framework_TestCase
     {
         $matcher = new RequestMatcher();
 
-        $request = Request::create('/admin/foo');
+        $request = Request::create('/adm/foo');
         $request->attributes->set('foo', 'foo_bar');
 
         $matcher->matchAttribute('foo', 'foo_.*');

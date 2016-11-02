@@ -289,7 +289,7 @@ class CommonController extends Controller
                     $msg="Login Details Incorrect! Try Again.";
                     return redirect('customer-login')->with('message',$msg);
                 }
-                else if(Auth::user()->hasRole('admin'))
+                else if(Auth::user()->hasRole('adm'))
                 {
                     $LoginUserId=Session::put('LoginUserId', Auth::user()->id);
                     $LoginUserType=Session::put('LoginUserType', 'patient');
@@ -297,7 +297,7 @@ class CommonController extends Controller
                     $AuthDisplayName=Session::put('AuthDisplayName', ucfirst(Auth::user()->name));
                     $AuthDisplayPhoto=Session::put('AuthDisplayPhoto', "no-image.jpg");
                     // dd(Auth::user()->name);
-                    return redirect('admin/'.Auth::user()->id.'/dashboard');
+                    return redirect('adm/'.Auth::user()->id.'/dashboard');
                 }
             }
             else
@@ -331,7 +331,7 @@ class CommonController extends Controller
 
     public function dashboardPatient()
     {
-        return view('portal.medical-services');
+        return view('portal.customer-dashboard');
     }
 
 
@@ -449,8 +449,8 @@ class CommonController extends Controller
 
             if (UserServiceFacade::ForgotdoLogin($login)) {
 
-                $url = 'http://www.healthvistaz.com/';
-                $subject = 'Forgot Login - Healthvistaz';
+                $url = 'http://www.app4cure.co.in/';
+                $subject = 'Forgot Login - App4Cure';
 
                 Mail::send('emails.welcomemail',array('name'=>$name,'email'=>$email,'password'=>$password,'url'=>$url), function($message) use($email,$name,$subject) {
                     $message->from('hello@app.com', 'Your Application');

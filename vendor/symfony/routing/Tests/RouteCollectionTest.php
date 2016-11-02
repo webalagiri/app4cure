@@ -147,18 +147,18 @@ class RouteCollectionTest extends \PHPUnit_Framework_TestCase
         $collection->addCollection($collection2);
         $collection->addPrefix(' / ');
         $this->assertSame('/foo', $collection->get('foo')->getPath(), '->addPrefix() trims the prefix and a single slash has no effect');
-        $collection->addPrefix('/{admin}', array('admin' => 'admin'), array('admin' => '\d+'));
-        $this->assertEquals('/{admin}/foo', $collection->get('foo')->getPath(), '->addPrefix() adds a prefix to all routes');
-        $this->assertEquals('/{admin}/bar', $collection->get('bar')->getPath(), '->addPrefix() adds a prefix to all routes');
-        $this->assertEquals(array('admin' => 'admin'), $collection->get('foo')->getDefaults(), '->addPrefix() adds defaults to all routes');
-        $this->assertEquals(array('admin' => 'admin'), $collection->get('bar')->getDefaults(), '->addPrefix() adds defaults to all routes');
-        $this->assertEquals(array('admin' => '\d+'), $collection->get('foo')->getRequirements(), '->addPrefix() adds requirements to all routes');
-        $this->assertEquals(array('admin' => '\d+'), $collection->get('bar')->getRequirements(), '->addPrefix() adds requirements to all routes');
+        $collection->addPrefix('/{adm}', array('adm' => 'adm'), array('adm' => '\d+'));
+        $this->assertEquals('/{adm}/foo', $collection->get('foo')->getPath(), '->addPrefix() adds a prefix to all routes');
+        $this->assertEquals('/{adm}/bar', $collection->get('bar')->getPath(), '->addPrefix() adds a prefix to all routes');
+        $this->assertEquals(array('adm' => 'adm'), $collection->get('foo')->getDefaults(), '->addPrefix() adds defaults to all routes');
+        $this->assertEquals(array('adm' => 'adm'), $collection->get('bar')->getDefaults(), '->addPrefix() adds defaults to all routes');
+        $this->assertEquals(array('adm' => '\d+'), $collection->get('foo')->getRequirements(), '->addPrefix() adds requirements to all routes');
+        $this->assertEquals(array('adm' => '\d+'), $collection->get('bar')->getRequirements(), '->addPrefix() adds requirements to all routes');
         $collection->addPrefix('0');
-        $this->assertEquals('/0/{admin}/foo', $collection->get('foo')->getPath(), '->addPrefix() ensures a prefix must start with a slash and must not end with a slash');
+        $this->assertEquals('/0/{adm}/foo', $collection->get('foo')->getPath(), '->addPrefix() ensures a prefix must start with a slash and must not end with a slash');
         $collection->addPrefix('/ /');
-        $this->assertSame('/ /0/{admin}/foo', $collection->get('foo')->getPath(), '->addPrefix() can handle spaces if desired');
-        $this->assertSame('/ /0/{admin}/bar', $collection->get('bar')->getPath(), 'the route pattern of an added collection is in synch with the added prefix');
+        $this->assertSame('/ /0/{adm}/foo', $collection->get('foo')->getPath(), '->addPrefix() can handle spaces if desired');
+        $this->assertSame('/ /0/{adm}/bar', $collection->get('bar')->getPath(), 'the route pattern of an added collection is in synch with the added prefix');
     }
 
     public function testAddPrefixOverridesDefaultsAndRequirements()
@@ -166,7 +166,7 @@ class RouteCollectionTest extends \PHPUnit_Framework_TestCase
         $collection = new RouteCollection();
         $collection->add('foo', $foo = new Route('/foo.{_format}'));
         $collection->add('bar', $bar = new Route('/bar.{_format}', array(), array('_format' => 'json')));
-        $collection->addPrefix('/admin', array(), array('_format' => 'html'));
+        $collection->addPrefix('/adm', array(), array('_format' => 'html'));
 
         $this->assertEquals('html', $collection->get('foo')->getRequirement('_format'), '->addPrefix() overrides existing requirements');
         $this->assertEquals('html', $collection->get('bar')->getRequirement('_format'), '->addPrefix() overrides existing requirements');

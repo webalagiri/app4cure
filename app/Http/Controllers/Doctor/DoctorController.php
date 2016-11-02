@@ -930,10 +930,10 @@ class DoctorController extends Controller
                         Session::put('LoginUserHospital', $hospitalId[0]->hospital_id);
                         return redirect('pharmacy/'.Auth::user()->id.'/dashboard');
                     }
-                    else if(Auth::user()->hasRole('admin'))
+                    else if(Auth::user()->hasRole('adm'))
                     {
-                        $LoginUserType=Session::put('LoginUserType', 'admin');
-                        return redirect('admin/'.Auth::user()->id.'/dashboard');
+                        $LoginUserType=Session::put('LoginUserType', 'adm');
+                        return redirect('adm/'.Auth::user()->id.'/dashboard');
                     }
                     else
                     {

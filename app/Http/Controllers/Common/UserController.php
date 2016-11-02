@@ -2,7 +2,7 @@
 
 /**
  * Created by Baskaran Subbaraman.
- * User: admin
+ * User: adm
  * Date: 10/15/2015
  * Time: 5:49 PM
  */
@@ -1813,7 +1813,7 @@ public function myMedicalDocumentPatient()
                     $msg="Login Details Incorrect! Try Again.";
                     return redirect('user/login')->with('message',$msg);
                 }
-                else if(Auth::user()->hasRole('admin'))
+                else if(Auth::user()->hasRole('adm'))
                 {
                     $LoginUserId=Session::put('LoginUserId', Auth::user()->id);
                     $LoginUserType=Session::put('LoginUserType', 'patient');
@@ -1821,7 +1821,7 @@ public function myMedicalDocumentPatient()
                     $AuthDisplayName=Session::put('AuthDisplayName', ucfirst(Auth::user()->name));
                     $AuthDisplayPhoto=Session::put('AuthDisplayPhoto', "no-image.jpg");
                    // dd(Auth::user()->name);
-                    return redirect('admin/'.Auth::user()->id.'/dashboard');
+                    return redirect('adm/'.Auth::user()->id.'/dashboard');
                 }
             }
             else

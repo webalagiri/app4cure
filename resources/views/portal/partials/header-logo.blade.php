@@ -19,7 +19,7 @@
                     </div>
                     @if(isset(Auth::user()->id))
                         <div class="login">
-                            <a href="{{ URL::to('/') }}/patient/{{Auth::user()->id}}/dashboard"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">My Account</span></a>
+                            <a href="{{ URL::to('/') }}/patient/{{Auth::user()->id}}/dashboard"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Welcome {{Session::get('AuthDisplayName')}}</span></a>
                             <a href="{{ URL::to('/') }}/logout"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign out</span></a>
                         </div>
                     @else

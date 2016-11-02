@@ -1,7 +1,7 @@
 <?php namespace App\prescription\repositories\repointerface;
 /**
  * Created by PhpStorm.
- * User: admin
+ * User: adm
  * Date: 9/28/2016
  * Time: 12:26 PM
  */
