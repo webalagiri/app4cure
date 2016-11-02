@@ -362,7 +362,7 @@ class LabController extends Controller
 
         try
         {
-            $laboratory = $this->labService->laboratoryList($labId, $hospitalId);
+            $laboratory = $this->labService->laboratoryList();
             dd($laboratory);
         }
         catch(LabException $profileExc)
