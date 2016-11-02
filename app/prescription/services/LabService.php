@@ -171,4 +171,26 @@ class LabService
 
         return $status;
     }
+
+
+    public function laboratoryList()
+    {
+        $laboratoryList = null;
+
+        try
+        {
+            $laboratoryList = $this->labRepo->laboratoryList();
+            //dd($laboratoryList);
+        }
+        catch(LabException $profileExc)
+        {
+            throw $profileExc;
+        }
+        catch(Exception $exc)
+        {
+            throw new LabException(null, ErrorEnum::LAB_TESTS_LIST_ERROR, $exc);
+        }
+
+        return $laboratoryList;
+    }
 }

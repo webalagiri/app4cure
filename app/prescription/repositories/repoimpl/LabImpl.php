@@ -229,4 +229,39 @@ class LabImpl implements LabInterface
 
         return $status;
     }
+
+
+    public function laboratoryList()
+    {
+        $laboratoryList = null;
+
+        try
+        {
+            $query = DB::table('laboratory as l')->join('users as u', 'u.id', '=', 'l.laboratory_id');
+            $query->join('laboratory_type as lt', 'lt.id', '=', 'l.laboratory_type_id');
+            $query->join('countries as lc', 'lc.id', '=', 'l.country');
+            $query->join('states as ls', 'ls.id', '=', 'l.state');
+            $query->join('cities as lct', 'lct.id', '=', 'l.city');
+            $query->join('areas as la', 'la.id', '=', 'l.area');
+            $query->select('l.*', 'lt.name as lab_type',
+                'la.area_name as lab_area','lct.city_name as lab_city',
+                'ls.name as lab_state','lc.name as lab_country',
+                'u.name as user_name', 'u.email as user_email');
+
+            //dd($query->toSql());
+            $laboratoryList = $query->get();
+            //dd($laboratoryList);
+        }
+        catch(QueryException $queryExc)
+        {
+            //dd($queryExc);
+            throw new LabException(null, ErrorEnum::LAB_PATIENT_LIST_ERROR, $queryExc);
+        }
+        catch(Exception $exc)
+        {
+            throw new LabException(null, ErrorEnum::LAB_PATIENT_LIST_ERROR, $exc);
+        }
+
+        return $laboratoryList;
+    }
 }

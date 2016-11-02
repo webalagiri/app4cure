@@ -359,13 +359,13 @@ class LabController extends Controller
     public function laboratoryList()
     {
 
-        $patients = null;
-        return view('portal.laboratory',compact('patients'));
+        $laboratory = null;
+        //return view('portal.laboratory',compact('laboratory'));
 
         try
         {
             $laboratory = $this->labService->laboratoryList();
-            dd($laboratory);
+            //dd($laboratory);
         }
         catch(LabException $profileExc)
         {
@@ -381,7 +381,7 @@ class LabController extends Controller
             Log::error($msg);
         }
 
-        return view('portal.lab-patients',compact('patients'));
+        return view('portal.laboratory',compact('laboratory'));
 
         //return $patients;
     }
