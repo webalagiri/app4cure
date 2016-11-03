@@ -43,27 +43,27 @@ _________________________________________________________ -->
                     <div class="panel panel-default sidebar-menu">
 
                         <div class="panel-heading">
-                            <h3 class="panel-title">Categories</h3>
+                            <h3 class="panel-title">Tests Categories</h3>
                         </div>
 
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked category-menu">
                                 <li class="active">
-                                    <a href="shop.html">Medicine &amp; related <span class="badge pull-right">42</span></a>
+
                                     <ul>
-                                        <li><a href="shop.html">Medicines</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory">BLOOD TESTS</a>
                                         </li>
-                                        <li><a href="shop.html">Personal Care</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory">LIVER FUNCTION TESTS</a>
                                         </li>
-                                        <li><a href="shop.html">Heath monitoring tools</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory">RAPID PLASMA REAGIN TEST</a>
                                         </li>
-                                        <li><a href="shop.html">First Aid</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory">INFECTIOUS MONONUCLEOSIS TEST</a>
                                         </li>
-                                        <li><a href="shop.html">Food &amp; nutrition</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory">TOTAL TESTOSTERONE</a>
                                         </li>
-                                        <li><a href="shop.html">Braces &amp; supports</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory">FREE TESTOSTERONE</a>
                                         </li>
-                                        <li><a href="shop.html">Herbal and Ayurvedic</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory">WIDAL TEST</a>
                                         </li>
                                     </ul>
                                 </li>
