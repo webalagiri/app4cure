@@ -4,6 +4,9 @@
 
 @section('styles')
 
+    <link rel="stylesheet" type="text/css" href="{{ URL::to('/') }}/js/datetimepicker-master/jquery.datetimepicker.css" />
+    <script src="{{ URL::to('/') }}/js/datetimepicker-master/jquery.js"></script>
+    <script src="{{ URL::to('/') }}/js/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
 @stop
 
 @section('content')
@@ -94,8 +97,8 @@ _________________________________________________________ -->
 
                         @foreach($laboratory as $labinfo)
 
-                        <div class="col-md-12 col-sm-12">
-                            <div class="product">
+                        <div class="col-md-12 col-sm-12" style="border:1px solid #ccc;">
+                            <div class="product" style="margin-bottom:10px; border:none;j8n ">
                                 <div class="col-md-4 col-sm-4">
                                 <div class="image">
                                     <a href="#shop-detail.html">
@@ -113,27 +116,99 @@ _________________________________________________________ -->
                                 </div>
                                 </div>
                                 <div class="col-md-2 col-sm-2">
-                                    <button id="book_{{$labinfo->laboratory_id}}" onclick="javascript:ajax_book('{{$labinfo->laboratory_id}}');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">Book</button>
+                                    <button id="book_{{$labinfo->laboratory_id}}" onclick="javascript:ajax_book('{{$labinfo->laboratory_id}}');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">View Tests</button>
                                 </div>
                                 <!-- /.text -->
                             </div>
                             <!-- /.product -->
                             <div id="book_form_{{$labinfo->laboratory_id}}" class="product-book" style="display: none;">
+
+                                <form id="form_{{$labinfo->laboratory_id}}" name="form_{{$labinfo->laboratory_id}}" action="#" method="POST" >
+
+                                <input type="hidden" name="laboratory_id" id="laboratory_id" value="{{$labinfo->laboratory_id}}" />
+
+                                <div class="col-md-8 col-sm-8">
+                                    <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Choose</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>BLOOD TESTS</td>
+                                        <td>1000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="1" data-src="1000" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>LIVER FUNCTION TESTS</td>
+                                        <td>3000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="2" data-src="3000" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>RAPID PLASMA REAGIN TEST</td>
+                                        <td>2000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="3" data-src="2000" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>INFECTIOUS MONONUCLEOSIS TEST</td>
+                                        <td>3000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="4" data-src="3000" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>TOTAL TESTOSTERONE</td>
+                                        <td>5000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="5" data-src="5000" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>FREE TESTOSTERONE</td>
+                                        <td>3000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="6" data-src="3000" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WIDAL TEST</td>
+                                        <td>2000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="7" data-src="2000" /></td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+
+                                </div>
                                 <div class="col-md-4 col-sm-4">
-                                    <div class="text">
 
+                                    <div class="form-group">
+                                        <br/>
+                                        <label for="email">Tests Costs</label>
+                                        <input type="hidden" class="form-control" id="laboratory_tests_cost" name="laboratory_tests_cost" required="required" readonly="readonly" />
+                                        <br/> <span class="price">0</span> INR
                                     </div>
-                                </div>
-                                <!-- /.image -->
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="text">
+                                    <div class="form-group">
+                                        <label for="email">Date & Time</label>
+                                        <input type="text" class="form-control" id="laboratory_tests_date_{{$labinfo->laboratory_id}}" name="laboratory_tests_date" required="required" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Notes</label>
+                                        <textarea class="form-control" id="laboratory_tests_notes" name="laboratory_tests_notes"></textarea>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-template-main"><i class="fa fa-flask"></i> Book </button>
+                                    </div>
 
-                                    </div>
+
                                 </div>
-                                <div class="col-md-2 col-sm-2">
-                                    <button type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">Book</button>
-                                </div>
-                                <!-- /.text -->
+
+                                </form>
+
+
+                                <script>
+                                    jQuery('#laboratory_tests_date_{{$labinfo->laboratory_id}}').datetimepicker({
+                                         startDate:'+1970/01/02',
+                                         allowTimes:['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
+                                    });
+                                </script>
+
+
                             </div>
                             <!-- /.product -->
                         </div>
@@ -199,13 +274,37 @@ _________________________________________________________ -->
 
 @section('scripts')
 
+    <script>
+        function ajax_book(id)
+        {
+            //alert("#book_form_"+id);
+            $( "#book_form_"+id ).toggle();
+        }
+
+    </script>
+    <script>
+
+        $( document ).ready(function() {
+            var inputs = $('form input:checkbox');
+
+            function updatePrice(){
+                //alert('HI');
+                //alert($(this).parent('form'));
+                var form_id = $(this).closest("form").prop("id");
+                //alert(form_id);
+                var value = 0;
+                inputs.filter('#'+form_id+' :checked').each(function(){
+
+                    value += parseInt($(this).data('src'), 10);
+
+                });
+                $('#'+form_id+' .price').html(value);
+                $('#'+form_id+' #laboratory_tests_cost').val(value);
+            }
+
+            inputs.change(updatePrice);
+        });
+    </script>
+
+
 @stop
-<script>
-    function ajax_book(id)
-    {
-        alert(id);
-
-        book_form_{{$labinfo->laboratory_id}}
-    }
-
-</script>
