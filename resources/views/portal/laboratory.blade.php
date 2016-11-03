@@ -95,7 +95,6 @@ _________________________________________________________ -->
                         @foreach($laboratory as $labinfo)
 
                         <div class="col-md-12 col-sm-12">
-
                             <div class="product">
                                 <div class="col-md-4 col-sm-4">
                                 <div class="image">
@@ -114,7 +113,25 @@ _________________________________________________________ -->
                                 </div>
                                 </div>
                                 <div class="col-md-2 col-sm-2">
-                                    <button>BOOK</button>
+                                    <button id="book_{{$labinfo->laboratory_id}}" onclick="javascript:ajax_book('{{$labinfo->laboratory_id}}');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">Book</button>
+                                </div>
+                                <!-- /.text -->
+                            </div>
+                            <!-- /.product -->
+                            <div id="book_form_{{$labinfo->laboratory_id}}" class="product-book" style="display: none;">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="text">
+
+                                    </div>
+                                </div>
+                                <!-- /.image -->
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="text">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-sm-2">
+                                    <button type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">Book</button>
                                 </div>
                                 <!-- /.text -->
                             </div>
@@ -183,3 +200,12 @@ _________________________________________________________ -->
 @section('scripts')
 
 @stop
+<script>
+    function ajax_book(id)
+    {
+        alert(id);
+
+        book_form_{{$labinfo->laboratory_id}}
+    }
+
+</script>
