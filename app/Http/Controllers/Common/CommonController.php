@@ -334,6 +334,37 @@ class CommonController extends Controller
         return view('portal.customer-dashboard');
     }
 
+    public function viewPatient()
+    {
+        $patientId=Auth::user()->id;
+        $patientInfo = HospitalServiceFacade::getPatientInfo($patientId);
+        //dd($patientInfo);
+
+        return view('portal.customer-view-profile',compact('patientInfo'));
+    }
+
+    public function editPatient()
+    {
+        return view('portal.customer-dashboard');
+    }
+
+    public function savePatient()
+    {
+        return view('portal.customer-dashboard');
+    }
+
+    public function changePasswordPatient()
+    {
+        return view('portal.customer-dashboard');
+    }
+
+    public function savePasswordPatient()
+    {
+        return view('portal.customer-dashboard');
+    }
+
+
+
 
 
     public function modalLoginPatient(PatientLoginRequest $patientRequest)

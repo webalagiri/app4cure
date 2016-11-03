@@ -77,6 +77,7 @@ class ErrorEnum extends Enum{
 
 
     const NEW_PATIENT_REGISTRATION_ERROR = 1001;
+    const PATIENT_INFO_ERROR = 1002;
 
 
 

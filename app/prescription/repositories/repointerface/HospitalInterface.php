@@ -45,5 +45,6 @@ interface HospitalInterface {
 
 
     public function registerNewPatient($patientInfo);
+    public function getPatientInfo($patientId);
 
 }

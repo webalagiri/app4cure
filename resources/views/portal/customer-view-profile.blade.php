@@ -102,55 +102,45 @@ _________________________________________________________ -->
 
                 <div class="col-sm-9">
 
-                    <section class="bar background-white">
+                    <section class="barx background-white">
                         <div class="container">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="team-member" data-animate="fadeInUp">
-                                        <div class="image">
-                                            <a href="{{ URL::to('/') }}/laboratory">
-                                                <img src="{{ URL::to('/') }}/img/service/lab.jpg" alt="" class="img-responsive img-circle">
-                                            </a>
-                                        </div>
-                                        <h3><a href="{{ URL::to('/') }}/laboratory">Laboratory Tests</a></h3>
-                                    </div>
-                                    <!-- /.team-member -->
-                                </div>
-                                <div class="col-md-3 col-sm-3" data-animate="fadeInUp">
-                                    <div class="team-member">
-                                        <div class="image">
-                                            <a href="#">
-                                                <img src="{{ URL::to('/') }}/img/service/medicine.jpg" alt="" class="img-responsive img-circle">
-                                            </a>
-                                        </div>
-                                        <h3><a href="#">Medicine Online</a></h3>
-
-                                    </div>
-                                    <!-- /.team-member -->
-                                </div>
-                                <div class="col-md-3 col-sm-3" data-animate="fadeInUp">
-                                    <div class="team-member">
-                                        <div class="image">
-                                            <a href="#">
-                                                <img src="{{ URL::to('/') }}/img/service/doctor.jpg" alt="" class="img-responsive img-circle">
-                                            </a>
-                                        </div>
-                                        <h3><a href="#">Doctor Appointment</a></h3>
-
-                                    </div>
-                                    <!-- /.team-member -->
-                                </div>
-                            </div>
-                            <!-- /.row -->
-                            <!-- See All Team Members -->
-                            <!--  <div class="row">
-                                 <div class="col-md-12">
-                                     <div class="see-more">
-                                         <a href="portfolio-4.html" class="btn btn-template-main">See all our team members</a>
-                                     </div>
-                                 </div>
-                             </div>
-                         -->
+                            <h2>My Profile</h2>
+                            <table class="table table-striped" style="width:80%;">
+                                <tbody>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>{{$patientInfo[0]->customer_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>{{$patientInfo[0]->email}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Telephone</td>
+                                    <td>{{$patientInfo[0]->telephone}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td>{{$patientInfo[0]->address}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Area</td>
+                                    <td>{{$patientInfo[0]->patient_area}}</td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td>{{$patientInfo[0]->patient_city}}</td>
+                                </tr>
+                                <tr>
+                                    <td>State</td>
+                                    <td>{{$patientInfo[0]->patient_state}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Country</td>
+                                    <td>{{$patientInfo[0]->patient_country}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
 
                         </div>
                         <!-- /.container -->
