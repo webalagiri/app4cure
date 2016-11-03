@@ -47,6 +47,8 @@ Route::group(['namespace' => 'Common'], function()
 
     Route::any('/patient/{id}/dashboard', array('as' => 'customer.dashboard', 'uses' => 'CommonController@dashboardPatient'));
     Route::any('/patient/{id}/viewprofile', array('as' => 'customer.dashboard', 'uses' => 'CommonController@viewPatient'));
+    Route::any('/patient/{id}/editprofile', array('as' => 'customer.dashboard', 'uses' => 'CommonController@editPatient'));
+    Route::any('/patient/{id}/changepassword', array('as' => 'customer.dashboard', 'uses' => 'CommonController@changePasswordPatient'));
 
     Route::any('/logout', array('as' => 'customer.login', 'uses' => 'CommonController@logoutPatient'));
 });

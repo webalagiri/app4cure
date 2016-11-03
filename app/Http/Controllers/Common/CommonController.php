@@ -345,7 +345,9 @@ class CommonController extends Controller
 
     public function editPatient()
     {
-        return view('portal.customer-dashboard');
+        $patientId=Auth::user()->id;
+        $patientInfo = HospitalServiceFacade::getPatientInfo($patientId);
+        return view('portal.customer-edit-profile',compact('patientInfo'));
     }
 
     public function savePatient()
@@ -355,7 +357,7 @@ class CommonController extends Controller
 
     public function changePasswordPatient()
     {
-        return view('portal.customer-dashboard');
+        return view('portal.customer-edit-password');
     }
 
     public function savePasswordPatient()
