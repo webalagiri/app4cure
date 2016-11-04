@@ -193,4 +193,25 @@ class LabService
 
         return $laboratoryList;
     }
+
+    public function laboratoryAddToCart($laboratoryCartInfo)
+    {
+        $status = null;
+
+        try
+        {
+            $status = $this->labRepo->laboratoryAddToCart($laboratoryCartInfo);
+            //dd($laboratoryList);
+        }
+        catch(LabException $profileExc)
+        {
+            throw $profileExc;
+        }
+        catch(Exception $exc)
+        {
+            throw new LabException(null, ErrorEnum::LAB_TESTS_LIST_ERROR, $exc);
+        }
+
+        return $status;
+    }
 }

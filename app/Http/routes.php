@@ -58,6 +58,7 @@ Route::group(['prefix' => 'laboratory'], function()
     Route::group(['namespace' => 'Lab'], function()
     {
         Route::any('/', array('as' => 'laboratory.list', 'uses' => 'LabController@laboratoryList'));
+        Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'LabController@laboratoryAddToCart'));
     });
 });
 

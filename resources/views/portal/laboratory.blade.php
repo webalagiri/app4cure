@@ -116,14 +116,20 @@ _________________________________________________________ -->
                                 </div>
                                 </div>
                                 <div class="col-md-2 col-sm-2">
+                                    @if(isset(Auth::user()->id))
                                     <button id="book_{{$labinfo->laboratory_id}}" onclick="javascript:ajax_book('{{$labinfo->laboratory_id}}');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">View Tests</button>
+                                    @else
+                                        <button onclick="javascript:alert('Please Login to Book Order');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">View Tests</button>
+                                    @endif
+
                                 </div>
                                 <!-- /.text -->
                             </div>
                             <!-- /.product -->
                             <div id="book_form_{{$labinfo->laboratory_id}}" class="product-book" style="display: none;">
 
-                                <form id="form_{{$labinfo->laboratory_id}}" name="form_{{$labinfo->laboratory_id}}" action="#" method="POST" >
+                                <form id="form_{{$labinfo->laboratory_id}}" name="form_{{$labinfo->laboratory_id}}" action="{{ URL::to('/') }}/laboratory/addtocart" method="POST" >
+
 
                                 <input type="hidden" name="laboratory_id" id="laboratory_id" value="{{$labinfo->laboratory_id}}" />
 

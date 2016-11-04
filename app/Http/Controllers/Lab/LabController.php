@@ -385,4 +385,41 @@ class LabController extends Controller
 
         //return $patients;
     }
+
+
+    public function laboratoryAddToCart(Request $laboratoryCart)
+    {
+        $status =  true;
+        //dd($laboratoryCart->all());
+        $laboratoryCartInfo = $laboratoryCart->all();
+        //return view('portal.laboratory',compact('laboratory'));
+
+        try
+        {
+            $status = $this->labService->laboratoryAddToCart($laboratoryCartInfo);
+            if($status)
+            {
+                $laboratory = $this->labService->laboratoryList();
+                return view('portal.laboratory',compact('laboratory'));
+            }
+            //dd($laboratory);
+        }
+        catch(LabException $profileExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $profileExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($profileExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return view('portal.laboratory',compact('laboratory'));
+
+        //return $patients;
+    }
 }

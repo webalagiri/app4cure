@@ -19,4 +19,5 @@ interface LabInterface
     public function getLabTestsByLid($lid);
     public function editLab(LabViewModel $labVM);
     public function laboratoryList();
+    public function laboratoryAddToCart($laboratoryCartInfo);
 }

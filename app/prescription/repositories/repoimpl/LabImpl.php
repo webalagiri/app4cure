@@ -10,6 +10,7 @@ namespace App\prescription\repositories\repoimpl;
 
 use App\Http\ViewModels\LabViewModel;
 use App\prescription\model\entities\Lab;
+use App\prescription\model\entities\LabCart;
 use App\prescription\repositories\repointerface\LabInterface;
 use App\prescription\utilities\Exception\LabException;
 
@@ -20,15 +21,11 @@ use App\User;
 use App\prescription\utilities\ErrorEnum\ErrorEnum;
 use Exception;
 
+use Auth;
+use Session;
+
 class LabImpl implements LabInterface
 {
-    /**
-     * Get the profile of the lab
-     * @param $labId
-     * @throws $labException
-     * @return array | null
-     * @author Baskar
-     */
 
     public function getProfile($labId)
     {
@@ -56,14 +53,6 @@ class LabImpl implements LabInterface
 
         return $labProfile;
     }
-
-    /**
-     * Get the list of patients for the selected lab
-     * @param $labId, $hospitalId
-     * @throws $labException
-     * @return array | null
-     * @author Baskar
-     */
 
     public function getPatientListForLab($labId, $hospitalId)
     {
@@ -100,14 +89,6 @@ class LabImpl implements LabInterface
         return $patients;
     }
 
-    /**
-     * Get the list of lab tests for the selected lab
-     * @param $labId, $hospitalId
-     * @throws $labException
-     * @return array | null
-     * @author Baskar
-     */
-
     public function getTestsForLab($labId, $hospitalId)
     {
         $labTests = null;
@@ -136,14 +117,6 @@ class LabImpl implements LabInterface
         return $labTests;
     }
 
-    /**
-     * Get lab tests by LID
-     * @param $lid
-     * @throws $labException
-     * @return array | null
-     * @author Baskar
-     */
-
     public function getLabTestsByLid($lid)
     {
         $labTests = null;
@@ -169,14 +142,6 @@ class LabImpl implements LabInterface
 
         return $labTests;
     }
-
-    /**
-     * Edit Lab Details
-     * @param $labVM
-     * @throws $labException
-     * @return true | false
-     * @author Baskar
-     */
 
     public function editLab(LabViewModel $labVM)
     {
@@ -230,7 +195,6 @@ class LabImpl implements LabInterface
         return $status;
     }
 
-
     public function laboratoryList()
     {
         $laboratoryList = null;
@@ -264,4 +228,55 @@ class LabImpl implements LabInterface
 
         return $laboratoryList;
     }
+
+    public function laboratoryAddToCart($laboratoryCartInfo)
+    {
+        $status = true;
+
+        try
+        {
+            //dd($laboratoryCartInfo);
+
+            $newLabCart = new LabCart();
+
+            //dd(count($laboratoryCartInfo['laboratory_tests']));
+
+            foreach($laboratoryCartInfo['laboratory_tests'] as $laboratoryCartInfo_laboratory_tests_id)
+            {
+                $newLabCart->customer_id = Auth::user()->id;
+                $newLabCart->laboratory_id = $laboratoryCartInfo['laboratory_id'];
+                $newLabCart->laboratory_tests_id = $laboratoryCartInfo_laboratory_tests_id;
+                $newLabCart->laboratory_tests_price = $laboratoryCartInfo['laboratory_tests_cost'];
+                $newLabCart->laboratory_tests_number = "1";
+                $newLabCart->laboratory_tests_total = $laboratoryCartInfo['laboratory_tests_cost'];
+                $newLabCart->laboratory_tests_datetime = $laboratoryCartInfo['laboratory_tests_date'];
+                $newLabCart->laboratory_tests_notes = $laboratoryCartInfo['laboratory_tests_notes'];
+                $newLabCart->created_by = strval(100);
+                $newLabCart->updated_by = strval(100);
+                $newLabCart->created_at = date("Y-m-d H:i:s");
+                $newLabCart->updated_at = date("Y-m-d H:i:s");
+                $newLabCart->save();
+
+            }
+
+            //dd($newLabCart);
+        }
+        catch (QueryException $queryEx)
+        {
+
+            $status = false;
+            dd($queryEx);
+            throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $queryEx);
+        }
+        catch (Exception $ex)
+        {
+            $status = false;
+            dd($ex);
+            throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $ex);
+        }
+
+        return $status;
+    }
+
+
 }

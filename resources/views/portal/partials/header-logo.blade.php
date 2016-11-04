@@ -144,19 +144,20 @@
                 <h4 class="modal-title" id="Login">Customer login</h4>
             </div>
             <div class="modal-body">
-                <form action="#customer-orders.html" method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="email_modal" placeholder="email">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="password_modal" placeholder="password">
-                    </div>
+                {!! Form::open( array( 'route' => array('customer.dologin') ,'role' => 'form' ,'method'=>'POST', 'files'=>true,'class'=>'') ) !!}
 
-                    <p class="text-center">
-                        <button class="btn btn-template-main"><i class="fa fa-sign-in"></i> Log in</button>
-                    </p>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="email" name="email" required="required" placeholder="email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" required="required" placeholder="password">
+                </div>
 
-                </form>
+                <p class="text-center">
+                    <button type="submit" class="btn btn-template-main"><i class="fa fa-sign-in"></i> Log in</button>
+                </p>
+
+                {!! Form::close() !!}
 
                 <p class="text-center text-muted">Not registered yet?</p>
                 <p class="text-center text-muted"><a href="{{ URL::to('/') }}/customer-register"><strong>Register now</strong></a>! It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!</p>
