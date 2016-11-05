@@ -158,33 +158,33 @@ _________________________________________________________ -->
                                     </tr>
                                     <tr>
                                         <td>LIVER FUNCTION TESTS</td>
-                                        <td>3000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="2" data-src="3000" /></td>
+                                        <td>1000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="2" data-src="1000" /></td>
                                     </tr>
                                     <tr>
                                         <td>RAPID PLASMA REAGIN TEST</td>
-                                        <td>2000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="3" data-src="2000" /></td>
+                                        <td>1000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="3" data-src="1000" /></td>
                                     </tr>
                                     <tr>
                                         <td>INFECTIOUS MONONUCLEOSIS TEST</td>
-                                        <td>3000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="4" data-src="3000" /></td>
+                                        <td>1000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="4" data-src="1000" /></td>
                                     </tr>
                                     <tr>
                                         <td>TOTAL TESTOSTERONE</td>
-                                        <td>5000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="5" data-src="5000" /></td>
+                                        <td>1000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="5" data-src="1000" /></td>
                                     </tr>
                                     <tr>
                                         <td>FREE TESTOSTERONE</td>
-                                        <td>3000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="6" data-src="3000" /></td>
+                                        <td>1000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="6" data-src="1000" /></td>
                                     </tr>
                                     <tr>
                                         <td>WIDAL TEST</td>
-                                        <td>2000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="7" data-src="2000" /></td>
+                                        <td>1000 INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="7" data-src="1000" /></td>
                                     </tr>
                                     </tbody>
                                     </table>

@@ -108,7 +108,8 @@ _________________________________________________________ -->
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Lab Name</th>
+                                    <th>Test Name</th>
                                     <th>Date</th>
                                     <th>Price</th>
                                     <th>Delete</th>
@@ -117,8 +118,8 @@ _________________________________________________________ -->
                             @foreach($laboratory as $labinfo)
 
                             <tr>
-                                <td>{{$labinfo->name}}
-                                </td>
+                                <td>{{$labinfo->laboratory_name}}</td>
+                                <td>{{$labinfo->name}}</td>
                                 <td>{{$labinfo->laboratory_tests_datetime}}</td>
                                 <td>{{$labinfo->laboratory_tests_total}}</td>
                                 <td><a href="#"> X </a></td>
@@ -131,6 +132,12 @@ _________________________________________________________ -->
 
                     </div>
                     <!-- /.products -->
+                        <div>
+                            <p class="loadMore" style="text-align: right;">
+                                <a href="{{ URL::to('/') }}/laboratory/confirm" class="btn btn-template-main"><i class="fa fa-cart-plus"></i> Confirm Order</a>
+                            </p>
+                        </div>
+
 
 
                 </div>

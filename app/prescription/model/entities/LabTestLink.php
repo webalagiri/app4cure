@@ -4,7 +4,7 @@ namespace App\prescription\model\entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LabTest extends Model
+class LabTestLink extends Model
 {
-    protected $table = 'laboratory_tests';
+    protected $table = 'laboratory_tests_link';
 }

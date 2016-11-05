@@ -11,6 +11,8 @@ namespace App\prescription\repositories\repoimpl;
 use App\Http\ViewModels\LabViewModel;
 use App\prescription\model\entities\Lab;
 use App\prescription\model\entities\LabCart;
+use App\prescription\model\entities\LabTest;
+use App\prescription\model\entities\LabTestLink;
 use App\prescription\repositories\repointerface\LabInterface;
 use App\prescription\utilities\Exception\LabException;
 
@@ -237,16 +239,23 @@ class LabImpl implements LabInterface
         {
             //dd($laboratoryCartInfo);
 
-            $newLabCart = new LabCart();
+
 
             //dd(count($laboratoryCartInfo['laboratory_tests']));
 
+            //dd($laboratoryCartInfo['laboratory_tests']);
             foreach($laboratoryCartInfo['laboratory_tests'] as $laboratoryCartInfo_laboratory_tests_id)
             {
+                $LabTestLinkInfo = LabTestLink::find($laboratoryCartInfo_laboratory_tests_id);
+
+                //$LabTestLinkInfo = LabTestLink::where($laboratoryCartInfo_laboratory_tests_id);
+                //dd($LabTestLinkInfo['laboratory_tests_price']);
+
+                $newLabCart = new LabCart();
                 $newLabCart->customer_id = Auth::user()->id;
                 $newLabCart->laboratory_id = $laboratoryCartInfo['laboratory_id'];
                 $newLabCart->laboratory_tests_id = $laboratoryCartInfo_laboratory_tests_id;
-                $newLabCart->laboratory_tests_price = $laboratoryCartInfo['laboratory_tests_cost'];
+                $newLabCart->laboratory_tests_price = $LabTestLinkInfo['laboratory_tests_price'];
                 $newLabCart->laboratory_tests_number = "1";
                 $newLabCart->laboratory_tests_total = $laboratoryCartInfo['laboratory_tests_cost'];
                 $newLabCart->laboratory_tests_datetime = $laboratoryCartInfo['laboratory_tests_date'];

@@ -400,7 +400,11 @@ class LabController extends Controller
             if($status)
             {
                 $laboratory = $this->labService->laboratoryList();
-                return view('portal.laboratory',compact('laboratory'));
+
+                $msg="Tests Added to Cart";
+                return redirect('laboratory/cart')->with('message',$msg);
+
+                //return view('portal.laboratory',compact('laboratory'));
             }
             //dd($laboratory);
         }
