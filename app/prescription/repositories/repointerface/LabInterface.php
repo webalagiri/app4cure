@@ -20,4 +20,6 @@ interface LabInterface
     public function editLab(LabViewModel $labVM);
     public function laboratoryList();
     public function laboratoryAddToCart($laboratoryCartInfo);
+
+    public function laboratoryCart();
 }

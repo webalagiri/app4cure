@@ -279,4 +279,43 @@ class LabImpl implements LabInterface
     }
 
 
+    public function laboratoryCart()
+    {
+        $laboratoryList = null;
+        $userId = Session::get('LoginUserId');
+        //dd($userId);
+        try
+        {
+            $query = DB::table('laboratory as l')->join('users as u', 'u.id', '=', 'l.laboratory_id');
+            $query->join('laboratory_type as lt', 'lt.id', '=', 'l.laboratory_type_id');
+            $query->join('countries as lc', 'lc.id', '=', 'l.country');
+            $query->join('states as ls', 'ls.id', '=', 'l.state');
+            $query->join('cities as lct', 'lct.id', '=', 'l.city');
+            $query->join('areas as la', 'la.id', '=', 'l.area');
+            $query->join('laboratory_cart as lbct', 'lbct.laboratory_id', '=', 'l.laboratory_id');
+            $query->join('laboratory_tests as lbti', 'lbti.id', '=', 'lbct.laboratory_tests_id');
+            $query->where('lbct.customer_id', '=', $userId);
+            $query->select('l.*','lbct.*','lbti.*', 'lt.name as lab_type',
+                'la.area_name as lab_area','lct.city_name as lab_city',
+                'ls.name as lab_state','lc.name as lab_country',
+                'u.name as user_name', 'u.email as user_email');
+
+            //dd($query->toSql());
+            $laboratoryList = $query->get();
+            //dd($laboratoryList);
+        }
+        catch(QueryException $queryExc)
+        {
+            //dd($queryExc);
+            throw new LabException(null, ErrorEnum::LAB_PATIENT_LIST_ERROR, $queryExc);
+        }
+        catch(Exception $exc)
+        {
+            throw new LabException(null, ErrorEnum::LAB_PATIENT_LIST_ERROR, $exc);
+        }
+
+        return $laboratoryList;
+    }
+
+
 }

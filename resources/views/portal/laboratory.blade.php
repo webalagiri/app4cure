@@ -86,19 +86,28 @@ _________________________________________________________ -->
 
                 <!-- *** LEFT COLUMN END *** -->
 
-                <!-- *** RIGHT COLUMN ***
-        _________________________________________________________ -->
+                <!-- *** RIGHT COLUMN *** -->
 
                 <div class="col-sm-9">
+                    <div style="text-align: right;font-weight: bold;">
+
+                        <a href="{{ URL::to('/') }}/laboratory/cart"> My Lab Cart </a>
+
+                        <!--
+                        <a href="{{ URL::to('/') }}/laboratory/cart" onclick="javascript:alert('Cart Empty');"> My Lab Cart </a>
+                        -->
+
+                    </div>
 
                     <p class="text-muted lead product_head">LABORATORY</p>
+
 
                     <div class="row products">
 
                         @foreach($laboratory as $labinfo)
 
                         <div class="col-md-12 col-sm-12" style="border:1px solid #ccc;">
-                            <div class="product" style="margin-bottom:10px; border:none;j8n ">
+                            <div class="product" style="margin-bottom:10px; border:none;">
                                 <div class="col-md-4 col-sm-4">
                                 <div class="image">
                                     <a href="#shop-detail.html">

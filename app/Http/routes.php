@@ -60,6 +60,7 @@ Route::group(['prefix' => 'laboratory'], function()
     {
         Route::any('/', array('as' => 'laboratory.list', 'uses' => 'LabController@laboratoryList'));
         Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'LabController@laboratoryAddToCart'));
+        Route::any('/cart', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryCart'));
     });
 });
 
