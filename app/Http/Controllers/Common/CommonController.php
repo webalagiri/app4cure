@@ -370,6 +370,17 @@ class CommonController extends Controller
             if (Auth::attempt(['email' => $patientInfo['email'], 'password' => $patientInfo['password']])) {
                 // Authentication passed...
 
+
+                if(Auth::user()->verification==0)
+                {
+                    //dd(Auth::user());
+                    Auth::logout();
+                    Session::flush();
+                    $msg="Email Verification Pending! Try Again.";
+                    return redirect('customer-login')->with('message',$msg);
+                }
+
+
                 if(Auth::user()->hasRole('customer'))
                 {
                     $LoginUserId=Session::put('LoginUserId', Auth::user()->id);
