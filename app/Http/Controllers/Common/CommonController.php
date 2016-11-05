@@ -10,6 +10,7 @@ use App\prescription\utilities\Exception\HospitalException;
 use App\prescription\utilities\Exception\AppendMessage;
 use App\prescription\common\ResponseJson;
 use App\prescription\utilities\ErrorEnum\ErrorEnum;
+use App\User;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\NewPatientRequest;
@@ -25,6 +26,8 @@ use Exception;
 
 use Auth;
 use Session;
+
+use Illuminate\Support\Facades\URL;
 
 class CommonController extends Controller
 {
@@ -184,23 +187,95 @@ class CommonController extends Controller
         return view('portal.customer-register');
     }
 
-    public function registerNewPatient(PatientRegisterRequest $patientRequest)
+    public function registerNewPatient(Request $patientRequest)
     {
+
 
         $status =  true;
         $patientInfo = $patientRequest->all();
         //dd($patientInfo);
 
+        /*
+        $email  = $patientInfo['email'];
+        $userInfo = User::where('email','=',$email)->first();
+        dd($userInfo['id']);
+        */
         try
         {
             //$status =  true;
             // $patientInfo = $patientRequest->all();
 
+
             $status = HospitalServiceFacade::registerNewPatient($patientInfo);
             if($status)
             {
+
+
+
+                $email  = $patientInfo['email'];
+                $name  = $patientInfo['name'];
+
+                $userInfo = User::where('email','=',$email)->first();
+                //dd($userInfo['id']);
+                $userId = $userInfo['id'];
+                $url  = URL::to('/').'/common/activation/'.$userId.'/'.md5($email);
+                $link  = '<a href="'.$url.'">'.$url.'</a>';
+
+                // recipients
+                $to  = $patientInfo['email'];
+                // subject
+                $subject = 'App4Cure - New Account Email Verification';
+                // message
+                $message = '<html>
+                            <head>
+                              <title>App4Cure - New Account Email Verification</title>
+                            </head>
+                            <body>
+                              <p>App4Cure - New Account Email Verification</p>
+                              <table>
+                                <tr>
+                                  <th>Dear '.$name.'</th>
+                                </tr>
+                                <tr>
+                                  <td>Thanks for register with us. Please verify your email account with below link</td>
+                                </tr>
+                                <tr>
+                                  <td>Click :: '.$link.'</td>
+                                </tr>
+                                <tr>
+                                  <td>Thanks, <br/> App4Cure Team</td>
+                                </tr>
+                              </table>
+                            </body>
+                            </html>';
+
+                // To send HTML mail, the Content-type header must be set
+                $headers  = 'MIME-Version: 1.0' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                // Additional headers
+                $headers .= 'To: '.$patientInfo['name'].'<'.$patientInfo['email'].'>' . "\r\n";
+                $headers .= 'From: App4Cure <noreply@app4cure.co.in>' . "\r\n";
+
+                echo $sucmsg="Registration Done Successfully! We send Activation Mail. Please Check your Email.";
+                echo "<h1>Email Server Issues</h1>";
+                echo $message;
+                exit;
+
+                // Mail it
+                if(mail($to, $subject, $message, $headers))
+                {
+
+                }
+                else
+                {
+                    echo $sucmsg="Registration Done Successfully! We send Activation Mail. Please Check your Email.";
+                    echo "<h1>Email Server Issues</h1>";
+                    echo $message;
+                    exit;
+                }
+
                 // dd("Saved successfully");
-                $sucmsg="Registration Done Successfully! Now you can login.";
+                $sucmsg="Registration Done Successfully! We send Activation Mail. Please Check your Email.";
                 return redirect('customer-login')->with('success',$sucmsg);
                 /*$msg = trans('messages.'.ErrorEnum::NEW_PATIENT_ADD_SUCCESS);
                 $savesuccess = Config::get('toastr.savesuccess');
@@ -227,6 +302,53 @@ class CommonController extends Controller
             $msg="Register Details Invalid! Try Again.";
             Log::error($msg);
             //return redirect('exception')->with('message',trans('messages.SupportTeam'));
+        }
+    }
+
+    public function activationNewPatient($id, $code)
+    {
+        $status =  true;
+        $patientInfo[] = $id;
+        $patientInfo[] = $code;
+        //dd($patientInfo);
+
+        try
+        {
+
+            $userInfo = User::find($id);
+            if($code==md5($userInfo['email']))
+            {
+                //dd($userInfo);
+                $userInfo->id = $userInfo['id'];
+                $userInfo->verification = "1";
+                $userInfo->save();
+
+                //dd($userInfo);
+                $sucmsg="Email Verification Successfully! Please Check your Email.";
+                return redirect('customer-login')->with('success',$sucmsg);
+
+
+            }
+
+
+
+        }
+        catch (PatientUserException $userExc) {
+            //dd($userExc);
+            $errorMsg = $userExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($userExc);
+            Log::error($msg);
+            return redirect('exception')->with('message',$errorMsg." ".trans('messages.SupportTeam'));
+            /*return Response::json(array(
+                        'success' => false,
+                        'data' => $errorMsg), '200'
+            );*/
+        } catch (Exception $ex) {
+            //dd($ex);
+            //throw $ex;
+            $msg = AppendMessage::appendGeneralException($ex);
+            Log::error($msg);
+            return redirect('exception')->with('message',trans('messages.SupportTeam'));
         }
     }
 
