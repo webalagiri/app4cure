@@ -13,5 +13,7 @@ if(mail($to, $subject, $message, $headers))
 else
 {
     echo "NOT";
+    print_r(error_get_last());
 }
+
 ?>
