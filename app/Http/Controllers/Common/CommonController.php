@@ -586,7 +586,7 @@ class CommonController extends Controller
     public function updatePatient()
     {
         $patientId=Auth::user()->id;
-        $patientInfo = HospitalServiceFacade::getPatientInfo($patientId);
+        $patientInfo = HospitalServiceFacade::getPatientUpdateInfo($patientId);
         $countryInfo = CommonController::getCountry();
         $stateInfo = CommonController::getState();
         $cityInfo = CommonController::getCity();

@@ -933,4 +933,33 @@ class HospitalImpl implements HospitalInterface{
 
         return $patientProfile;
     }
+
+    public function getPatientUpdateInfo($patientId)
+    {
+        $patientProfile = null;
+
+        try
+        {
+            $query = DB::table('customer as p')->select('p.id', 'p.customer_id', 'p.customer_name', 'p.customer_photo', 'p.email', 'p.telephone','p.address','p.area as patient_area_id','p.city as patient_city_id',               'p.state as patient_state_id','p.country as patient_country_id');
+            $query->join('users as usr', 'usr.id', '=', 'p.customer_id');
+            //$query->join('countries as pc', 'pc.id', '=', 'p.country');
+            //$query->join('states as ps', 'ps.id', '=', 'p.state');
+            //$query->join('cities as pct', 'pct.id', '=', 'p.city');
+            //$query->join('areas as pa', 'pa.id', '=', 'p.area');
+            $query->where('p.customer_id', '=', $patientId);
+            //$query->where('usr.delete_status', '=', 1);
+
+            $patientProfile = $query->get();
+        }
+        catch(QueryException $queryEx)
+        {
+            throw new HospitalException(null, ErrorEnum::PATIENT_PROFILE_ERROR, $queryEx);
+        }
+        catch(Exception $exc)
+        {
+            throw new HospitalException(null, ErrorEnum::PATIENT_PROFILE_ERROR, $exc);
+        }
+
+        return $patientProfile;
+    }
 }

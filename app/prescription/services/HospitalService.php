@@ -627,4 +627,24 @@ class HospitalService {
         return $labTestDetails;
     }
 
+    public function getPatientUpdateInfo($patientId)
+    {
+        $labTestDetails = null;
+
+        try
+        {
+            $labTestDetails = $this->hospitalRepo->getPatientUpdateInfo($patientId);
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            throw $hospitalExc;
+        }
+        catch(Exception $exc)
+        {
+            throw new HospitalException(null, ErrorEnum::PATIENT_INFO_ERROR, $exc);
+        }
+
+        return $labTestDetails;
+    }
+
 }
