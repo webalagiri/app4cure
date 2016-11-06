@@ -318,6 +318,7 @@ class CommonController extends Controller
 
                 $email  = $patientInfo['email'];
                 $name  = $patientInfo['name'];
+                $password  = $patientInfo['password'];
 
                 $userInfo = User::where('email','=',$email)->first();
                 //dd($userInfo['id']);
@@ -364,6 +365,12 @@ class CommonController extends Controller
                 //echo "<h1>Email Server Issues</h1>";
                 //echo $message;
                 //exit;
+
+
+                Mail::send('emails.welcome',array('name'=>$name,'email'=>$email,'password'=>$password,'url'=>$link), function($message) use($email,$name,$subject) {
+                    $message->from('noreply@app4cure.co.in', 'App4Cure');
+                    $message->to( $email, $name)->subject($subject);
+                });
 
                 // Mail it
                 if(mail($to, $subject, $message, $headers))
