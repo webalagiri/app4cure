@@ -46,6 +46,9 @@ Route::group(['namespace' => 'Common'], function()
     Route::any('/customer-login', array('as' => 'customer.login', 'uses' => 'CommonController@loginFormPatient'));
     Route::any('/do-customer-login', array('as' => 'customer.dologin', 'uses' => 'CommonController@loginPatient'));
 
+    Route::any('/patient/{id}/updateprofile', array('as' => 'customer.dashboard', 'uses' => 'CommonController@updatePatient'));
+
+
     Route::any('/patient/{id}/dashboard', array('as' => 'customer.dashboard', 'uses' => 'CommonController@dashboardPatient'));
     Route::any('/patient/{id}/viewprofile', array('as' => 'customer.dashboard', 'uses' => 'CommonController@viewPatient'));
     Route::any('/patient/{id}/editprofile', array('as' => 'customer.dashboard', 'uses' => 'CommonController@editPatient'));
@@ -61,6 +64,7 @@ Route::group(['prefix' => 'laboratory'], function()
         Route::any('/', array('as' => 'laboratory.list', 'uses' => 'LabController@laboratoryList'));
         Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'LabController@laboratoryAddToCart'));
         Route::any('/cart', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryCart'));
+        Route::any('/confirm', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryConfirm'));
     });
 });
 

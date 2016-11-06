@@ -4,8 +4,7 @@ namespace App\prescription\model\entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cities extends Model
+class States extends Model
 {
-    protected $table = 'cities';
-
+    protected $table = 'states';
 }

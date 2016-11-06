@@ -910,8 +910,8 @@ class HospitalImpl implements HospitalInterface{
 
         try
         {
-            $query = DB::table('customer as p')->select('p.id', 'p.customer_id', 'p.customer_name', 'p.customer_photo', 'p.email', 'p.telephone','p.address','pa.area_name as patient_area','pct.city_name as patient_city',
-                'ps.name as patient_state','pc.name as patient_country');
+            $query = DB::table('customer as p')->select('p.id', 'p.customer_id', 'p.customer_name', 'p.customer_photo', 'p.email', 'p.telephone','p.address','pa.id as patient_area_id','pa.area_name as patient_area','pct.id as patient_city_id','pct.city_name as patient_city',
+                'ps.id as patient_state_id','ps.name as patient_state','pc.id as patient_country_id','pc.name as patient_country');
             $query->join('users as usr', 'usr.id', '=', 'p.customer_id');
             $query->join('countries as pc', 'pc.id', '=', 'p.country');
             $query->join('states as ps', 'ps.id', '=', 'p.state');

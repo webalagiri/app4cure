@@ -2,6 +2,14 @@
 
 namespace App\Http\Controllers\Common;
 
+use App\prescription\model\entities\Patient;
+use App\prescription\model\entities\Countries;
+use App\prescription\model\entities\States;
+use App\prescription\model\entities\Cities;
+use App\prescription\model\entities\Areas;
+
+
+
 use App\prescription\services\HelperService;
 use App\prescription\services\HospitalService;
 use App\prescription\facades\HospitalServiceFacade;
@@ -151,14 +159,107 @@ class CommonController extends Controller
         return $patient;
     }
 
-    /* Get all the cities
-     * @params none
-     * @throws HelperException
-     * @return array | null
-     * @author Baskar
-     */
-
     public function getCities(HelperService $helperService)
+    {
+        $cities = null;
+
+        try
+        {
+            $cities = $helperService->getCities();
+        }
+        catch(HelperException $cityExc)
+        {
+            $errorMsg = $cityExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($cityExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return $cities;
+    }
+
+
+    //VIMAL
+
+    public function getCountry(HelperService $helperService)
+    {
+        $cities = null;
+
+        try
+        {
+            //$cities = $helperService->getCities();
+            $country = Countries::get();
+
+        }
+        catch(HelperException $cityExc)
+        {
+            $errorMsg = $cityExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($cityExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return $country;
+    }
+
+
+    public function getState(HelperService $helperService)
+    {
+        $cities = null;
+
+        try
+        {
+            $cities = $helperService->getCities();
+        }
+        catch(HelperException $cityExc)
+        {
+            $errorMsg = $cityExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($cityExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return $cities;
+    }
+
+
+    public function getCity(HelperService $helperService)
+    {
+        $cities = null;
+
+        try
+        {
+            $cities = $helperService->getCities();
+        }
+        catch(HelperException $cityExc)
+        {
+            $errorMsg = $cityExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($cityExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return $cities;
+    }
+
+
+    public function getArea(HelperService $helperService)
     {
         $cities = null;
 
@@ -383,6 +484,7 @@ class CommonController extends Controller
 
                 if(Auth::user()->hasRole('customer'))
                 {
+
                     $LoginUserId=Session::put('LoginUserId', Auth::user()->id);
                     $LoginUserType=Session::put('LoginUserType', 'patient');
                     $DisplayName=Session::put('DisplayName', ucfirst(Auth::user()->name));
@@ -396,10 +498,12 @@ class CommonController extends Controller
                         $AuthDisplayPhoto=Session::put('AuthDisplayPhoto', str_replace('public',$img, URL::to('/')));
                     }
 
-                    $intendUrl = Session::get('previousurl');
-                    if(!is_null($intendUrl))
+
+                    $patientInfo = Patient::where('customer_id','=',Auth::user()->id)->first();
+                    if($patientInfo->pincode=="")
                     {
-                        return redirect($intendUrl);
+                        $msg="Please Enter Contact Details to Complete Registration";
+                        return redirect('patient/'.Auth::user()->id.'/updateprofile')->with('message',$msg);;
                     }
                     else{
                         //9762/myallenquiries
@@ -474,6 +578,13 @@ class CommonController extends Controller
         //dd($patientInfo);
 
         return view('portal.customer-view-profile',compact('patientInfo'));
+    }
+
+    public function updatePatient()
+    {
+        $patientId=Auth::user()->id;
+        $patientInfo = HospitalServiceFacade::getPatientInfo($patientId);
+        return view('portal.customer-update-profile',compact('patientInfo'));
     }
 
     public function editPatient()

@@ -22,4 +22,5 @@ interface LabInterface
     public function laboratoryAddToCart($laboratoryCartInfo);
 
     public function laboratoryCart();
+    public function laboratoryConfirm();
 }
