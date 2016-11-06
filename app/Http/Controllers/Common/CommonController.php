@@ -360,15 +360,17 @@ class CommonController extends Controller
                 $headers .= 'To: '.$patientInfo['name'].'<'.$patientInfo['email'].'>' . "\r\n";
                 $headers .= 'From: App4Cure <noreply@app4cure.co.in>' . "\r\n";
 
-                echo $sucmsg="Registration Done Successfully! We send Activation Mail. Please Check your Email.";
-                echo "<h1>Email Server Issues</h1>";
-                echo $message;
-                exit;
+                //echo $sucmsg="Registration Done Successfully! We send Activation Mail. Please Check your Email.";
+                //echo "<h1>Email Server Issues</h1>";
+                //echo $message;
+                //exit;
 
                 // Mail it
                 if(mail($to, $subject, $message, $headers))
                 {
 
+                    $sucmsg="Registration Done Successfully! We send Activation Mail. Please Check your Email.";
+                    return redirect('customer-login')->with('success',$sucmsg);
                 }
                 else
                 {
