@@ -34,7 +34,8 @@ use Exception;
 
 use Auth;
 use Session;
-
+use Illuminate\Mail;
+//use Illuminate\Contracts\Mail;
 use Illuminate\Support\Facades\URL;
 
 class CommonController extends Controller
