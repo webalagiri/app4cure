@@ -185,7 +185,7 @@ class CommonController extends Controller
 
     //VIMAL
 
-    public function getCountry(HelperService $helperService)
+    public function getCountry()
     {
         $cities = null;
 
@@ -211,13 +211,14 @@ class CommonController extends Controller
     }
 
 
-    public function getState(HelperService $helperService)
+    public function getState()
     {
         $cities = null;
 
         try
         {
-            $cities = $helperService->getCities();
+            //$cities = $helperService->getCities();
+            $state = States::get();
         }
         catch(HelperException $cityExc)
         {
@@ -231,17 +232,18 @@ class CommonController extends Controller
             Log::error($msg);
         }
 
-        return $cities;
+        return $state;
     }
 
 
-    public function getCity(HelperService $helperService)
+    public function getCity()
     {
         $cities = null;
 
         try
         {
-            $cities = $helperService->getCities();
+            //$cities = $helperService->getCities();
+            $city = Cities::get();
         }
         catch(HelperException $cityExc)
         {
@@ -255,17 +257,18 @@ class CommonController extends Controller
             Log::error($msg);
         }
 
-        return $cities;
+        return $city;
     }
 
 
-    public function getArea(HelperService $helperService)
+    public function getArea()
     {
         $cities = null;
 
         try
         {
-            $cities = $helperService->getCities();
+            //$cities = $helperService->getCities();
+            $area = Areas::get();
         }
         catch(HelperException $cityExc)
         {
@@ -279,7 +282,7 @@ class CommonController extends Controller
             Log::error($msg);
         }
 
-        return $cities;
+        return $area;
     }
 
 
@@ -584,14 +587,85 @@ class CommonController extends Controller
     {
         $patientId=Auth::user()->id;
         $patientInfo = HospitalServiceFacade::getPatientInfo($patientId);
-        return view('portal.customer-update-profile',compact('patientInfo'));
+        $countryInfo = CommonController::getCountry();
+        $stateInfo = CommonController::getState();
+        $cityInfo = CommonController::getCity();
+        $areaInfo = CommonController::getArea();
+        //dd($areaInfo);
+
+        return view('portal.customer-update-profile',compact('patientInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
+    }
+
+    public function updateSavePatient(Request $patientProfileInfo)
+    {
+        $status =  true;
+        $patientProfileInfoValue = $patientProfileInfo->all();
+        //dd($patientProfileInfoValue);
+
+
+        $patientAreaInfo = Areas::find($patientProfileInfoValue['area']);
+        //dd($patientAreaInfo['area_pincode']);
+        $patientId=Auth::user()->id;
+
+        $patientInfo = Patient::where('customer_id','=',$patientId)->first();
+
+        $patientInfo->customer_name = $patientProfileInfoValue['customer_name'];
+        $patientInfo->telephone = $patientProfileInfoValue['telephone'];
+        $patientInfo->address = $patientProfileInfoValue['address'];
+        $patientInfo->country = $patientProfileInfoValue['country'];
+        $patientInfo->state = $patientProfileInfoValue['state'];
+        $patientInfo->city = $patientProfileInfoValue['city'];
+        $patientInfo->area = $patientProfileInfoValue['area'];
+        $patientInfo->pincode = $patientAreaInfo['area_pincode'];
+        $patientInfo->updated_by = $patientProfileInfoValue['customer_name'];
+        $patientInfo->updated_at = date("Y-m-d H:i:s");
+        $patientInfo->save();
+
+
+        return redirect('patient/'.Auth::user()->id.'/dashboard');
+        //return view('portal.customer-update-profile',compact('patientInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
     }
 
     public function editPatient()
     {
         $patientId=Auth::user()->id;
         $patientInfo = HospitalServiceFacade::getPatientInfo($patientId);
-        return view('portal.customer-edit-profile',compact('patientInfo'));
+        $countryInfo = CommonController::getCountry();
+        $stateInfo = CommonController::getState();
+        $cityInfo = CommonController::getCity();
+        $areaInfo = CommonController::getArea();
+
+        return view('portal.customer-edit-profile',compact('patientInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
+    }
+
+    public function editSavePatient(Request $patientProfileInfo)
+    {
+        $status =  true;
+        $patientProfileInfoValue = $patientProfileInfo->all();
+        //dd($patientProfileInfoValue);
+
+
+        $patientAreaInfo = Areas::find($patientProfileInfoValue['area']);
+        //dd($patientAreaInfo['area_pincode']);
+        $patientId=Auth::user()->id;
+
+        $patientInfo = Patient::where('customer_id','=',$patientId)->first();
+
+        $patientInfo->customer_name = $patientProfileInfoValue['customer_name'];
+        $patientInfo->telephone = $patientProfileInfoValue['telephone'];
+        $patientInfo->address = $patientProfileInfoValue['address'];
+        $patientInfo->country = $patientProfileInfoValue['country'];
+        $patientInfo->state = $patientProfileInfoValue['state'];
+        $patientInfo->city = $patientProfileInfoValue['city'];
+        $patientInfo->area = $patientProfileInfoValue['area'];
+        $patientInfo->pincode = $patientAreaInfo['area_pincode'];
+        $patientInfo->updated_by = $patientProfileInfoValue['customer_name'];
+        $patientInfo->updated_at = date("Y-m-d H:i:s");
+        $patientInfo->save();
+
+
+        return redirect('patient/'.Auth::user()->id.'/dashboard');
+        //return view('portal.customer-update-profile',compact('patientInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
     }
 
     public function savePatient()

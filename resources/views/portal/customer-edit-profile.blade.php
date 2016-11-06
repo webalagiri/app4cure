@@ -103,49 +103,76 @@ _________________________________________________________ -->
                 <div class="col-sm-9">
 
                     <section class="barx background-white">
-                        <div class="container">
+                        <div class="containerX">
                             <h2>Edit Profile</h2>
-                            <form>
-                            <table class="table table-striped" style="width:80%;">
-                                <tbody>
-                                <tr>
-                                    <td>Name</td>
-                                    <td><input type="text" value="{{$patientInfo[0]->customer_name}}" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
-                                    <td><input type="email" value="{{$patientInfo[0]->email}}" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Telephone</td>
-                                    <td><input type="number" value="{{$patientInfo[0]->telephone}}" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td><textarea>{{$patientInfo[0]->address}}</textarea></td>
-                                </tr>
-                                <tr>
-                                    <td>Area</td>
-                                    <td><input type="text" value="{{$patientInfo[0]->patient_area}}" /></td>
-                                </tr>
-                                <tr>
-                                    <td>City</td>
-                                    <td><input type="text" value="{{$patientInfo[0]->patient_city}}" /></td>
-                                </tr>
-                                <tr>
-                                    <td>State</td>
-                                    <td><input type="text" value="{{$patientInfo[0]->patient_state}}" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Country</td>
-                                    <td><input type="text" value="{{$patientInfo[0]->patient_country}}" /></td>
-                                </tr>
-                                <tr>
-                                    <td> </td>
-                                    <td><input type="button" value="Update" /></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <form action="{{ URL::to('/') }}/patient/{{Auth::user()->id}}/editsaveprofile" method="POST">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td><input type="text" class="form-control" name="customer_name" value="{{$patientInfo[0]->customer_name}}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Telephone</td>
+                                        <td><input type="number" class="form-control" name="telephone" value="{{$patientInfo[0]->telephone}}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td><textarea class="form-control" name="address">{{$patientInfo[0]->address}}</textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td>
+                                            <select name="country" class="form-control" >
+                                                <option value="">--Choose Country--</option>
+                                                @foreach($countryInfo as $countryInfoValue)
+                                                    <option value="{{$countryInfoValue->id}}" @if($countryInfoValue->id==$patientInfo[0]->patient_country_id) selected @endif >{{$countryInfoValue->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>State</td>
+                                        <td>
+                                            <select name="state" class="form-control" >
+                                                <option value="">--Choose State--</option>
+                                                @foreach($stateInfo as $stateInfoValue)
+                                                    <option value="{{$stateInfoValue->id}}" @if($stateInfoValue->id==$patientInfo[0]->patient_state_id) selected @endif >{{$stateInfoValue->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>City</td>
+                                        <td>
+                                            <select name="city" class="form-control" >
+                                                <option value="">--Choose City--</option>
+                                                @foreach($cityInfo as $cityInfoValue)
+                                                    <option value="{{$cityInfoValue->id}}" @if($cityInfoValue->id==$patientInfo[0]->patient_city_id) selected @endif >{{$cityInfoValue->city_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Area</td>
+                                        <td>
+                                            <select name="area" class="form-control" >
+                                                <option value="">--Choose Area--</option>
+                                                @foreach($areaInfo as $areaInfoValue)
+                                                    <option value="{{$areaInfoValue->id}}" @if($areaInfoValue->id==$patientInfo[0]->patient_area_id) selected @endif >{{$areaInfoValue->area_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                    </tr>
+
+
+
+                                    <tr>
+                                        <td> </td>
+                                        <td><input type="submit" name="submit" value="Update" /></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </form>
 
                         </div>

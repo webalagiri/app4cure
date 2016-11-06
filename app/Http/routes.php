@@ -46,12 +46,14 @@ Route::group(['namespace' => 'Common'], function()
     Route::any('/customer-login', array('as' => 'customer.login', 'uses' => 'CommonController@loginFormPatient'));
     Route::any('/do-customer-login', array('as' => 'customer.dologin', 'uses' => 'CommonController@loginPatient'));
 
-    Route::any('/patient/{id}/updateprofile', array('as' => 'customer.dashboard', 'uses' => 'CommonController@updatePatient'));
+    Route::any('/patient/{id}/updateprofile', array('as' => 'customer.updateprofile', 'uses' => 'CommonController@updatePatient'));
+    Route::any('/patient/{id}/updatesaveprofile', array('as' => 'customer.updatesaveprofile', 'uses' => 'CommonController@updateSavePatient'));
 
 
     Route::any('/patient/{id}/dashboard', array('as' => 'customer.dashboard', 'uses' => 'CommonController@dashboardPatient'));
     Route::any('/patient/{id}/viewprofile', array('as' => 'customer.dashboard', 'uses' => 'CommonController@viewPatient'));
     Route::any('/patient/{id}/editprofile', array('as' => 'customer.dashboard', 'uses' => 'CommonController@editPatient'));
+    Route::any('/patient/{id}/editsaveprofile', array('as' => 'customer.editsaveprofile', 'uses' => 'CommonController@editSavePatient'));
     Route::any('/patient/{id}/changepassword', array('as' => 'customer.dashboard', 'uses' => 'CommonController@changePasswordPatient'));
 
     Route::any('/logout', array('as' => 'customer.login', 'uses' => 'CommonController@logoutPatient'));

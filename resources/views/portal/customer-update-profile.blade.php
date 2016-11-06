@@ -105,71 +105,83 @@ _________________________________________________________ -->
                     <section class="barx background-white">
                         <div class="container">
                             <h2>Update Profile</h2>
+                            <?php /* ?>
                             {{print_r($patientInfo[0])}}
-                            <form>
+                            <hr/>
+                            {{print_r($countryInfo)}}
+                            <hr/>
+                            {{print_r($stateInfo)}}
+                            <hr/>
+                            {{print_r($cityInfo)}}
+                            <hr/>
+                            {{print_r($areaInfo)}}
+                            <hr/>
+                            <?php */ ?>
+                            <form action="{{ URL::to('/') }}/patient/{{Auth::user()->id}}/updatesaveprofile" method="POST">
                             <table class="table table-striped">
                                 <tbody>
                                 <tr>
                                     <td>Name</td>
-                                    <td><input type="text" value="{{$patientInfo[0]->customer_name}}" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
-                                    <td><input type="email" value="{{$patientInfo[0]->email}}" /></td>
+                                    <td><input type="text" class="form-control" name="customer_name" value="{{$patientInfo[0]->customer_name}}" /></td>
                                 </tr>
                                 <tr>
                                     <td>Telephone</td>
-                                    <td><input type="number" value="{{$patientInfo[0]->telephone}}" /></td>
+                                    <td><input type="number" class="form-control" name="telephone" value="{{$patientInfo[0]->telephone}}" /></td>
                                 </tr>
                                 <tr>
                                     <td>Address</td>
-                                    <td><textarea>{{$patientInfo[0]->address}}</textarea></td>
+                                    <td><textarea class="form-control" name="address">{{$patientInfo[0]->address}}</textarea></td>
                                 </tr>
                                 <tr>
-                                    <td>Area</td>
+                                    <td>Country</td>
                                     <td>
-                                    <select name="area">
-                                        <option value="">--Choose Area--</option>
-                                        <option value="1" @if($patientInfo[0]->patient_area_id==1) selected @endif >Anna Nagar</option>
-                                    </select>
-
-                                        <input type="text" value="{{$patientInfo[0]->patient_area}}" />
-
+                                        <select name="country" class="form-control" >
+                                            <option value="">--Choose Country--</option>
+                                            @foreach($countryInfo as $countryInfoValue)
+                                                <option value="1" @if($countryInfoValue->id==$patientInfo[0]->patient_country_id) selected @endif >{{$countryInfoValue->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>State</td>
+                                    <td>
+                                        <select name="state" class="form-control" >
+                                            <option value="">--Choose State--</option>
+                                            @foreach($stateInfo as $stateInfoValue)
+                                                <option value="1" @if($stateInfoValue->id==$patientInfo[0]->patient_state_id) selected @endif >{{$stateInfoValue->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>City</td>
                                     <td>
-                                    <select name="area">
-                                        <option value="">--Choose City--</option>
-                                        <option value="1" @if($patientInfo[0]->patient_city_id==1) selected @endif >Chennai</option>
-                                    </select>
-
-                                        <input type="text" value="{{$patientInfo[0]->patient_city}}" /></td>
-                                </tr>
-                                <tr>
-                                    <td>State</td>
-                                    <td>
-                                    <select name="area">
-                                        <option value="">--Choose State--</option>
-                                        <option value="1" @if($patientInfo[0]->patient_state_id==1) selected @endif >Tamil Nadu</option>
-                                    </select>
-
-                                        <input type="text" value="{{$patientInfo[0]->patient_state}}" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Country</td>
-                                    <td>
-                                        <select name="country">
-                                            <option value="">--Choose Country--</option>
-                                            <option value="1" @if($patientInfo[0]->patient_country_id==1) selected @endif >India</option>
+                                        <select name="city" class="form-control" >
+                                            <option value="">--Choose City--</option>
+                                            @foreach($cityInfo as $cityInfoValue)
+                                                <option value="1" @if($cityInfoValue->id==$patientInfo[0]->patient_city_id) selected @endif >{{$cityInfoValue->city_name}}</option>
+                                            @endforeach
                                         </select>
-
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>Area</td>
+                                    <td>
+                                    <select name="area" class="form-control" >
+                                        <option value="">--Choose Area--</option>
+                                        @foreach($areaInfo as $areaInfoValue)
+                                            <option value="1" @if($areaInfoValue->id==$patientInfo[0]->patient_area_id) selected @endif >{{$areaInfoValue->area_name}}</option>
+                                        @endforeach
+                                    </select>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
                                     <td> </td>
-                                    <td><input type="button" value="Update" /></td>
+                                    <td><input type="submit" name="submit" value="Update" /></td>
                                 </tr>
                                 </tbody>
                             </table>
