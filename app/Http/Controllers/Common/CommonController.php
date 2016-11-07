@@ -539,15 +539,16 @@ class CommonController extends Controller
                     $msg="Login Details Incorrect! Try Again.";
                     return redirect('customer-login')->with('message',$msg);
                 }
-                else if(Auth::user()->hasRole('adm'))
+                else if(Auth::user()->hasRole('admin'))
                 {
+                    //dd(Auth::user());
                     $LoginUserId=Session::put('LoginUserId', Auth::user()->id);
                     $LoginUserType=Session::put('LoginUserType', 'patient');
                     $DisplayName=Session::put('DisplayName', ucfirst(Auth::user()->name));
                     $AuthDisplayName=Session::put('AuthDisplayName', ucfirst(Auth::user()->name));
                     $AuthDisplayPhoto=Session::put('AuthDisplayPhoto', "no-image.jpg");
                     // dd(Auth::user()->name);
-                    return redirect('adm/'.Auth::user()->id.'/dashboard');
+                    return redirect('admin/'.Auth::user()->id.'/dashboard');
                 }
             }
             else
