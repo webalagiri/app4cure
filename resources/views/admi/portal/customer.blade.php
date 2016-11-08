@@ -613,5 +613,32 @@
 @endsection
 
 @section('scripts')
+    <script>
 
+        window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')
+        $('ul.nav li.dropdown').hover(function() {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+        }, function() {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+        });
+        function toggler(divId) {
+            $("#" + divId).toggle();
+        }
+
+        $(function () {
+            $('.td1').hide();
+            $('#edtusr').click(function () {
+                $('.td1').show();
+                $('#editUser').show();
+                $('#viewUser').hide();
+            });
+            $('#dispusr').click(function () {
+                $('.td1').show();
+                $('#viewUser').show();
+                $('#editUser').hide();
+            });
+            // $('.td1').hide();
+        });
+
+    </script>
 @stop
