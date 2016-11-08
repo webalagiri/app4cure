@@ -48,4 +48,7 @@ interface HospitalInterface {
     public function getPatientInfo($patientId);
     public function getPatientUpdateInfo($patientId);
 
+    public function getPatientList();
+
+
 }

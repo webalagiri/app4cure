@@ -35,6 +35,18 @@ Route::get('/contact', function () {
     return view('portal.contact');
 });
 
+Route::get('/terms', function () {
+    return view('portal.about');
+});
+
+Route::get('/privacy', function () {
+    return view('portal.about');
+});
+
+Route::get('/faq', function () {
+    return view('portal.about');
+});
+
 
 Route::group(['namespace' => 'Common'], function()
 {
@@ -73,18 +85,35 @@ Route::group(['prefix' => 'laboratory'], function()
 
 Route::group(['prefix' => 'admin'], function()
 {
+    Route::group(['namespace' => 'Common'], function() {
+
+        Route::any('/login', array('as' => 'customer.login', 'uses' => 'CommonController@loginAdmin'));
+        Route::any('/do-customer-login', array('as' => 'customer.dologin', 'uses' => 'CommonController@loginPatient'));
+        Route::any('/logout', array('as' => 'customer.login', 'uses' => 'CommonController@logoutAdmin'));
+
+    });
+
     Route::group(['namespace' => 'Admin'], function()
     {
+
     Route::any('{id}/dashboard', array('as' => 'customer.dashboard', 'uses' => 'AdminController@dashboardAdmin'));
+
     });
 
     Route::group(['namespace' => 'Lab'], function()
     {
-        Route::any('/', array('as' => 'laboratory.list', 'uses' => 'LabController@laboratoryList'));
-        Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'LabController@laboratoryAddToCart'));
-        Route::any('/cart', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryCart'));
-        Route::any('/confirm', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryConfirm'));
+
+        Route::any('/laboratory', array('as' => 'laboratory.list', 'uses' => 'LabController@laboratoryListAdmin'));
+
     });
+
+    Route::group(['namespace' => 'Common'], function()
+    {
+
+        Route::any('/customer', array('as' => 'laboratory.list', 'uses' => 'CommonController@UserListAdmin'));
+
+    });
+
 });
 
 

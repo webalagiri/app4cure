@@ -791,6 +791,21 @@ class CommonController extends Controller
         return redirect('customer-login')->with('message',$msg);
     }
 
+
+
+    public function loginAdmin()
+    {
+        return view('portal.admin-login');
+    }
+
+    public function logoutAdmin()
+    {
+        Auth::logout();
+        Session::flush();
+        $msg="Login Successfully! Thanks.";
+        return redirect('admin/login')->with('message',$msg);
+    }
+
     public function forgotlogin()
     {
         return view('portal.forgot-password');
@@ -844,4 +859,20 @@ class CommonController extends Controller
             return redirect('user/forgotlogin')->with('message',trans('messages.SupportTeam'));
         }
     }
+
+
+    public function UserListAdmin()
+    {
+
+        $patientInfo = HospitalServiceFacade::getPatientList();
+        //dd($patientInfo);
+        $countryInfo = CommonController::getCountry();
+        $stateInfo = CommonController::getState();
+        $cityInfo = CommonController::getCity();
+        $areaInfo = CommonController::getArea();
+
+        //return view('portal.customer-view-profile',compact('patientInfo'));
+        return view('admi.portal.customer',compact('patientInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
+    }
+
 }

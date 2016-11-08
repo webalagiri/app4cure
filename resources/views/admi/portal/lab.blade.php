@@ -20,7 +20,7 @@
                 <!-- *** MENUS AND FILTERS ***-->
 
                 <div class="panel panel-default sidebar-menu">
-                    <p>Home > Dashboard </p>
+                    <p>Home > Laboratory </p>
                     @include('admi.portal.sidebar')
                 </div>
             </div>
@@ -36,13 +36,8 @@
 
             <div class="col-sm-10 main-content">
                 <div class="row">
-                    <div class="col-md-12">
-                        <p class="body-heading"><strong>Welcome to Admin Panel</strong></p>
-                    </div>
-                </div>
-                <div class="row hidden">
                     <div class="col-md-6">
-                        <p class="body-heading"><strong>User Management</strong> - <span>Admin</span></p>
+                        <p class="body-heading"><strong>Laboratory Management</strong> - <span>Admin</span></p>
                     </div>
 
                     <div class="col-md-4 text-right">
@@ -63,7 +58,7 @@
                 </div>
                 <hr class="style-three" />
 
-                <div class="row hidden">
+                <div class="row">
                     <div class="col-lg-12">
                         <div class="main-box no-header clearfix">
                             <div class="main-box-body clearfix">
@@ -423,8 +418,19 @@
                     </div>
                 </div>
 
+
+
+
+
+
+
+
+
+
+
+
                 <p>&nbsp;</p>
-                <div class="row hidden">
+                <div class="row">
 
 
                     <div class="collapse" id="editUser">

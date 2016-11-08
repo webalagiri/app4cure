@@ -491,4 +491,37 @@ class LabController extends Controller
         //return $patients;
     }
 
+
+    public function laboratoryListAdmin()
+    {
+
+        $laboratory = null;
+        //return view('portal.laboratory',compact('laboratory'));
+
+        try
+        {
+            $laboratory = $this->labService->laboratoryList();
+            //dd($laboratory);
+        }
+        catch(LabException $profileExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $profileExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($profileExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return view('admi.portal.lab',compact('laboratory'));
+
+        //return $patients;
+    }
+
+
+
 }

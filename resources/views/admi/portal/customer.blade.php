@@ -20,7 +20,7 @@
                 <!-- *** MENUS AND FILTERS ***-->
 
                 <div class="panel panel-default sidebar-menu">
-                    <p>Home > Dashboard </p>
+                    <p>Home > Customer </p>
                     @include('admi.portal.sidebar')
                 </div>
             </div>
@@ -36,13 +36,8 @@
 
             <div class="col-sm-10 main-content">
                 <div class="row">
-                    <div class="col-md-12">
-                        <p class="body-heading"><strong>Welcome to Admin Panel</strong></p>
-                    </div>
-                </div>
-                <div class="row hidden">
                     <div class="col-md-6">
-                        <p class="body-heading"><strong>User Management</strong> - <span>Admin</span></p>
+                        <p class="body-heading"><strong>Customer Management</strong> - <span>Admin</span></p>
                     </div>
 
                     <div class="col-md-4 text-right">
@@ -63,7 +58,7 @@
                 </div>
                 <hr class="style-three" />
 
-                <div class="row hidden">
+                <div class="row">
                     <div class="col-lg-12">
                         <div class="main-box no-header clearfix">
                             <div class="main-box-body clearfix">
@@ -80,6 +75,61 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($patientInfo as $patientInfoValue)
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" value="">
+                                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+
+                                                        </label>
+                                                    </div>
+
+                                                </td>
+                                                <td>
+                                                    <img src="http://bootdey.com/img/Content/user_1.jpg" alt="">
+                                                    <a href="#" class="user-link">{{$patientInfoValue->customer_name}}</a>
+                                                    <span class="user-subhead">Customer</span>
+                                                </td>
+
+
+                                                <td>
+                                                    <a href="#">{{$patientInfoValue->email}}</a>
+                                                    <br /><span class="user-subhead">{{$patientInfoValue->telephone}}</span>
+                                                </td>
+                                                <td>2013/08/12
+
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="label label-success">Active</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a data-toggle="collapse" href="#viewUser" aria-expanded="false" aria-controls="collapseExample" class="table-link" id="dispusr">
+                                                                <span class="fa-stack">
+                                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                                    <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+                                                                </span>
+                                                    </a>
+
+                                                    <a data-toggle="collapse" href="#editUser" aria-expanded="false" aria-controls="collapseExample" class="table-link" id="edtusr">
+                                                                <span class="fa-stack">
+                                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                                </span>
+                                                    </a>
+                                                    <a href="#" class="table-link danger">
+                                                                <span class="fa-stack">
+                                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                                </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+
+                                        @endforeach
+                                        <?php /* ?>
                                         <tr>
                                             <td>
                                                 <div class="checkbox">
@@ -415,6 +465,7 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                        <?php */ ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -423,8 +474,19 @@
                     </div>
                 </div>
 
+
+
+
+
+
+
+
+
+
+
+
                 <p>&nbsp;</p>
-                <div class="row hidden">
+                <div class="row">
 
 
                     <div class="collapse" id="editUser">

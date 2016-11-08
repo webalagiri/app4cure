@@ -20,28 +20,41 @@ _________________________________________________________ -->
                 </div>
                 <div class="col-xs-7">
 
+                    @if(isset(Auth::user()->id))
 
-                    <div class="login">
-                        <ul class="nav navbar-nav">
-                            <li> <a href="#" data-toggle="modal" data-target="#login-modal">24x7 Customer Support</a></li>
+                        <div class="login">
+                            <ul class="nav navbar-nav">
+                                <li> <a href="#" data-toggle="modal" data-target="#login-modal">24x7 Customer Support</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#login-modal">Tracking</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Hi {{$DisplayName=Session::get('DisplayName')}}! <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#"><i class="fa fa-male"></i> My Profile</a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i> Orders</a></li>
+                                        <li><a href="#"><i class="fa fa-rupee"></i> Wallet</a></li>
+                                        <li><a href="#"><i class="fa fa-hand-o-right"></i> Recommendations</a></li>
+                                        <li><a href="#"><i class="fa fa-suitcase"></i> My Briefcase</a></li>
+                                        <li><a href="{{ URL::to('/') }}/admin/logout"><i class="fa fa-sign-out"></i> Sign Out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
 
-                            <li><a href="#" data-toggle="modal" data-target="#login-modal">Tracking</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Hi Suresh! <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#"><i class="fa fa-male"></i> My Profile</a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i> Orders</a></li>
-                                    <li><a href="#"><i class="fa fa-rupee"></i> Wallet</a></li>
-                                    <li><a href="#"><i class="fa fa-hand-o-right"></i> Recommendations</a></li>
-                                    <li><a href="#"><i class="fa fa-suitcase"></i> My Briefcase</a></li>
-                                    <li><a href="#"><i class="fa fa-sign-out"></i> Sign Out</a></li>
-                                </ul>
-                            </li>
+                    @else
 
-                        </ul>
+                        <div class="login">
+                            <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in / Register</span></a>
+                            <a href="#"><i class="fa fa-truck"></i> TRACK ORDER</a>
+                        </div>
+
+                    @endif
 
 
-                    </div>
+
+
+
+
+
 
                 </div>
             </div>
@@ -77,23 +90,23 @@ _________________________________________________________ -->
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="index.html">Product Management</a>
+                            <a href="#">Product Management</a>
 
                         </li>
                         <li class="dropdown use-yamm yamm-fw">
-                            <a href="about.html">Administration</a>
+                            <a href="#">Administration</a>
 
                         </li>
                         <li class="dropdown use-yamm yamm-fw">
-                            <a href="Blog.html">Payments</a>
+                            <a href="#">Payments</a>
 
                         </li>
                         <li class="dropdown use-yamm yamm-fw">
-                            <a href="medical-services.html">Approvals</a>
+                            <a href="#">Approvals</a>
 
                         </li>
                         <li class="dropdown use-yamm yamm-fw">
-                            <a href="shop.html">Reports</a>
+                            <a href="#">Reports</a>
 
                         </li>
                         <!-- ========== FULL WIDTH MEGAMENU END ================== -->
@@ -101,11 +114,11 @@ _________________________________________________________ -->
                         <li class="dropdown">
                             <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Contact <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="contact.html">Contact option 1</a>
+                                <li><a href="#contact.html">Contact option 1</a>
                                 </li>
-                                <li><a href="contact2.html">Contact option 2</a>
+                                <li><a href="#contact2.html">Contact option 2</a>
                                 </li>
-                                <li><a href="contact3.html">Contact option 3</a>
+                                <li><a href="#contact3.html">Contact option 3</a>
                                 </li>
 
                             </ul>
