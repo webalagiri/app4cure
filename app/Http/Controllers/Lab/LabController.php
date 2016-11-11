@@ -2,9 +2,18 @@
 
 namespace App\Http\Controllers\Lab;
 
+use App\prescription\model\entities\Lab;
+use App\prescription\model\entities\Patient;
+use App\prescription\model\entities\Countries;
+use App\prescription\model\entities\States;
+use App\prescription\model\entities\Cities;
+use App\prescription\model\entities\Areas;
+
+
 use App\prescription\mapper\LabMapper;
 use App\prescription\services\HelperService;
 use App\prescription\services\HospitalService;
+use App\prescription\services\CommonService;
 use App\prescription\services\LabService;
 use App\prescription\utilities\Exception\LabException;
 use App\prescription\utilities\Exception\AppendMessage;
@@ -24,6 +33,109 @@ class LabController extends Controller
     {
         $this->labService = $labService;
     }
+
+
+
+    public function getCountry()
+    {
+        $cities = null;
+
+        try
+        {
+            //$cities = $helperService->getCities();
+            $country = Countries::get();
+
+        }
+        catch(HelperException $cityExc)
+        {
+            $errorMsg = $cityExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($cityExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return $country;
+    }
+
+
+    public function getState()
+    {
+        $cities = null;
+
+        try
+        {
+            //$cities = $helperService->getCities();
+            $state = States::get();
+        }
+        catch(HelperException $cityExc)
+        {
+            $errorMsg = $cityExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($cityExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return $state;
+    }
+
+
+    public function getCity()
+    {
+        $cities = null;
+
+        try
+        {
+            //$cities = $helperService->getCities();
+            $city = Cities::get();
+        }
+        catch(HelperException $cityExc)
+        {
+            $errorMsg = $cityExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($cityExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return $city;
+    }
+
+
+    public function getArea()
+    {
+        $cities = null;
+
+        try
+        {
+            //$cities = $helperService->getCities();
+            $area = Areas::get();
+        }
+        catch(HelperException $cityExc)
+        {
+            $errorMsg = $cityExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($cityExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return $area;
+    }
+
 
     /**
      * Get the profile of the lab
@@ -495,12 +607,19 @@ class LabController extends Controller
     public function laboratoryListAdmin()
     {
 
-        $laboratory = null;
+        $laboratoryInfo = null;
         //return view('portal.laboratory',compact('laboratory'));
 
         try
         {
-            $laboratory = $this->labService->laboratoryList();
+            $laboratoryInfo = $this->labService->laboratoryList();
+
+            $countryInfo = $this->getCountry();
+            $stateInfo = $this->getState();
+            $cityInfo = $this->getCity();
+            $areaInfo = $this->getArea();
+
+
             //dd($laboratory);
         }
         catch(LabException $profileExc)
@@ -517,7 +636,7 @@ class LabController extends Controller
             Log::error($msg);
         }
 
-        return view('admi.portal.lab',compact('laboratory'));
+        return view('admi.portal.lab',compact('laboratoryInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
 
         //return $patients;
     }
