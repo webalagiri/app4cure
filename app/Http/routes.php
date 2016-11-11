@@ -96,7 +96,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::group(['namespace' => 'Admin'], function()
     {
 
-    Route::any('{id}/dashboard', array('as' => 'customer.dashboard', 'uses' => 'AdminController@dashboardAdmin'));
+    Route::any('dashboard', array('as' => 'customer.dashboard', 'uses' => 'AdminController@dashboardAdmin'));
 
     });
 
@@ -104,6 +104,8 @@ Route::group(['prefix' => 'admin'], function()
     {
 
         Route::any('/laboratory', array('as' => 'laboratory.list', 'uses' => 'LabController@laboratoryListAdmin'));
+        Route::any('/laboratory/add', array('as' => 'laboratory.add', 'uses' => 'LabController@laboratoryAddAdmin'));
+        Route::any('/laboratory/save', array('as' => 'laboratory.save', 'uses' => 'LabController@laboratorySaveAdmin'));
 
     });
 

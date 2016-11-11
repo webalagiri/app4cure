@@ -548,7 +548,8 @@ class CommonController extends Controller
                     $AuthDisplayName=Session::put('AuthDisplayName', ucfirst(Auth::user()->name));
                     $AuthDisplayPhoto=Session::put('AuthDisplayPhoto', "no-image.jpg");
                     // dd(Auth::user()->name);
-                    return redirect('admin/'.Auth::user()->id.'/dashboard');
+                    return redirect('admin/dashboard');
+                    //return redirect('admin/'.Auth::user()->id.'/dashboard');
                 }
             }
             else

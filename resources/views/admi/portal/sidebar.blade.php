@@ -4,7 +4,7 @@
 
 <div class="panel-body">
     <ul class="nav nav-pills nav-stacked category-menu">
-        <li class="active"><a href="{{ URL::to('/') }}/admin/{{$DisplayName=Session::get('LoginUserId')}}/dashboard">Dashboard</a></li>
+        <li class="active"><a href="{{ URL::to('/') }}/admin/dashboard">Dashboard</a></li>
         <li><a href="{{ URL::to('/') }}/admin/customer">Customers</a></li>
         <li><a href="{{ URL::to('/') }}/admin/laboratory">Laboratories</a></li>
         <li><a href="#{{ URL::to('/') }}/admin/customer">Pharmacies </a></li>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Lab;
 
 use App\prescription\model\entities\Lab;
+use App\prescription\model\entities\LabTest;
 use App\prescription\model\entities\Patient;
 use App\prescription\model\entities\Countries;
 use App\prescription\model\entities\States;
@@ -136,6 +137,31 @@ class LabController extends Controller
         return $area;
     }
 
+
+    public function getLabTest()
+    {
+        $labtest = null;
+
+        try
+        {
+            //$cities = $helperService->getCities();
+            $labtest = LabTest::get();
+
+        }
+        catch(HelperException $cityExc)
+        {
+            $errorMsg = $cityExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($cityExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return $labtest;
+    }
 
     /**
      * Get the profile of the lab
@@ -641,6 +667,86 @@ class LabController extends Controller
         //return $patients;
     }
 
+    public function laboratoryAddAdmin()
+    {
 
+        $countryInfo = null;
+        $stateInfo = null;
+        $cityInfo = null;
+        $areaInfo = null;
+
+        try
+        {
+
+            $countryInfo = $this->getCountry();
+            $stateInfo = $this->getState();
+            $cityInfo = $this->getCity();
+            $areaInfo = $this->getArea();
+            $labTestInfo = $this->getLabTest();
+
+
+
+            //dd($laboratory);
+        }
+        catch(LabException $profileExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $profileExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($profileExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return view('admi.portal.lab-add',compact('countryInfo','stateInfo','cityInfo','areaInfo','labTestInfo'));
+
+        //return $patients;
+    }
+
+
+    public function laboratorySaveAdmin(Request $labRequest)
+    {
+       dd($labRequest->all());
+
+        $countryInfo = null;
+        $stateInfo = null;
+        $cityInfo = null;
+        $areaInfo = null;
+
+        try
+        {
+
+            $countryInfo = $this->getCountry();
+            $stateInfo = $this->getState();
+            $cityInfo = $this->getCity();
+            $areaInfo = $this->getArea();
+            $labTestInfo = $this->getLabTest();
+
+
+
+            //dd($laboratory);
+        }
+        catch(LabException $profileExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $profileExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($profileExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return view('admi.portal.lab-add',compact('countryInfo','stateInfo','cityInfo','areaInfo','labTestInfo'));
+
+        //return $patients;
+    }
 
 }

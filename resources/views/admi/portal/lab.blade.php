@@ -36,8 +36,12 @@
 
             <div class="col-sm-10 main-content">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <p class="body-heading"><strong>Laboratory Management</strong> - <span>Admin</span></p>
+                    </div>
+
+                    <div class="col-md-2">
+                        <a href="{{ URL::to('/') }}/admin/laboratory/add" class="table-link">ADD LAB</a>
                     </div>
 
                     <div class="col-md-4 text-right">
