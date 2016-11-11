@@ -1,0 +1,433 @@
+/* your styles go here */
+
+#heading-breadcrumbs {
+    padding: 0px !important;
+    background: url(../img/texture-turquoise.png) center center repeat;
+}
+#top {    height: 40px;}
+
+.homeicn {
+  margin-top: 8px;
+  font-size: 30px;
+  float: right;
+}
+#top .login a {
+    letter-spacing: 0 !important; 
+}
+
+.navbar-nav {  margin-top: -20px;} 
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: transparent;
+}
+
+.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+    background-color: #38a7bb;
+    color: #fff;
+}
+
+.dropdown-menu {
+    background-color: #555555;
+
+}
+.bar {
+  padding: 0px;
+}
+
+#bottom-container {
+  padding: 20px;
+}
+
+#bottom-container ul li {
+  list-style: none;
+  margin-left: 0px;
+  margin
+}
+
+.product_head {
+	color: #f00;
+	font-weight: bold;
+}
+.panel.sidebar-menu ul.nav.category-menu {
+letter-spacing: inherit;
+}
+
+.main-content {
+  padding-top: 2%;
+}
+th {
+  background-color: #ccc;
+}
+.footer {
+    background: #d1d3d4;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    clear: both;
+    z-index: 999;
+    height: 56px;
+    padding: 17px;
+}
+
+.footer-container {
+    padding: 0;
+}
+
+.footer__social-links {
+    float: left;
+}
+
+.contact {
+  font-size: 12px;
+}
+.external {
+  color: #fff;
+}
+.copyright-link {
+    font-size: 12px;
+    color: #888888;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.social-nav li {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 50px;
+    list-style:none;
+}
+
+.social-nav-item {
+    float: left;
+    padding-right: 20px;
+    padding-right: 1.25rem;
+}
+
+.footer__links {
+    padding-left: 55px;
+    padding-left: 3.4375rem;
+    float: left;
+}
+
+.links-nav-item {
+    display: inline-block;
+    padding-right: 25px;
+    padding-right: 1.5625rem;
+    font-family: "Open Sans", "Helvetica Neue", Verdana, Arial, sans-serif;
+}
+
+.footer__copyright {
+    font-size: 12px;
+    float: right;
+    color: #3c3c3c;
+}
+
+.store-link-copy {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 2px;
+    font-size: 12px;
+    color: #3c3c3c;
+}
+
+.store-link-list {
+    display: inline;
+    vertical-align: top;
+    list-style: none;
+    float: left;
+}
+.body-heading {
+   
+    font-size: 16px;
+    color: inherit;
+    text-transform: uppercase;
+}
+.body-heading span {
+  color: #3498db;
+}
+.activeuser, .badge {
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.badge {
+  background-color: #38a7bb;
+  color: #fff;
+} 
+
+.style-three {
+    border: 0;
+    border-bottom: 1px dashed #38a7bb;
+    margin: 0px !important;
+}
+
+.td1, #editUser, #viewUser {
+    display: none;
+}
+
+#editUser, #viewUser {
+  /*width: 60%; */
+}
+
+.txtbox {
+    border: none;
+    border-bottom: solid 2px #c9c9c9;
+    margin-bottom: 10px;
+}
+.lbltxt {
+     margin-bottom: 10px;
+}
+
+/*    Custom Style for search text box          */
+
+  .search-form .form-group {
+  float: right !important;
+  transition: all 0.35s, border-radius 0s;
+  width: 32px;
+  height: 32px;
+  background-color: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+.search-form .form-group input.form-control {
+  padding-right: 20px;
+  border: 0 none;
+  background: transparent;
+  box-shadow: none;
+  display:block;
+}
+.search-form .form-group input.form-control::-webkit-input-placeholder {
+  display: none;
+}
+.search-form .form-group input.form-control:-moz-placeholder {
+  /* Firefox 18- */
+  display: none;
+}
+.search-form .form-group input.form-control::-moz-placeholder {
+  /* Firefox 19+ */
+  display: none;
+}
+.search-form .form-group input.form-control:-ms-input-placeholder {
+  display: none;
+}
+.search-form .form-group:hover,
+.search-form .form-group.hover {
+  width: 100%;
+  border-radius: 4px 25px 25px 4px;
+}
+.search-form .form-group span.form-control-feedback {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  z-index: 2;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  color: #38a7bb;
+  left: initial;
+  font-size: 14px;
+}
+
+/*   Search text box styles end here               */
+
+/*   check box styles starts here               */
+
+.checkbox label:after, 
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+}
+
+.radio .cr {
+    border-radius: 50%;
+}
+
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+}
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+}
+
+
+
+
+/*   check box stylesend here               */
+
+
+@media only screen and (max-width: 800px) {
+    
+    /* Force table to not be like tables anymore */
+	#no-more-tables table, 
+	#no-more-tables thead, 
+	#no-more-tables tbody, 
+	#no-more-tables th, 
+	#no-more-tables td, 
+	#no-more-tables tr { 
+		display: block; 
+	}
+ 
+	/* Hide table headers (but not display: none;, for accessibility) */
+	#no-more-tables thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+ 
+	#no-more-tables tr { border: 1px solid #ccc; }
+ 
+	#no-more-tables td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+		white-space: normal;
+		text-align:left;
+	}
+ 
+	#no-more-tables td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		text-align:left;
+		font-weight: bold;
+	}
+ 
+	/*
+	Label the data
+	*/
+	#no-more-tables td:before { content: attr(data-title); }
+}
+
+.usertbl {font-size: 12px;}
+
+.hidden {
+     display:none;
+}
+
+#editUser, #ViewUser  {
+	
+	padding: 20px;
+	font-size: 12px;
+	margin: 20px 0; 
+}
+
+#editUser .form-control, #viewUser .form-control, .modal-title {
+font-size: 12px;
+
+}
+
+
+
+.main-box.no-header {
+    padding-top: 20px;
+}
+.main-box {
+    background: #FFFFFF;
+    -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    box-shadow: 1px 1px 2px 0 #CCCCCC;
+    margin-bottom: 16px;
+    -webikt-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.table a.table-link.danger {
+    color: #e74c3c;
+}
+.label {
+    border-radius: 3px;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+.user-list tbody td .user-subhead {
+    font-size: 10px;
+    font-style: italic;
+}
+.user-list tbody td .user-link {
+    display: block;
+    font-size: 12px;
+    padding-top: 3px;
+    margin-left: 60px;
+}
+a {
+    color: #3498db;
+    outline: none!important;
+}
+.user-list tbody td>img {
+    position: relative;
+    max-width: 50px;
+    float: left;
+    margin-right: 15px;
+}
+
+.table thead tr th {
+    text-transform: uppercase;
+    font-size: 0.875em;
+}
+.table thead tr th {
+    border-bottom: 2px solid #e7ebee;
+}
+.table tbody tr td:first-child {
+    font-size: 1.125em;
+    font-weight: 300;
+}
+.table tbody tr td {
+    font-size: 0.875em;
+    vertical-align: middle;
+    border-top: 1px solid #e7ebee;
+    padding: 12px 8px;
+}
