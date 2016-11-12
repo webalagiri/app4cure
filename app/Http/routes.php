@@ -68,6 +68,7 @@ Route::group(['namespace' => 'Common'], function()
     Route::any('/patient/{id}/editsaveprofile', array('as' => 'customer.editsaveprofile', 'uses' => 'CommonController@editSavePatient'));
     Route::any('/patient/{id}/changepassword', array('as' => 'customer.dashboard', 'uses' => 'CommonController@changePasswordPatient'));
 
+    Route::any('/login', array('as' => 'customer.login', 'uses' => 'CommonController@loginFormPatient'));
     Route::any('/logout', array('as' => 'customer.login', 'uses' => 'CommonController@logoutPatient'));
 });
 
@@ -93,26 +94,31 @@ Route::group(['prefix' => 'admin'], function()
 
     });
 
-    Route::group(['namespace' => 'Admin'], function()
+    Route::group(array('middleware' => ['auth']), function()
     {
 
-    Route::any('dashboard', array('as' => 'customer.dashboard', 'uses' => 'AdminController@dashboardAdmin'));
+        Route::group(['namespace' => 'Admin'], function()
+        {
 
-    });
+        Route::any('dashboard', array('as' => 'customer.dashboard', 'uses' => 'AdminController@dashboardAdmin'));
 
-    Route::group(['namespace' => 'Lab'], function()
-    {
+        });
 
-        Route::any('/laboratory', array('as' => 'laboratory.list', 'uses' => 'LabController@laboratoryListAdmin'));
-        Route::any('/laboratory/add', array('as' => 'laboratory.add', 'uses' => 'LabController@laboratoryAddAdmin'));
-        Route::any('/laboratory/save', array('as' => 'laboratory.save', 'uses' => 'LabController@laboratorySaveAdmin'));
+        Route::group(['namespace' => 'Lab'], function()
+        {
 
-    });
+            Route::any('/laboratory', array('as' => 'laboratory.list', 'uses' => 'LabController@laboratoryListAdmin'));
+            Route::any('/laboratory/add', array('as' => 'laboratory.add', 'uses' => 'LabController@laboratoryAddAdmin'));
+            Route::any('/laboratory/save', array('as' => 'laboratory.save', 'uses' => 'LabController@laboratorySaveAdmin'));
 
-    Route::group(['namespace' => 'Common'], function()
-    {
+        });
 
-        Route::any('/customer', array('as' => 'laboratory.list', 'uses' => 'CommonController@UserListAdmin'));
+        Route::group(['namespace' => 'Common'], function()
+        {
+
+            Route::any('/customer', array('as' => 'laboratory.list', 'uses' => 'CommonController@UserListAdmin'));
+
+        });
 
     });
 
@@ -121,6 +127,7 @@ Route::group(['prefix' => 'admin'], function()
 
 /* ADMIN */
 
+/*
 Route::get('/adm', function () {
     return view('adm.portal.login');
 });
@@ -135,7 +142,7 @@ Route::get('/dashboard', function () {
     return view('adm.portal.index');
 });
 
-
+*/
 Route::get('/logout', function()
 {
     Auth::logout();

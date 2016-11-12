@@ -146,8 +146,8 @@
                                     @foreach($labTestInfo as $labTestInfoValue)
                                     <tr>
                                         <td>{{$labTestInfoValue['name']}}</td>
-                                        <td><input type="checkbox" name="laboratory_tests_info['laboratory_tests'][{{$labTestInfoValue['id']}}]" id="laboratory_tests" value="{{$labTestInfoValue['id']}}" /></td>
-                                        <td><input type="number" name="laboratory_tests_info['laboratory_tests_price'][{{$labTestInfoValue['id']}}]" id="laboratory_tests" value="" /></td>
+                                        <td><input type="checkbox" name="laboratory_tests_info[laboratory_tests][{{$labTestInfoValue['id']}}]" id="laboratory_tests" value="{{$labTestInfoValue['id']}}" /></td>
+                                        <td><input type="number" name="laboratory_tests_info[laboratory_tests_price][{{$labTestInfoValue['id']}}]" id="laboratory_tests" value="" /></td>
                                     </tr>
                                     @endforeach
 

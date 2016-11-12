@@ -11,6 +11,8 @@ namespace App\prescription\repositories\repoimpl;
 use App\Http\ViewModels\PatientLabTestViewModel;
 use App\prescription\model\entities\Patient;
 use App\prescription\model\entities\Lab;
+use App\prescription\model\entities\LabTestLink;
+
 use App\prescription\model\entities\Hospital;
 use App\prescription\model\entities\LabTestDetails;
 use App\prescription\model\entities\PatientLabTests;
@@ -1051,6 +1053,20 @@ class HospitalImpl implements HospitalInterface{
             $newPatient->created_at = date("Y-m-d H:i:s");
             $newPatient->updated_at = date("Y-m-d H:i:s");
             $newPatient->save();
+
+            $labTestsId = $labInfo['laboratory_tests_info']['laboratory_tests'];
+            $labTestsPrice = $labInfo['laboratory_tests_info']['laboratory_tests_price'];
+
+            foreach($labTestsId as $laboratory_tests)
+            {
+                $LabTestLink = new LabTestLink();
+                $LabTestLink->laboratory_id = $labInfo['laboratory_id'];
+                $LabTestLink->laboratory_tests_id = $laboratory_tests;
+                $LabTestLink->laboratory_tests_price = $labTestsPrice[$laboratory_tests];
+                $LabTestLink->save();
+            }
+            //dd($LabTestLink);
+
             //dd($newPatient);
         }
         catch (QueryException $queryEx)
