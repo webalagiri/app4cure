@@ -95,7 +95,7 @@
                                                 <td>
                                                     <img src="http://bootdey.com/img/Content/user_1.jpg" alt="">
                                                     <a href="#" class="user-link">{{$laboratoryInfoValue->laboratory_name}}</a>
-                                                    <span class="user-subhead">Customer</span>
+                                                    <span class="user-subhead">Laboratory</span>
                                                 </td>
 
 
