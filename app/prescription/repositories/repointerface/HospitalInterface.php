@@ -50,5 +50,6 @@ interface HospitalInterface {
 
     public function getPatientList();
 
+    public function registerNewLab($labInfo);
 
 }

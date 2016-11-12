@@ -71,18 +71,13 @@
                                 <label for="password-login">Password</label>
                                 <input type="password" class="form-control" id="password-login" name="password" required="required" />
                             </div>
-
-                            <div class="form-group">
-                                <label for="detail-login">Details</label>
-                                <input type="text" class="form-control" id="name-login" name="laboratory_details" required="required" />
-                            </div>
                             <div class="form-group">
                                 <label for="address-login">Telephone</label>
                                 <input type="text" class="form-control" id="email-login" name="telephone" required="required" />
                             </div>
                             <div class="form-group">
                                 <label for="address-login">Address</label>
-                                <input type="text" class="form-control" id="email-login" name="email" required="required" />
+                                <input type="text" class="form-control" id="email-login" name="address" required="required" />
                             </div>
                             <div class="form-group">
                                 <label for="country-login">Country</label>
@@ -122,6 +117,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="detail-login">Lab Details</label>
+                                <input type="text" class="form-control" id="name-login" name="laboratory_details" required="required" />
+                            </div>
+
+                            <div class="form-group">
                                 <label for="name-login">Contact Name</label>
                                 <input type="text" class="form-control" id="name-login" name="laboratory_contact_name" required="required" />
                             </div>
@@ -146,8 +146,8 @@
                                     @foreach($labTestInfo as $labTestInfoValue)
                                     <tr>
                                         <td>{{$labTestInfoValue['name']}}</td>
-                                        <td><input type="checkbox" name="laboratory_tests[{{$labTestInfoValue['id']}}]" id="laboratory_tests" value="{{$labTestInfoValue['id']}}" /></td>
-                                        <td><input type="number" name="laboratory_tests_price[{{$labTestInfoValue['id']}}]" id="laboratory_tests" value="" /></td>
+                                        <td><input type="checkbox" name="laboratory_tests_info['laboratory_tests'][{{$labTestInfoValue['id']}}]" id="laboratory_tests" value="{{$labTestInfoValue['id']}}" /></td>
+                                        <td><input type="number" name="laboratory_tests_info['laboratory_tests_price'][{{$labTestInfoValue['id']}}]" id="laboratory_tests" value="" /></td>
                                     </tr>
                                     @endforeach
 

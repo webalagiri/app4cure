@@ -12,10 +12,12 @@ use App\prescription\model\entities\Areas;
 
 
 use App\prescription\mapper\LabMapper;
+
 use App\prescription\services\HelperService;
 use App\prescription\services\HospitalService;
-use App\prescription\services\CommonService;
+use App\prescription\facades\HospitalServiceFacade;
 use App\prescription\services\LabService;
+use App\prescription\services\CommonService;
 use App\prescription\utilities\Exception\LabException;
 use App\prescription\utilities\Exception\AppendMessage;
 use Illuminate\Http\Request;
@@ -710,25 +712,14 @@ class LabController extends Controller
 
     public function laboratorySaveAdmin(Request $labRequest)
     {
-       dd($labRequest->all());
-
-        $countryInfo = null;
-        $stateInfo = null;
-        $cityInfo = null;
-        $areaInfo = null;
+        $labInfo = $labRequest->all();
+        //dd($labRequest->all());
 
         try
         {
-
-            $countryInfo = $this->getCountry();
-            $stateInfo = $this->getState();
-            $cityInfo = $this->getCity();
-            $areaInfo = $this->getArea();
-            $labTestInfo = $this->getLabTest();
+            $status = HospitalServiceFacade::registerNewLab($labInfo);
 
 
-
-            //dd($laboratory);
         }
         catch(LabException $profileExc)
         {
@@ -744,7 +735,12 @@ class LabController extends Controller
             Log::error($msg);
         }
 
-        return view('admi.portal.lab-add',compact('countryInfo','stateInfo','cityInfo','areaInfo','labTestInfo'));
+        //dd($status);
+        //return $status;
+
+        $msg="Lab Added Successfully";
+        return redirect('admin/laboratory/add')->with('message',$msg);
+        //return view('admi.portal.lab-add',compact('countryInfo','stateInfo','cityInfo','areaInfo','labTestInfo'));
 
         //return $patients;
     }

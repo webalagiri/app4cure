@@ -667,4 +667,30 @@ class HospitalService {
         return $patientInfo;
     }
 
+
+    public function registerNewLab($labInfo)
+    {
+        $status = true;
+
+        try
+        {
+            DB::transaction(function() use($labInfo)
+            {
+                $status = $this->hospitalRepo->registerNewLab($labInfo);
+            });
+        }
+        catch(HospitalException $userExc)
+        {
+            $status = false;
+            throw $userExc;
+        }
+        catch (Exception $ex) {
+            $status = false;
+            throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $ex);
+        }
+
+
+        return $status;
+    }
+
 }

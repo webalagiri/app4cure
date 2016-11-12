@@ -10,6 +10,7 @@ namespace App\prescription\repositories\repoimpl;
 
 use App\Http\ViewModels\PatientLabTestViewModel;
 use App\prescription\model\entities\Patient;
+use App\prescription\model\entities\Lab;
 use App\prescription\model\entities\Hospital;
 use App\prescription\model\entities\LabTestDetails;
 use App\prescription\model\entities\PatientLabTests;
@@ -992,6 +993,81 @@ class HospitalImpl implements HospitalInterface{
         }
 
         return $patientInfo;
+    }
+
+
+    public function registerNewLab($labInfo)
+    {
+        //dd($labInfo);
+        $newLab = null;
+        $prefix = trans('constants.prefix');
+        $pid = 0;
+        $status = true;
+
+        try
+        {
+            //$input = Input::only('name','email','password');
+            $user = new User();
+            $user->name = $labInfo['name'];
+            $user->email = $labInfo['email'];
+            $user->password = \Hash::make($labInfo['password']);
+            $user->save();
+            $labInfo['laboratory_id']=$user->id;
+
+            $userRole = Role::find(5);
+
+            if (!is_null($userRole))
+            {
+                $user->assignRole($userRole->name);
+            }
+            //dd($user);
+
+            //return $status;
+
+            //dd('Inside Add New Patient implementation method');
+            //$pid = $this->generatePid();
+            //dd($patientInfo);
+            //dd('Value of pid is:'.$pid);
+            //dd($pid);
+            $newPatient = new Lab();
+
+            $newPatient->laboratory_id = $labInfo['laboratory_id'];
+            $newPatient->laboratory_type_id = "1";
+            $newPatient->laboratory_name = $labInfo['name'];
+
+            $newPatient->address = $labInfo['address'];
+            $newPatient->email = $labInfo['email'];
+            $newPatient->telephone = $labInfo['telephone'];
+            $newPatient->country = $labInfo['country'];
+            $newPatient->state = $labInfo['state'];
+            $newPatient->city = $labInfo['city'];
+            $newPatient->area = $labInfo['area'];
+            $newPatient->laboratory_details = $labInfo['laboratory_details'];
+            $newPatient->laboratory_contact_name = $labInfo['laboratory_contact_name'];
+            $newPatient->laboratory_contact_mobile = $labInfo['laboratory_contact_mobile'];
+
+            $newPatient->created_by = strval(100);
+            $newPatient->updated_by = strval(100);
+            $newPatient->created_at = date("Y-m-d H:i:s");
+            $newPatient->updated_at = date("Y-m-d H:i:s");
+            $newPatient->save();
+            //dd($newPatient);
+        }
+        catch (QueryException $queryEx)
+        {
+
+            $status = false;
+            dd($queryEx);
+            throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $queryEx);
+        }
+        catch (Exception $ex)
+        {
+            $status = false;
+            dd($ex);
+            throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $ex);
+        }
+
+        return $status;
     }
 
 }
