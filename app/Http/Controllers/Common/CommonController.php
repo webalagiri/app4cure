@@ -878,4 +878,31 @@ class CommonController extends Controller
         return view('admi.portal.customer',compact('patientInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
     }
 
+    public function UserUpdateAdmin(Request $patientProfileInfo)
+    {
+        $status =  true;
+        $patientProfileInfoValue = $patientProfileInfo->all();
+        //dd($patientProfileInfoValue);
+
+        $patientAreaInfo = Areas::find($patientProfileInfoValue['area']);
+
+        $patientInfo = Patient::where('customer_id','=',$patientProfileInfoValue['customer_id'])->first();
+
+        $patientInfo->customer_name = $patientProfileInfoValue['customer_name'];
+        $patientInfo->telephone = $patientProfileInfoValue['telephone'];
+        $patientInfo->email = $patientProfileInfoValue['email'];
+        $patientInfo->country = $patientProfileInfoValue['country'];
+        $patientInfo->state = $patientProfileInfoValue['state'];
+        $patientInfo->city = $patientProfileInfoValue['city'];
+        $patientInfo->area = $patientProfileInfoValue['area'];
+        $patientInfo->pincode = $patientAreaInfo['area_pincode'];
+        $patientInfo->updated_by = "Admin";
+        $patientInfo->updated_at = date("Y-m-d H:i:s");
+        $patientInfo->save();
+
+
+        return redirect('admin/customer');
+        //return view('portal.customer-update-profile',compact('patientInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
+    }
+
 }

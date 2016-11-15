@@ -136,7 +136,12 @@ $vendor_menu="0";
                                             </tr>
                                             <tr class="td1" id="td{{$patientInfoValue->id}}">
                                                 <td colspan="6">
+
                                                     <div class="collapseX divUser" id="editUser{{$patientInfoValue->id}}">
+
+                                                        <form id="form_{{$patientInfoValue->id}}" name="form_{{$patientInfoValue->id}}" action="{{ URL::to('/') }}/admin/customer/update" method="POST" >
+
+
                                                         <div class="row">
                                                             <div class="col-md-2 col-md-offset-1">
                                                                 <div class="row">
@@ -145,6 +150,7 @@ $vendor_menu="0";
                                                                     </div>
                                                                     <div class="col-md-12">
                                                                         <h5>{{$patientInfoValue->customer_name}}</h5>
+                                                                        <input type="hidden" class="form-control txtbox" id="exampleInputFName" name="customer_id" value="{{$patientInfoValue->customer_id}}" >
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -155,7 +161,7 @@ $vendor_menu="0";
                                                                             <label for="FirstName">Customer Name</label>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <input type="text" class="form-control txtbox" id="exampleInputFName" value="{{$patientInfoValue->customer_name}}" >
+                                                                            <input type="text" class="form-control txtbox" id="exampleInputFName" name="customer_name" value="{{$patientInfoValue->customer_name}}" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -165,7 +171,7 @@ $vendor_menu="0";
                                                                             <label for="Email">EMail</label>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <input type="email" class="form-control txtbox" id="exampleEMail" value="{{$patientInfoValue->email}}" >
+                                                                            <input type="email" class="form-control txtbox" id="exampleEMail" name="email" value="{{$patientInfoValue->email}}" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -175,7 +181,7 @@ $vendor_menu="0";
                                                                             <label for="ContactNo" class="lbltxt">Contact No.</label>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <input type="text" class="form-control txtbox" id="exampleInputContactNo" value="{{$patientInfoValue->telephone}}" >
+                                                                            <input type="text" class="form-control txtbox" id="exampleInputContactNo" name="telephone" value="{{$patientInfoValue->telephone}}" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -273,6 +279,8 @@ $vendor_menu="0";
                                                             </div>
 
                                                         </div>
+
+                                                        </form>
                                                     </div>
 
 

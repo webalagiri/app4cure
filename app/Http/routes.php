@@ -114,13 +114,15 @@ Route::group(['prefix' => 'admin'], function()
             Route::any('/laboratory', array('as' => 'laboratory.list', 'uses' => 'LabController@laboratoryListAdmin'));
             Route::any('/laboratory/add', array('as' => 'laboratory.add', 'uses' => 'LabController@laboratoryAddAdmin'));
             Route::any('/laboratory/save', array('as' => 'laboratory.save', 'uses' => 'LabController@laboratorySaveAdmin'));
+            Route::any('/laboratory/update', array('as' => 'laboratory.update', 'uses' => 'LabController@laboratoryUpdateAdmin'));
 
         });
 
         Route::group(['namespace' => 'Common'], function()
         {
 
-            Route::any('/customer', array('as' => 'laboratory.list', 'uses' => 'CommonController@UserListAdmin'));
+            Route::any('/customer', array('as' => 'customer.list', 'uses' => 'CommonController@UserListAdmin'));
+            Route::any('/customer/update', array('as' => 'customer.update', 'uses' => 'CommonController@UserUpdateAdmin'));
 
         });
 
