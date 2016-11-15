@@ -60,15 +60,18 @@
                         {!! Form::open( array( 'route' => array('customer.doregister') ,'role' => 'form' ,'method'=>'POST', 'files'=>true,'class'=>'') ) !!}
                             <div class="form-group">
                                 <label for="name-login">Name</label>
-                                <input type="text" class="form-control" id="name-login" name="name" required="required" />
+                                <input type="text" class="form-control" id="name-login" name="name" value="{{Input::old('name')}}" required="required" />
+                                @if ($errors->has('name'))<p class="error" style="">{!!$errors->first('name')!!}</p>@endif
                             </div>
                             <div class="form-group">
                                 <label for="email-login">Email</label>
-                                <input type="text" class="form-control" id="email-login" name="email" required="required" />
+                                <input type="text" class="form-control" id="email-login" name="email" value="{{Input::old('email')}}" required="required" />
+                                @if ($errors->has('email'))<p class="error" style="">{!!$errors->first('email')!!}</p>@endif
                             </div>
                             <div class="form-group">
                                 <label for="password-login">Password</label>
-                                <input type="password" class="form-control" id="password-login" name="password" required="required" />
+                                <input type="password" class="form-control" id="password-login" name="password" value="{{Input::old('password')}}" required="required" />
+                                @if ($errors->has('password'))<p class="error" style="">{!!$errors->first('password')!!}</p>@endif
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-template-main"><i class="fa fa-user-md"></i> Register</button>

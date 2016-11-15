@@ -69,23 +69,28 @@ $vendor_menu="0";
 
                             <div class="form-group">
                                 <label for="name-login">Name</label>
-                                <input type="text" class="form-control" id="name-login" name="name" required="required" />
+                                <input type="text" class="form-control" id="name-login" name="name" value="{{Input::old('name')}}" required="required" />
+                                @if ($errors->has('name'))<p class="error" style="">{!!$errors->first('name')!!}</p>@endif
                             </div>
                             <div class="form-group">
                                 <label for="email-login">Email</label>
-                                <input type="text" class="form-control" id="email-login" name="email" required="required" />
+                                <input type="text" class="form-control" id="email-login" name="email" value="{{Input::old('email')}}" required="required" />
+                                @if ($errors->has('email'))<p class="error" style="">{!!$errors->first('email')!!}</p>@endif
                             </div>
                             <div class="form-group">
                                 <label for="password-login">Password</label>
-                                <input type="password" class="form-control" id="password-login" name="password" required="required" />
+                                <input type="password" class="form-control" id="password-login" name="password" value="{{Input::old('password')}}" required="required" />
+                                @if ($errors->has('password'))<p class="error" style="">{!!$errors->first('password')!!}</p>@endif
                             </div>
                             <div class="form-group">
                                 <label for="address-login">Telephone</label>
-                                <input type="text" class="form-control" id="email-login" name="telephone" required="required" />
+                                <input type="text" class="form-control" id="email-login" name="telephone" value="{{Input::old('telephone')}}" required="required" />
+                                @if ($errors->has('telephone'))<p class="error" style="">{!!$errors->first('telephone')!!}</p>@endif
                             </div>
                             <div class="form-group">
                                 <label for="address-login">Address</label>
-                                <input type="text" class="form-control" id="email-login" name="address" required="required" />
+                                <input type="text" class="form-control" id="email-login" name="address" value="{{Input::old('address')}}" required="required" />
+                                @if ($errors->has('address'))<p class="error" style="">{!!$errors->first('address')!!}</p>@endif
                             </div>
                             <div class="form-group">
                                 <label for="country-login">Country</label>
@@ -126,17 +131,20 @@ $vendor_menu="0";
 
                             <div class="form-group">
                                 <label for="detail-login">Lab Details</label>
-                                <input type="text" class="form-control" id="name-login" name="laboratory_details" required="required" />
+                                <input type="text" class="form-control" id="name-login" name="laboratory_details" value="{{Input::old('laboratory_details')}}" required="required" />
+                                @if ($errors->has('laboratory_details'))<p class="error" style="">{!!$errors->first('laboratory_details')!!}</p>@endif
                             </div>
 
                             <div class="form-group">
                                 <label for="name-login">Contact Name</label>
-                                <input type="text" class="form-control" id="name-login" name="laboratory_contact_name" required="required" />
+                                <input type="text" class="form-control" id="name-login" name="laboratory_contact_name" value="{{Input::old('laboratory_contact_name')}}" required="required" />
+                                @if ($errors->has('laboratory_contact_name'))<p class="error" style="">{!!$errors->first('laboratory_contact_name')!!}</p>@endif
                             </div>
 
                             <div class="form-group">
                                 <label for="address-login">Contact Telephone</label>
                                 <input type="text" class="form-control" id="email-login" name="laboratory_contact_mobile" required="required" />
+                                @if ($errors->has('laboratory_contact_mobile'))<p class="error" style="">{!!$errors->first('laboratory_contact_mobile')!!}</p>@endif
                             </div>
 
 

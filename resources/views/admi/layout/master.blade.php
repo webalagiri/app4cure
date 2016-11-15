@@ -12,6 +12,11 @@
                 <!-- STYLES -->
         @include('admi.layout.style')
         <!-- STYLES -->
+        <style>
+            .error { color:red; }
+            .success { color:green; }
+            .message { color:blue; }
+        </style>
 
 </head>
 <body class="stretched">
@@ -19,6 +24,7 @@
 <!-- Document Wrapper
 ============================================= -->
 <div id="all">
+
 
     <!-- HEADER-->
     @include('admi.portal.header')

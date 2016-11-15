@@ -12,6 +12,11 @@
                 <!-- STYLES -->
         @include('layout.style')
         <!-- STYLES -->
+        <style>
+            .error { color:red; }
+            .success { color:green; }
+            .message { color:blue; }
+        </style>
 
 </head>
 <body class="stretched">

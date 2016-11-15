@@ -22,7 +22,11 @@ use App\prescription\utilities\Exception\LabException;
 use App\prescription\utilities\Exception\AppendMessage;
 use Illuminate\Http\Request;
 
+
+
 use App\Http\Requests;
+use App\Http\Requests\LabRegisterRequest;
+
 use App\Http\Controllers\Controller;
 
 use Exception;
@@ -710,7 +714,7 @@ class LabController extends Controller
     }
 
 
-    public function laboratorySaveAdmin(Request $labRequest)
+    public function laboratorySaveAdmin(LabRegisterRequest $labRequest)
     {
         $labInfo = $labRequest->all();
         //dd($labRequest->all());

@@ -21,6 +21,8 @@ use App\prescription\utilities\ErrorEnum\ErrorEnum;
 use App\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+
 use App\Http\Requests\NewPatientRequest;
 use App\Http\Requests\PatientRegisterRequest;
 use App\Http\Requests\PatientLoginRequest;
@@ -292,7 +294,7 @@ class CommonController extends Controller
         return view('portal.customer-register');
     }
 
-    public function registerNewPatient(Request $patientRequest)
+    public function registerNewPatient(PatientRegisterRequest $patientRequest)
     {
 
 
