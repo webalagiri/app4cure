@@ -5,7 +5,15 @@
 @section('styles')
 
 @stop
-
+<?php
+$dashboard_menu="1";
+$customer_menu="0";
+$lab_menu="0";
+$pharmacy_menu="0";
+$hospital_menu="0";
+$doctor_menu="0";
+$vendor_menu="0";
+?>
 @section('content')
 
 

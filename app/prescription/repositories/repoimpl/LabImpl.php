@@ -217,6 +217,11 @@ class LabImpl implements LabInterface
             //dd($query->toSql());
             $laboratoryList = $query->get();
             //dd($laboratoryList);
+/*
+            $ltl_query = DB::table('laboratory_tests_link as ltl')->join('users as u', 'u.id', '=', 'ltl.laboratory_id');
+            $laboratoryTestList = $ltl_query->get();
+dd($laboratoryTestList);
+*/
         }
         catch(QueryException $queryExc)
         {
