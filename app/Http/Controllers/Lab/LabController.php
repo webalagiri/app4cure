@@ -749,4 +749,31 @@ class LabController extends Controller
         //return $patients;
     }
 
+    public function laboratoryUpdateAdmin(Request $laboratoryProfileInfo)
+    {
+        $status =  true;
+        $laboratoryProfileInfoValue = $laboratoryProfileInfo->all();
+        //dd($laboratoryProfileInfoValue);
+
+        $laboratoryAreaInfo = Areas::find($laboratoryProfileInfoValue['area']);
+
+        $laboratoryInfo = Lab::where('laboratory_id','=',$laboratoryProfileInfoValue['laboratory_id'])->first();
+
+        $laboratoryInfo->laboratory_name = $laboratoryProfileInfoValue['laboratory_name'];
+        $laboratoryInfo->telephone = $laboratoryProfileInfoValue['telephone'];
+        $laboratoryInfo->email = $laboratoryProfileInfoValue['email'];
+        $laboratoryInfo->country = $laboratoryProfileInfoValue['country'];
+        $laboratoryInfo->state = $laboratoryProfileInfoValue['state'];
+        $laboratoryInfo->city = $laboratoryProfileInfoValue['city'];
+        $laboratoryInfo->area = $laboratoryProfileInfoValue['area'];
+        $laboratoryInfo->pincode = $laboratoryAreaInfo['area_pincode'];
+        $laboratoryInfo->updated_by = "Admin";
+        $laboratoryInfo->updated_at = date("Y-m-d H:i:s");
+        $laboratoryInfo->save();
+
+
+        return redirect('admin/laboratory');
+        //return view('portal.customer-update-profile',compact('patientInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
+    }
+
 }

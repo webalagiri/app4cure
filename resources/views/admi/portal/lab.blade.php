@@ -141,6 +141,10 @@ $vendor_menu="0";
                                             </tr>
                                             <tr class="td1" id="td{{$laboratoryInfoValue->id}}">
                                                 <td colspan="6">
+
+
+                                                    <form id="form_{{$laboratoryInfoValue->id}}" name="form_{{$laboratoryInfoValue->id}}" action="{{ URL::to('/') }}/admin/laboratory/update" method="POST" >
+
                                                     <div class="collapseX divUser" id="editUser{{$laboratoryInfoValue->id}}">
                                                         <div class="row">
                                                             <div class="col-md-2 col-md-offset-1">
@@ -150,6 +154,7 @@ $vendor_menu="0";
                                                                     </div>
                                                                     <div class="col-md-12">
                                                                         <h5>{{$laboratoryInfoValue->laboratory_name}}</h5>
+                                                                        <input type="hidden" class="form-control txtbox" id="exampleInputFName" name="laboratory_id" value="{{$laboratoryInfoValue->laboratory_id}}" >
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -160,7 +165,7 @@ $vendor_menu="0";
                                                                             <label for="FirstName">Lab Name</label>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <input type="text" class="form-control txtbox" id="exampleInputFName" value="{{$laboratoryInfoValue->laboratory_name}}" >
+                                                                            <input type="text" class="form-control txtbox" id="exampleInputFName" name="laboratory_name" value="{{$laboratoryInfoValue->laboratory_name}}" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -170,7 +175,7 @@ $vendor_menu="0";
                                                                             <label for="Email">EMail</label>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <input type="email" class="form-control txtbox" id="exampleEMail" value="{{$laboratoryInfoValue->email}}" >
+                                                                            <input type="email" class="form-control txtbox" id="exampleEMail" name="email" value="{{$laboratoryInfoValue->email}}" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -180,7 +185,7 @@ $vendor_menu="0";
                                                                             <label for="ContactNo" class="lbltxt">Contact No.</label>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <input type="text" class="form-control txtbox" id="exampleInputContactNo" value="{{$laboratoryInfoValue->telephone}}" >
+                                                                            <input type="text" class="form-control txtbox" id="exampleInputContactNo" name="telephone" value="{{$laboratoryInfoValue->telephone}}" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -280,7 +285,7 @@ $vendor_menu="0";
                                                         </div>
                                                     </div>
 
-
+                                                    </form>
 
                                                     <div class="collapseX divUser" id="viewUser{{$laboratoryInfoValue->id}}">
                                                         <div class="row">
