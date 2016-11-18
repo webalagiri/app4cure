@@ -27,6 +27,10 @@ Route::get('/medical-services', function () {
     return view('portal.medical-services');
 });
 
+Route::get('/doctors-appointment', function () {
+    return view('portal.medical-services');
+});
+
 Route::get('/shop', function () {
     return view('portal.shop');
 });
