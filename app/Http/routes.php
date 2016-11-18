@@ -118,6 +118,16 @@ Route::group(['prefix' => 'admin'], function()
 
         });
 
+        Route::group(['namespace' => 'Hospital'], function()
+        {
+
+            Route::any('/hospital', array('as' => 'hospital.list', 'uses' => 'HospitalController@hospitalListAdmin'));
+            Route::any('/hospital/add', array('as' => 'hospital.add', 'uses' => 'HospitalController@hospitalAddAdmin'));
+            Route::any('/hospital/save', array('as' => 'hospital.save', 'uses' => 'HospitalController@hospitalSaveAdmin'));
+            Route::any('/hospital/update', array('as' => 'hospital.update', 'uses' => 'HospitalController@hospitalUpdateAdmin'));
+
+        });
+
         Route::group(['namespace' => 'Common'], function()
         {
 

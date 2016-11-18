@@ -693,4 +693,54 @@ class HospitalService {
         return $status;
     }
 
+
+
+    public function hospitalList()
+    {
+        $hospitalList = null;
+
+        try
+        {
+            $hospitalList = $this->hospitalRepo->hospitalList();
+            //dd($hospitalList);
+        }
+        catch(HospitalException $profileExc)
+        {
+            throw $profileExc;
+        }
+        catch(Exception $exc)
+        {
+            throw new HospitalException(null, ErrorEnum::LAB_TESTS_LIST_ERROR, $exc);
+        }
+
+        return $hospitalList;
+    }
+
+
+    public function registerNewHospital($hospitalInfo)
+    {
+        $status = true;
+
+        try
+        {
+            DB::transaction(function() use($hospitalInfo)
+            {
+                $status = $this->hospitalRepo->registerNewHospital($hospitalInfo);
+            });
+        }
+        catch(HospitalException $userExc)
+        {
+            $status = false;
+            throw $userExc;
+        }
+        catch (Exception $ex) {
+            $status = false;
+            throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $ex);
+        }
+
+
+        return $status;
+    }
+
+
 }

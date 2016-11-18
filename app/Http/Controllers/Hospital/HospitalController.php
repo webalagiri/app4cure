@@ -26,7 +26,8 @@ use Illuminate\Http\Request;
 
 
 use App\Http\Requests;
-use App\Http\Requests\LabRegisterRequest;
+use App\Http\Requests\HospitalRegisterRequest;
+
 
 use App\Http\Controllers\Controller;
 
@@ -149,10 +150,10 @@ class HospitalController extends Controller
             //$cities = $helperService->getCities();
             $area = HospitalType::get();
         }
-        catch(HelperException $typeExc)
+        catch(HospitalException $hospitalExc)
         {
-            $errorMsg = $typeExc->getMessageForCode();
-            $msg = AppendMessage::appendMessage($typeExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
             Log::error($msg);
         }
         catch(Exception $exc)
@@ -209,7 +210,7 @@ class HospitalController extends Controller
             $areaInfo = $this->getArea();
 
         }
-        catch(LabException $hospitalExc)
+        catch(HospitalException $hospitalExc)
         {
             //dd($hospitalExc);
             $errorMsg = $hospitalExc->getMessageForCode();
@@ -246,7 +247,7 @@ class HospitalController extends Controller
             $hospitalTypeInfo = $this->getHospitalType();
 
         }
-        catch(LabException $hospitalExc)
+        catch(HospitalException $hospitalExc)
         {
             //dd($hospitalExc);
             $errorMsg = $hospitalExc->getMessageForCode();
@@ -274,7 +275,7 @@ class HospitalController extends Controller
         {
             $status = HospitalServiceFacade::registerNewHospital($hospitalInfo);
         }
-        catch(LabException $hospitalExc)
+        catch(HospitalException $hospitalExc)
         {
             //dd($hospitalExc);
             $errorMsg = $hospitalExc->getMessageForCode();
@@ -306,7 +307,7 @@ class HospitalController extends Controller
 
             $hospitalInfo = Hospital::where('hospital_id','=',$hospitalProfileInfoValue['hospital_id'])->first();
 
-            $hospitalInfo->laboratory_name = $hospitalProfileInfoValue['hospital_name'];
+            $hospitalInfo->hospital_name = $hospitalProfileInfoValue['hospital_name'];
             $hospitalInfo->telephone = $hospitalProfileInfoValue['telephone'];
             $hospitalInfo->email = $hospitalProfileInfoValue['email'];
             $hospitalInfo->country = $hospitalProfileInfoValue['country'];
@@ -321,7 +322,7 @@ class HospitalController extends Controller
 
             //$status = HospitalServiceFacade::registerNewHospital($hospitalInfo);
         }
-        catch(LabException $hospitalExc)
+        catch(HospitalException $hospitalExc)
         {
             //dd($hospitalExc);
             $errorMsg = $hospitalExc->getMessageForCode();

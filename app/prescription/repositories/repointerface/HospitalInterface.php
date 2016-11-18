@@ -52,4 +52,6 @@ interface HospitalInterface {
 
     public function registerNewLab($labInfo);
 
+    public function hospitalList();
+
 }

@@ -1086,4 +1086,136 @@ class HospitalImpl implements HospitalInterface{
         return $status;
     }
 
+
+    public function hospitalList()
+    {
+        $hospitalList = null;
+
+        try
+        {
+            $query = DB::table('hospital as h')->join('users as u', 'u.id', '=', 'h.hospital_id');
+            $query->join('hospital_type as ht', 'ht.id', '=', 'h.hospital_type_id');
+            $query->join('countries as hc', 'hc.id', '=', 'h.country');
+            $query->join('states as hs', 'hs.id', '=', 'h.state');
+            $query->join('cities as hct', 'hct.id', '=', 'h.city');
+            $query->join('areas as ha', 'ha.id', '=', 'h.area');
+            $query->select('h.*', 'ht.name as hospital_type',
+                'ha.area_name as hospital_area','hct.city_name as hospital_city',
+                'hs.name as hospital_state','hc.name as hospital_country',
+                'u.name as user_name', 'u.email as user_email');
+
+            //dd($query->toSql());
+            $hospitalList = $query->get();
+            //dd($hospitalList);
+            /*
+                        $ltl_query = DB::table('laboratory_tests_link as ltl')->join('users as u', 'u.id', '=', 'ltl.laboratory_id');
+                        $laboratoryTestList = $ltl_query->get();
+            dd($laboratoryTestList);
+            */
+        }
+        catch(QueryException $queryExc)
+        {
+            //dd($queryExc);
+            throw new HospitalException(null, ErrorEnum::LAB_PATIENT_LIST_ERROR, $queryExc);
+        }
+        catch(Exception $exc)
+        {
+            throw new HospitalException(null, ErrorEnum::LAB_PATIENT_LIST_ERROR, $exc);
+        }
+
+        return $hospitalList;
+    }
+
+
+
+    public function registerNewHospital($hospitalInfo)
+    {
+        //dd($labInfo);
+        $newHospital = null;
+        $prefix = trans('constants.prefix');
+        $pid = 0;
+        $status = true;
+
+        try
+        {
+            //$input = Input::only('name','email','password');
+            $user = new User();
+            $user->name = $hospitalInfo['name'];
+            $user->email = $hospitalInfo['email'];
+            $user->password = \Hash::make($hospitalInfo['password']);
+            $user->save();
+            $hospitalInfo['hospital_id']=$user->id;
+
+            $userRole = Role::find(5);
+
+            if (!is_null($userRole))
+            {
+                $user->assignRole($userRole->name);
+            }
+            //dd($user);
+
+            //return $status;
+
+            //dd('Inside Add New Patient implementation method');
+            //$pid = $this->generatePid();
+            //dd($patientInfo);
+            //dd('Value of pid is:'.$pid);
+            //dd($pid);
+            $newPatient = new Hospital();
+
+            $newPatient->hospital_id = $hospitalInfo['hospital_id'];
+            $newPatient->hospital_type_id = "1";
+            $newPatient->hospital_name = $hospitalInfo['name'];
+
+            $newPatient->address = $hospitalInfo['address'];
+            $newPatient->email = $hospitalInfo['email'];
+            $newPatient->telephone = $hospitalInfo['telephone'];
+            $newPatient->country = $hospitalInfo['country'];
+            $newPatient->state = $hospitalInfo['state'];
+            $newPatient->city = $hospitalInfo['city'];
+            $newPatient->area = $hospitalInfo['area'];
+            $newPatient->hospital_details = $hospitalInfo['hospital_details'];
+            $newPatient->hospital_contact_name = $hospitalInfo['hospital_contact_name'];
+            $newPatient->hospital_contact_mobile = $hospitalInfo['hospital_contact_mobile'];
+
+            $newPatient->created_by = strval(100);
+            $newPatient->updated_by = strval(100);
+            $newPatient->created_at = date("Y-m-d H:i:s");
+            $newPatient->updated_at = date("Y-m-d H:i:s");
+            $newPatient->save();
+            /*
+            $labTestsId = $labInfo['laboratory_tests_info']['laboratory_tests'];
+            $labTestsPrice = $labInfo['laboratory_tests_info']['laboratory_tests_price'];
+
+            foreach($labTestsId as $laboratory_tests)
+            {
+                $LabTestLink = new LabTestLink();
+                $LabTestLink->laboratory_id = $labInfo['laboratory_id'];
+                $LabTestLink->laboratory_tests_id = $laboratory_tests;
+                $LabTestLink->laboratory_tests_price = $labTestsPrice[$laboratory_tests];
+                $LabTestLink->save();
+            }
+            */
+            //dd($LabTestLink);
+
+            //dd($newPatient);
+        }
+        catch (QueryException $queryEx)
+        {
+
+            $status = false;
+            dd($queryEx);
+            throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $queryEx);
+        }
+        catch (Exception $ex)
+        {
+            $status = false;
+            dd($ex);
+            throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $ex);
+        }
+
+        return $status;
+    }
+
+
 }
