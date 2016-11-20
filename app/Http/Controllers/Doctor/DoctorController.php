@@ -180,6 +180,7 @@ class DoctorController extends Controller
         try
         {
             $doctor = $this->doctorService->doctorList();
+            $specialityInfo = $this->getDoctorSpecialty();
             //dd($doctor);
         }
         catch(DoctorException $profileExc)
@@ -196,7 +197,7 @@ class DoctorController extends Controller
             Log::error($msg);
         }
 
-        return view('portal.doctor',compact('doctor'));
+        return view('portal.doctor',compact('doctor','specialityInfo'));
 
     }
 

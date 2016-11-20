@@ -91,6 +91,19 @@ Route::group(['prefix' => 'laboratory'], function()
     });
 });
 
+Route::group(['prefix' => 'doctor'], function()
+{
+    Route::group(['namespace' => 'Doctor'], function()
+    {
+        Route::any('/', array('as' => 'doctor.list', 'uses' => 'DoctorController@doctorList'));
+        /*
+        Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'LabController@laboratoryAddToCart'));
+        Route::any('/cart', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryCart'));
+        Route::any('/confirm', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryConfirm'));
+        */
+    });
+});
+
 
 Route::group(['prefix' => 'admin'], function()
 {

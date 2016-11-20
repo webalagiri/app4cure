@@ -116,6 +116,20 @@ _________________________________________________________ -->
                                     </div>
                                     <!-- /.team-member -->
                                 </div>
+
+                                <div class="col-md-3 col-sm-3" data-animate="fadeInUp">
+                                    <div class="team-member">
+                                        <div class="image">
+                                            <a href="{{ URL::to('/') }}/doctor">
+                                                <img src="{{ URL::to('/') }}/img/service/doctor.jpg" alt="" class="img-responsive img-circle">
+                                            </a>
+                                        </div>
+                                        <h3><a href="{{ URL::to('/') }}/doctor">Doctor Appointment</a></h3>
+
+                                    </div>
+                                    <!-- /.team-member -->
+                                </div>
+
                                 <div class="col-md-3 col-sm-3" data-animate="fadeInUp">
                                     <div class="team-member">
                                         <div class="image">
@@ -128,18 +142,7 @@ _________________________________________________________ -->
                                     </div>
                                     <!-- /.team-member -->
                                 </div>
-                                <div class="col-md-3 col-sm-3" data-animate="fadeInUp">
-                                    <div class="team-member">
-                                        <div class="image">
-                                            <a href="#">
-                                                <img src="{{ URL::to('/') }}/img/service/doctor.jpg" alt="" class="img-responsive img-circle">
-                                            </a>
-                                        </div>
-                                        <h3><a href="#">Doctor Appointment</a></h3>
 
-                                    </div>
-                                    <!-- /.team-member -->
-                                </div>
                             </div>
                             <!-- /.row -->
                             <!-- See All Team Members -->
