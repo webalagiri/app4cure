@@ -13,6 +13,9 @@ use App\prescription\model\entities\Patient;
 use App\prescription\model\entities\Lab;
 use App\prescription\model\entities\LabTestLink;
 
+use App\prescription\model\entities\Doctor;
+use App\prescription\model\entities\DoctorSpecialty;
+
 use App\prescription\model\entities\Hospital;
 use App\prescription\model\entities\LabTestDetails;
 use App\prescription\model\entities\PatientLabTests;
@@ -1067,6 +1070,97 @@ class HospitalImpl implements HospitalInterface{
             }
             //dd($LabTestLink);
 
+            //dd($newPatient);
+        }
+        catch (QueryException $queryEx)
+        {
+
+            $status = false;
+            dd($queryEx);
+            throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $queryEx);
+        }
+        catch (Exception $ex)
+        {
+            $status = false;
+            dd($ex);
+            throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $ex);
+        }
+
+        return $status;
+    }
+
+
+
+    public function registerNewDoctor($doctorInfo)
+    {
+        //dd($labInfo);
+        $newDoctor = null;
+        $prefix = trans('constants.prefix');
+        $pid = 0;
+        $status = true;
+
+        try
+        {
+            //$input = Input::only('name','email','password');
+            $user = new User();
+            $user->name = $doctorInfo['name'];
+            $user->email = $doctorInfo['email'];
+            $user->password = \Hash::make($doctorInfo['password']);
+            $user->save();
+            $doctorInfo['doctor_id']=$user->id;
+
+            $userRole = Role::find(5);
+
+            if (!is_null($userRole))
+            {
+                $user->assignRole($userRole->name);
+            }
+            //dd($user);
+
+            //return $status;
+
+            //dd('Inside Add New Patient implementation method');
+            //$pid = $this->generatePid();
+            //dd($patientInfo);
+            //dd('Value of pid is:'.$pid);
+            //dd($pid);
+            $newDoctor = new Doctor();
+
+            $newDoctor->doctor_id = $doctorInfo['doctor_id'];
+            $newDoctor->doctor_specialty_id = $doctorInfo['doctor_specialty_id'];
+            $newDoctor->doctor_name = $doctorInfo['name'];
+
+            $newDoctor->address = $doctorInfo['address'];
+            $newDoctor->email = $doctorInfo['email'];
+            $newDoctor->telephone = $doctorInfo['telephone'];
+            $newDoctor->country = $doctorInfo['country'];
+            $newDoctor->state = $doctorInfo['state'];
+            $newDoctor->city = $doctorInfo['city'];
+            $newDoctor->area = $doctorInfo['area'];
+            $newDoctor->doctor_details = $doctorInfo['doctor_details'];
+            $newDoctor->doctor_experience = $doctorInfo['doctor_experience'];
+            $newDoctor->doctor_qualification = $doctorInfo['doctor_qualification'];
+
+            $newDoctor->created_by = strval(100);
+            $newDoctor->updated_by = strval(100);
+            $newDoctor->created_at = date("Y-m-d H:i:s");
+            $newDoctor->updated_at = date("Y-m-d H:i:s");
+            $newDoctor->save();
+
+            /*
+            $labTestsId = $labInfo['laboratory_tests_info']['laboratory_tests'];
+            $labTestsPrice = $labInfo['laboratory_tests_info']['laboratory_tests_price'];
+
+            foreach($labTestsId as $laboratory_tests)
+            {
+                $LabTestLink = new LabTestLink();
+                $LabTestLink->laboratory_id = $labInfo['laboratory_id'];
+                $LabTestLink->laboratory_tests_id = $laboratory_tests;
+                $LabTestLink->laboratory_tests_price = $labTestsPrice[$laboratory_tests];
+                $LabTestLink->save();
+            }
+            //dd($LabTestLink);
+            */
             //dd($newPatient);
         }
         catch (QueryException $queryEx)

@@ -132,6 +132,16 @@ Route::group(['prefix' => 'admin'], function()
 
         });
 
+        Route::group(['namespace' => 'Doctor'], function()
+        {
+
+            Route::any('/doctor', array('as' => 'doctor.list', 'uses' => 'DoctorController@doctorListAdmin'));
+            Route::any('/doctor/add', array('as' => 'doctor.add', 'uses' => 'DoctorController@doctorAddAdmin'));
+            Route::any('/doctor/save', array('as' => 'doctor.save', 'uses' => 'DoctorController@doctorSaveAdmin'));
+            Route::any('/doctor/update', array('as' => 'doctor.update', 'uses' => 'DoctorController@doctorUpdateAdmin'));
+
+        });
+
         Route::group(['namespace' => 'Common'], function()
         {
 

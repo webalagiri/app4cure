@@ -694,6 +694,31 @@ class HospitalService {
     }
 
 
+    public function registerNewDoctor($doctorInfo)
+    {
+        $status = true;
+
+        try
+        {
+            DB::transaction(function() use($doctorInfo)
+            {
+                $status = $this->hospitalRepo->registerNewDoctor($doctorInfo);
+            });
+        }
+        catch(HospitalException $userExc)
+        {
+            $status = false;
+            throw $userExc;
+        }
+        catch (Exception $ex) {
+            $status = false;
+            throw new HospitalException(null, ErrorEnum::NEW_PATIENT_REGISTRATION_ERROR, $ex);
+        }
+
+
+        return $status;
+    }
+
 
     public function hospitalList()
     {
