@@ -81,8 +81,10 @@ _________________________________________________________ -->
 
                         </li>
                         <li class="dropdown use-yamm yamm-fw">
-                            <a href="{{ URL::to('/') }}/doctors-appointment">Doctors Appointment</a>
-
+                            <a href="{{ URL::to('/') }}/laboratory">Laboratory Tests</a>
+                        </li>
+                        <li class="dropdown use-yamm yamm-fw">
+                            <a href="{{ URL::to('/') }}/doctor">Doctors Appointment</a>
                         </li>
                         <li class="dropdown use-yamm yamm-fw">
                             <a href="{{ URL::to('/') }}/shop">Shop</a>

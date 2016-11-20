@@ -1040,6 +1040,10 @@ class HospitalImpl implements HospitalInterface{
             $newPatient->laboratory_type_id = "1";
             $newPatient->laboratory_name = $labInfo['name'];
 
+            $newPatient->laboratory_logo = "http://www.innatoss.com/wp-content/uploads/2015/05/icon-lab-services-website-groot-20152-e1432203722959.png";
+            $newPatient->laboratory_photo = "http://www.innatoss.com/wp-content/uploads/2015/05/icon-lab-services-website-groot-20152-e1432203722959.png";
+
+
             $newPatient->address = $labInfo['address'];
             $newPatient->email = $labInfo['email'];
             $newPatient->telephone = $labInfo['telephone'];
@@ -1129,6 +1133,10 @@ class HospitalImpl implements HospitalInterface{
             $newDoctor->doctor_id = $doctorInfo['doctor_id'];
             $newDoctor->doctor_specialty_id = $doctorInfo['doctor_specialty_id'];
             $newDoctor->doctor_name = $doctorInfo['name'];
+
+            $newDoctor->doctor_logo ="https://cdn1.iconfinder.com/data/icons/avatar-3/512/Doctor-128.png";
+            $newDoctor->doctor_photo ="https://cdn1.iconfinder.com/data/icons/avatar-3/512/Doctor-128.png";
+
 
             $newDoctor->address = $doctorInfo['address'];
             $newDoctor->email = $doctorInfo['email'];
@@ -1260,6 +1268,9 @@ class HospitalImpl implements HospitalInterface{
             $newPatient->hospital_id = $hospitalInfo['hospital_id'];
             $newPatient->hospital_type_id = "1";
             $newPatient->hospital_name = $hospitalInfo['name'];
+
+            $newPatient->hospital_logo = "https://www.mercy.net/sites/default/files/vendor-resources/hospital-icon-at-118px-146px.png";
+            $newPatient->hospital_photo = "https://www.mercy.net/sites/default/files/vendor-resources/hospital-icon-at-118px-146px.png";
 
             $newPatient->address = $hospitalInfo['address'];
             $newPatient->email = $hospitalInfo['email'];

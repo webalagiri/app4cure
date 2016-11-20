@@ -94,10 +94,10 @@ _________________________________________________________ -->
 
                         <div class="col-md-12 col-sm-12" style="border:1px solid #ccc;">
                             <div class="product" style="margin-bottom:10px; border:none;">
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-3 col-sm-3">
                                 <div class="image">
                                     <a href="#shop-detail.html">
-                                        <img src="{{$doctorinfo->doctor_logo}}" alt="" class="img-responsive image1">
+                                        <img src="{{$doctorinfo->doctor_photo}}" alt="" class="img-responsive image1">
                                     </a>
                                 </div>
                                 </div>
@@ -110,11 +110,11 @@ _________________________________________________________ -->
 
                                 </div>
                                 </div>
-                                <div class="col-md-2 col-sm-2">
+                                <div class="col-md-3 col-sm-3">
                                     @if(isset(Auth::user()->id))
-                                    <button id="book_{{$doctorinfo->doctor_id}}" onclick="javascript:ajax_book('{{$doctorinfo->doctor_id}}');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">Book Appoitment</button>
+                                    <button id="book_{{$doctorinfo->doctor_id}}" onclick="javascript:ajax_book('{{$doctorinfo->doctor_id}}');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;width:200px;">Book Appoitment</button>
                                     @else
-                                        <button onclick="javascript:alert('Please Login to Book Order');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">Book Appointment</button>
+                                        <button onclick="javascript:alert('Please Login to Book Order');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;width:200px;">Book Appointment</button>
                                     @endif
 
                                 </div>
@@ -122,7 +122,7 @@ _________________________________________________________ -->
                             </div>
                             <!-- /.product -->
                             <div id="book_form_{{$doctorinfo->doctor_id}}" class="product-book" style="display: none;">
-
+                                
                                 <form id="form_{{$doctorinfo->doctor_id}}" name="form_{{$doctorinfo->doctor_id}}" action="{{ URL::to('/') }}/doctor/addtocart" method="POST" >
 
 
@@ -132,61 +132,36 @@ _________________________________________________________ -->
                                     <table class="table table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Hospital</th>
                                         <th>Price</th>
                                         <th>Choose</th>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>BLOOD TESTS</td>
+                                        <td>Apollo</td>
                                         <td>1000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="1" data-src="1000" /></td>
+                                        <td><input type="radio" name="hospital_id" id="hospital_id" value="86" data-src="1000" /></td>
                                     </tr>
                                     <tr>
-                                        <td>LIVER FUNCTION TESTS</td>
+                                        <td>SIMS</td>
                                         <td>1000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="2" data-src="1000" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>RAPID PLASMA REAGIN TEST</td>
-                                        <td>1000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="3" data-src="1000" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>INFECTIOUS MONONUCLEOSIS TEST</td>
-                                        <td>1000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="4" data-src="1000" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>TOTAL TESTOSTERONE</td>
-                                        <td>1000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="5" data-src="1000" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>FREE TESTOSTERONE</td>
-                                        <td>1000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="6" data-src="1000" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>WIDAL TEST</td>
-                                        <td>1000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="7" data-src="1000" /></td>
+                                        <td><input type="radio" name="hospital_id" id="hospital_id" value="87" data-src="1000" /></td>
                                     </tr>
                                     </tbody>
                                     </table>
-
+                                    <iframe src="{{ URL::to('/') }}/doctor-calendar.php" style="width:100%;height: 100%;border:0px;"></iframe>    
                                 </div>
                                 <div class="col-md-4 col-sm-4">
 
                                     <div class="form-group">
                                         <br/>
-                                        <label for="email">Tests Costs</label>
-                                        <input type="hidden" class="form-control" id="doctor_tests_cost" name="doctor_tests_cost" required="required" readonly="readonly" />
+                                        <label for="email">Appointment Costs</label>
+                                        <input type="hidden" class="form-control" id="doctor_appointment_cost" name="doctor_appointment_cost" required="required" readonly="readonly" />
                                         <br/> <span class="price">0</span> INR
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Date & Time</label>
-                                        <input type="text" class="form-control" id="doctor_tests_date_{{$doctorinfo->doctor_id}}" name="doctor_tests_date" required="required" />
+                                        <input type="text" class="form-control" id="doctor_appointment_date_{{$doctorinfo->doctor_id}}" name="doctor_tests_date" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Notes</label>
@@ -203,7 +178,7 @@ _________________________________________________________ -->
 
 
                                 <script>
-                                    jQuery('#laboratory_tests_date_{{$doctorinfo->doctor_id}}').datetimepicker({
+                                    jQuery('#doctor_appointment_date_{{$doctorinfo->doctor_id}}').datetimepicker({
                                          startDate:'+1970/01/02',
                                          allowTimes:['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
                                     });
@@ -221,7 +196,7 @@ _________________________________________________________ -->
                     <!-- /.products -->
 
                     <div class="row">
-
+<br/>
                         <div class="col-md-12 banner">
                             <a href="#">
                                 <img src="img/banner2.jpg" alt="" class="img-responsive">
@@ -286,7 +261,7 @@ _________________________________________________________ -->
     <script>
 
         $( document ).ready(function() {
-            var inputs = $('form input:checkbox');
+            var inputs = $('form input:radio');
 
             function updatePrice(){
                 //alert('HI');
@@ -300,7 +275,7 @@ _________________________________________________________ -->
 
                 });
                 $('#'+form_id+' .price').html(value);
-                $('#'+form_id+' #laboratory_tests_cost').val(value);
+                $('#'+form_id+' #doctor_appointment_cost').val(value);
             }
 
             inputs.change(updatePrice);

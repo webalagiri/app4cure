@@ -39,19 +39,9 @@
         start: new DayPilot.Date("2013-03-25T12:00:00"),
         end: new DayPilot.Date("2013-03-25T12:00:00").addHours(3).addMinutes(15),
         id: "1",
-        text: "Special event"
+        text: "Apollo"
     });
     dp.events.add(e);
     
-</script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    var url = window.location.href;
-    var filename = url.substring(url.lastIndexOf('/')+1);
-    if (filename === "") filename = "index.html";
-    $(".menu a[href='" + filename + "']").addClass("selected");
-});
-        
 </script>
 

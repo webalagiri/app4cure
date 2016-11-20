@@ -235,7 +235,7 @@ _________________________________________________________ -->
                     <!-- /.products -->
 
                     <div class="row">
-
+<br/>
                         <div class="col-md-12 banner">
                             <a href="#">
                                 <img src="img/banner2.jpg" alt="" class="img-responsive">
