@@ -1110,10 +1110,11 @@ class HospitalImpl implements HospitalInterface{
             $user->name = $doctorInfo['name'];
             $user->email = $doctorInfo['email'];
             $user->password = \Hash::make($doctorInfo['password']);
+            $user->verification = "1";
             $user->save();
             $doctorInfo['doctor_id']=$user->id;
 
-            $userRole = Role::find(5);
+            $userRole = Role::find(4);
 
             if (!is_null($userRole))
             {
@@ -1245,10 +1246,11 @@ class HospitalImpl implements HospitalInterface{
             $user->name = $hospitalInfo['name'];
             $user->email = $hospitalInfo['email'];
             $user->password = \Hash::make($hospitalInfo['password']);
+            $user->verification = "1";
             $user->save();
             $hospitalInfo['hospital_id']=$user->id;
 
-            $userRole = Role::find(5);
+            $userRole = Role::find(3);
 
             if (!is_null($userRole))
             {

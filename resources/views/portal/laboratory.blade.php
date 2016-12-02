@@ -195,7 +195,7 @@ _________________________________________________________ -->
                                     <div class="form-group">
                                         <br/>
                                         <label for="email">Tests Costs</label>
-                                        <input type="hidden" class="form-control" id="laboratory_tests_cost" name="laboratory_tests_cost" required="required" readonly="readonly" />
+                                        <input type="hidden" class="form-control" id="laboratory_tests_cost" name="laboratory_tests_cost" value="" required="required"/>
                                         <br/> <span class="price">0</span> INR
                                     </div>
                                     <div class="form-group">

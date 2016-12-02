@@ -46,7 +46,28 @@ _________________________________________________________ -->
                     <div class="panel panel-default sidebar-menu">
 
                         <div class="panel-heading">
-                            <h3 class="panel-title">Tests Categories</h3>
+                            <h3 class="panel-title">Hospitals</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked category-menu">
+                                <li class="active">
+                                    <ul>
+                                        @foreach($hospitalInfo as $hospitalInfoValue)
+                                            <li><a href="{{ URL::to('/') }}/doctor?hid={{$hospitalInfoValue->id}}">{{$hospitalInfoValue->hospital_name}}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- *** MENUS AND FILTERS END *** -->
+
+                    <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Specialities</h3>
                         </div>
 
                         <div class="panel-body">

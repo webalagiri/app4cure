@@ -147,6 +147,29 @@ class DoctorController extends Controller
         return $area;
     }
 
+    public function getHospital()
+    {
+        $hospital = null;
+
+        try
+        {
+            $hospital = Hospital::get();
+        }
+        catch(HelperException $hospitalExc)
+        {
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return $hospital;
+    }
+
 
     public function getDoctorSpecialty()
     {
@@ -181,6 +204,7 @@ class DoctorController extends Controller
         {
             $doctor = $this->doctorService->doctorList();
             $specialityInfo = $this->getDoctorSpecialty();
+            $hospitalInfo = $this->getHospital();
             //dd($doctor);
         }
         catch(DoctorException $profileExc)
@@ -197,7 +221,7 @@ class DoctorController extends Controller
             Log::error($msg);
         }
 
-        return view('portal.doctor',compact('doctor','specialityInfo'));
+        return view('portal.doctor',compact('doctor','specialityInfo','hospitalInfo'));
 
     }
 
@@ -442,6 +466,12 @@ class DoctorController extends Controller
 
         return redirect('admin/doctor');
         //return view('portal.customer-update-profile',compact('patientInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
+    }
+
+
+    public function dashboard()
+    {
+        return view('doctor.portal.dashboard');
     }
 
 

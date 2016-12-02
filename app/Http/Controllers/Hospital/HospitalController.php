@@ -10,6 +10,7 @@ use App\prescription\model\entities\Countries;
 use App\prescription\model\entities\States;
 use App\prescription\model\entities\Cities;
 use App\prescription\model\entities\Areas;
+use App\prescription\model\entities\DoctorHospital;
 
 
 use App\prescription\mapper\LabMapper;
@@ -31,6 +32,12 @@ use App\Http\Requests\HospitalRegisterRequest;
 
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
+
+
+use Auth;
+use Session;
 use Exception;
 use Log;
 
@@ -194,7 +201,7 @@ class HospitalController extends Controller
 
     }
 
-
+  //ADMIN
     public function hospitalListAdmin()
     {
 
@@ -341,4 +348,175 @@ class HospitalController extends Controller
         //return view('portal.customer-update-profile',compact('patientInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
     }
 
+
+
+    //DOCTOR
+
+
+    public function hospitalListDoctor()
+    {
+
+        $hospitalInfo = null;
+
+        try
+        {
+            //$hospitalInfo = $this->hospitalService->hospitalList();
+
+            $doctorId = Auth::user()->id;
+            $query = DB::table('hospital as h')->join('users as u', 'u.id', '=', 'h.hospital_id');
+            $query->join('hospital_type as ht', 'ht.id', '=', 'h.hospital_type_id');
+            $query->join('countries as hc', 'hc.id', '=', 'h.country');
+            $query->join('states as hs', 'hs.id', '=', 'h.state');
+            $query->join('cities as hct', 'hct.id', '=', 'h.city');
+            $query->join('areas as ha', 'ha.id', '=', 'h.area');
+            $query->join('doctor_hospital_link as dhl', 'dhl.hospital_id', '=', 'h.hospital_id');
+            $query->where('dhl.doctor_id', '=', $doctorId);
+            $query->select('h.*', 'ht.name as hospital_type',
+                'ha.area_name as hospital_area','hct.city_name as hospital_city',
+                'hs.name as hospital_state','hc.name as hospital_country',
+                'u.name as user_name', 'u.email as user_email');
+
+            //dd($query->toSql());
+            $hospitalInfo = $query->get();
+
+            $countryInfo = $this->getCountry();
+            $stateInfo = $this->getState();
+            $cityInfo = $this->getCity();
+            $areaInfo = $this->getArea();
+
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return view('doctor.portal.hospital',compact('hospitalInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
+
+    }
+
+    public function hospitalAddDoctor()
+    {
+
+        $countryInfo = null;
+        $stateInfo = null;
+        $cityInfo = null;
+        $areaInfo = null;
+        $hospitalTypeInfo = null;
+
+        try
+        {
+
+            $hospitalInfo = $this->hospitalService->hospitalList();
+
+
+            $countryInfo = $this->getCountry();
+            $stateInfo = $this->getState();
+            $cityInfo = $this->getCity();
+            $areaInfo = $this->getArea();
+            $hospitalTypeInfo = $this->getHospitalType();
+
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return view('doctor.portal.hospital-add',compact('countryInfo','stateInfo','cityInfo','areaInfo','hospitalTypeInfo','hospitalInfo'));
+
+    }
+
+
+    public function hospitalSaveDoctor(Request $hospitalRequest)
+    {
+        $doctorId = Auth::user()->id;
+        $hospitalInfo = $hospitalRequest->get('hospital');
+        //dd($hospitalInfo);
+
+        try
+        {
+
+            foreach($hospitalInfo as $hospitalId)
+            {
+
+                $DoctorHospitalLink = DoctorHospital::where('doctor_id','=',$doctorId)->where('hospital_id','=',$hospitalId)->first();
+                if(is_null($DoctorHospitalLink))
+                {
+                    $DoctorHospitalLink = new DoctorHospital();
+                    $DoctorHospitalLink->doctor_id = $doctorId;
+                    $DoctorHospitalLink->hospital_id = $hospitalId;
+                    $DoctorHospitalLink->status = "1";
+                    $DoctorHospitalLink->save();
+                }
+
+            }
+
+            //$status = HospitalServiceFacade::registerNewHospital($hospitalInfo);
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        $msg="Hospital Added Successfully";
+        return redirect('doctor/hospital')->with('message',$msg);
+
+    }
+
+    public function hospitalRemoveDoctor($hospitalId)
+    {
+        $status =  true;
+        $doctorId = Auth::user()->id;
+
+        try
+        {
+
+            $DoctorHospitalLink = DoctorHospital::where('doctor_id','=',$doctorId)->where('hospital_id','=',$hospitalId)->delete();
+
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+
+        $msg="Hospital Removed Successfully";
+        return redirect('doctor/hospital')->with('message',$msg);
+
+    }
 }

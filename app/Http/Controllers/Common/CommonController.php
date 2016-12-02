@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Common;
 
+use App\prescription\model\entities\Hospital;
 use App\prescription\model\entities\Patient;
 use App\prescription\model\entities\Countries;
 use App\prescription\model\entities\States;
@@ -478,7 +479,7 @@ class CommonController extends Controller
     {
         $status =  true;
         $patientInfo = $patientRequest->all();
-        //dd($patientInfo);
+
 
         try
         {
@@ -536,16 +537,25 @@ class CommonController extends Controller
                 }
                 else if(Auth::user()->hasRole('doctor'))
                 {
-                    Auth::logout();
-                    Session::flush();
-                    $msg="Login Details Incorrect! Try Again.";
-                    return redirect('customer-login')->with('message',$msg);
+                    //dd('HI');
+                    $LoginUserId=Session::put('LoginUserId', Auth::user()->id);
+                    $LoginUserType=Session::put('LoginUserType', 'doctor');
+                    $DisplayName=Session::put('DisplayName', ucfirst(Auth::user()->name));
+                    $AuthDisplayName=Session::put('AuthDisplayName', ucfirst(Auth::user()->name));
+                    $AuthDisplayPhoto=Session::put('AuthDisplayPhoto', "no-image.jpg");
+
+                    return redirect('doctor/dashboard');
+
+                    //Auth::logout();
+                    //Session::flush();
+                    //$msg="Login Details Incorrect! Try Again.";
+                    //return redirect('customer-login')->with('message',$msg);
                 }
                 else if(Auth::user()->hasRole('admin'))
                 {
                     //dd(Auth::user());
                     $LoginUserId=Session::put('LoginUserId', Auth::user()->id);
-                    $LoginUserType=Session::put('LoginUserType', 'patient');
+                    $LoginUserType=Session::put('LoginUserType', 'admin');
                     $DisplayName=Session::put('DisplayName', ucfirst(Auth::user()->name));
                     $AuthDisplayName=Session::put('AuthDisplayName', ucfirst(Auth::user()->name));
                     $AuthDisplayPhoto=Session::put('AuthDisplayPhoto', "no-image.jpg");

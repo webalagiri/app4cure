@@ -170,6 +170,34 @@ Route::group(['prefix' => 'admin'], function()
 
 /* ADMIN */
 
+Route::group(['prefix' => 'doctor'], function()
+{
+
+    Route::group(array('middleware' => ['auth']), function()
+    {
+
+        Route::group(['namespace' => 'Doctor'], function()
+        {
+
+            Route::any('dashboard', array('as' => 'doctor.dashboard', 'uses' => 'DoctorController@dashboard'));
+
+        });
+
+        Route::group(['namespace' => 'Hospital'], function()
+        {
+
+            Route::any('/hospital', array('as' => 'doctor.hospital.list', 'uses' => 'HospitalController@hospitalListDoctor'));
+            Route::any('/hospital/add', array('as' => 'doctor.hospital.add', 'uses' => 'HospitalController@hospitalAddDoctor'));
+            Route::any('/hospital/save', array('as' => 'doctor.hospital.save', 'uses' => 'HospitalController@hospitalSaveDoctor'));
+            Route::any('/hospital/remove/{hospitalId}', array('as' => 'doctor.hospital.remove', 'uses' => 'HospitalController@hospitalRemoveDoctor'));
+
+        });
+
+    });
+
+});
+
+
 /*
 Route::get('/adm', function () {
     return view('adm.portal.login');
