@@ -11,6 +11,7 @@ use App\prescription\model\entities\States;
 use App\prescription\model\entities\Cities;
 use App\prescription\model\entities\Areas;
 use App\prescription\model\entities\DoctorHospital;
+use App\prescription\model\entities\DoctorSchedule;
 
 
 use App\prescription\mapper\LabMapper;
@@ -519,4 +520,176 @@ class HospitalController extends Controller
         return redirect('doctor/hospital')->with('message',$msg);
 
     }
+
+
+    //DOCTOR SCHEDULE
+
+
+    public function scheduleListDoctor()
+    {
+
+        $hospitalInfo = null;
+
+        try
+        {
+            //$hospitalInfo = $this->hospitalService->hospitalList();
+
+            $doctorId = Auth::user()->id;
+            $query = DB::table('hospital as h')->join('users as u', 'u.id', '=', 'h.hospital_id');
+            $query->join('hospital_type as ht', 'ht.id', '=', 'h.hospital_type_id');
+            $query->join('countries as hc', 'hc.id', '=', 'h.country');
+            $query->join('states as hs', 'hs.id', '=', 'h.state');
+            $query->join('cities as hct', 'hct.id', '=', 'h.city');
+            $query->join('areas as ha', 'ha.id', '=', 'h.area');
+            $query->join('doctor_schedule as dhs', 'dhs.hospital_id', '=', 'h.hospital_id');
+            $query->where('dhs.doctor_id', '=', $doctorId);
+            $query->select('h.*', 'ht.name as hospital_type',
+                'ha.area_name as hospital_area','hct.city_name as hospital_city',
+                'hs.name as hospital_state','hc.name as hospital_country',
+                'u.name as user_name', 'u.email as user_email',
+                'dhs.schedule_date','dhs.schedule_from_time','dhs.schedule_to_time');
+
+
+
+
+            //dd($query->toSql());
+            $hospitalInfo = $query->get();
+
+            $countryInfo = $this->getCountry();
+            $stateInfo = $this->getState();
+            $cityInfo = $this->getCity();
+            $areaInfo = $this->getArea();
+
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return view('doctor.portal.schedule',compact('hospitalInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
+
+    }
+
+    public function scheduleAddDoctor()
+    {
+
+        $countryInfo = null;
+        $stateInfo = null;
+        $cityInfo = null;
+        $areaInfo = null;
+        $hospitalTypeInfo = null;
+
+        try
+        {
+
+            $hospitalInfo = $this->hospitalService->hospitalList();
+
+
+            $countryInfo = $this->getCountry();
+            $stateInfo = $this->getState();
+            $cityInfo = $this->getCity();
+            $areaInfo = $this->getArea();
+            $hospitalTypeInfo = $this->getHospitalType();
+
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return view('doctor.portal.schedule-add',compact('countryInfo','stateInfo','cityInfo','areaInfo','hospitalTypeInfo','hospitalInfo'));
+
+    }
+
+
+    public function scheduleSaveDoctor(Request $hospitalRequest)
+    {
+        $doctorId = Auth::user()->id;
+        $hospitalInfo = $hospitalRequest->all();
+        //$hospitalInfo = $hospitalRequest->get('hospital');
+        //dd($hospitalInfo['hospital']);
+
+        try
+        {
+
+            $DoctorHospitalSchedule = new DoctorSchedule();
+            $DoctorHospitalSchedule->doctor_id = $doctorId;
+            $DoctorHospitalSchedule->hospital_id = $hospitalInfo['hospital'];
+            $DoctorHospitalSchedule->schedule_date = $hospitalInfo['schedule_date'];
+            $DoctorHospitalSchedule->schedule_from_time = $hospitalInfo['schedule_from_time'];
+            $DoctorHospitalSchedule->schedule_to_time = $hospitalInfo['schedule_to_time'];
+            $DoctorHospitalSchedule->schedule_count = "100";
+            $DoctorHospitalSchedule->schedule_status = "1";
+            $DoctorHospitalSchedule->save();
+
+            //$status = HospitalServiceFacade::registerNewHospital($hospitalInfo);
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        $msg="Schedule Added Successfully";
+        return redirect('doctor/schedule')->with('message',$msg);
+
+    }
+
+    public function scheduleRemoveDoctor($hospitalId)
+    {
+        $status =  true;
+        $doctorId = Auth::user()->id;
+
+        try
+        {
+
+            $DoctorHospitalLink = DoctorHospital::where('doctor_id','=',$doctorId)->where('hospital_id','=',$hospitalId)->delete();
+
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+
+        $msg="Schedule Removed Successfully";
+        return redirect('doctor/schedule')->with('message',$msg);
+
+    }
+
 }

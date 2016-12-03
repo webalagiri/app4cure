@@ -191,6 +191,11 @@ Route::group(['prefix' => 'doctor'], function()
             Route::any('/hospital/save', array('as' => 'doctor.hospital.save', 'uses' => 'HospitalController@hospitalSaveDoctor'));
             Route::any('/hospital/remove/{hospitalId}', array('as' => 'doctor.hospital.remove', 'uses' => 'HospitalController@hospitalRemoveDoctor'));
 
+            Route::any('/schedule', array('as' => 'doctor.schedule.list', 'uses' => 'HospitalController@scheduleListDoctor'));
+            Route::any('/schedule/add', array('as' => 'doctor.schedule.add', 'uses' => 'HospitalController@scheduleAddDoctor'));
+            Route::any('/schedule/save', array('as' => 'doctor.schedule.save', 'uses' => 'HospitalController@scheduleSaveDoctor'));
+            Route::any('/schedule/remove/{hospitalId}', array('as' => 'doctor.schedule.remove', 'uses' => 'HospitalController@scheduleRemoveDoctor'));
+
         });
 
     });
