@@ -124,7 +124,7 @@ $appointment_menu="0";
                                                     <?php */ ?>
 
 
-                                                    <a href="{{ URL::to('/') }}/doctor/schedule/remove/{{$hospitalInfoValue->hospital_id}}" class="table-link danger" onclick="return confirm('Want to delete');">
+                                                    <a href="{{ URL::to('/') }}/doctor/schedule/remove/{{$hospitalInfoValue->schedule_id}}" class="table-link danger" onclick="return confirm('Want to delete');">
                                                                 <span class="fa-stack">
                                                                     <i class="fa fa-square fa-stack-2x"></i>
                                                                     <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>

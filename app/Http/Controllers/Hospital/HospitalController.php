@@ -547,7 +547,7 @@ class HospitalController extends Controller
                 'ha.area_name as hospital_area','hct.city_name as hospital_city',
                 'hs.name as hospital_state','hc.name as hospital_country',
                 'u.name as user_name', 'u.email as user_email',
-                'dhs.schedule_date','dhs.schedule_from_time','dhs.schedule_to_time');
+                'dhs.id as schedule_id','dhs.schedule_date','dhs.schedule_from_time','dhs.schedule_to_time');
 
 
 
@@ -661,7 +661,7 @@ class HospitalController extends Controller
 
     }
 
-    public function scheduleRemoveDoctor($hospitalId)
+    public function scheduleRemoveDoctor($scheduleId)
     {
         $status =  true;
         $doctorId = Auth::user()->id;
@@ -669,7 +669,7 @@ class HospitalController extends Controller
         try
         {
 
-            $DoctorHospitalLink = DoctorHospital::where('doctor_id','=',$doctorId)->where('hospital_id','=',$hospitalId)->delete();
+            $DoctorHospitalSchedule = DoctorSchedule::where('doctor_id','=',$doctorId)->where('id','=',$scheduleId)->delete();
 
         }
         catch(HospitalException $hospitalExc)
