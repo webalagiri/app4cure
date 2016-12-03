@@ -7,7 +7,7 @@
         <li class="@if($dashboard_menu==1) active @endif"><a href="{{ URL::to('/') }}/doctor/dashboard">Dashboard</a></li>
         <li class="@if($hospital_menu==1) active @endif"><a href="{{ URL::to('/') }}/doctor/hospital">Hospitals </a></li>
         <li class="@if($schedule_menu==1) active @endif"><a href="{{ URL::to('/') }}/doctor/schedule">Schedules </a></li>
-        <li class="@if($appointment_menu==1) active @endif"><a href="{{ URL::to('/') }}/doctor/appointment">Appointments</a></li>
+        <li class="@if($appointment_menu==1) active @endif"><a href="#{{ URL::to('/') }}/doctor/appointment">Appointments</a></li>
 
 
 
