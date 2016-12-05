@@ -143,13 +143,14 @@ _________________________________________________________ -->
                             </div>
                             <!-- /.product -->
                             <div id="book_form_{{$doctorinfo->doctor_id}}" class="product-book" style="display: none;">
-                                
+
                                 <form id="form_{{$doctorinfo->doctor_id}}" name="form_{{$doctorinfo->doctor_id}}" action="{{ URL::to('/') }}/doctor/addtocart" method="POST" >
 
 
                                 <input type="hidden" name="doctor_id" id="doctor_id" value="{{$doctorinfo->doctor_id}}" />
 
                                 <div class="col-md-8 col-sm-8">
+                                    <?php /* ?>
                                     <table class="table table-striped">
                                     <thead>
                                     <tr>
@@ -170,7 +171,12 @@ _________________________________________________________ -->
                                     </tr>
                                     </tbody>
                                     </table>
-                                    <iframe src="{{ URL::to('/') }}/doctor-calendar.php" style="width:100%;height: 100%;border:0px;"></iframe>    
+
+                                    <iframe src="{{ URL::to('/') }}/doctor-calendar.php" style="width:100%;height: 100%;border:0px;"></iframe>
+                                    <?php */ ?>
+
+                                    <iframe src="{{ URL::to('/') }}/schedule_calendar/book.php?doctorid={{$doctorinfo->doctor_id}}" style="width:100%;height: 100%;border:0px;"></iframe>
+
                                 </div>
                                 <div class="col-md-4 col-sm-4">
 
@@ -178,11 +184,11 @@ _________________________________________________________ -->
                                         <br/>
                                         <label for="email">Appointment Costs</label>
                                         <input type="hidden" class="form-control" id="doctor_appointment_cost" name="doctor_appointment_cost" required="required" readonly="readonly" />
-                                        <br/> <span class="price">0</span> INR
+                                        <br/> <span class="price"><input type="text" value="0" class="form-control" name="doctor_appointment_cost_display" required="required" readonly="readonly" style="width: 60px;float: left;height: 20px;background: #fff;border: none;" /></span> INR
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Date & Time</label>
-                                        <input type="text" class="form-control" id="doctor_appointment_date_{{$doctorinfo->doctor_id}}" name="doctor_tests_date" required="required" />
+                                        <input type="text" class="form-control" id="Xdoctor_appointment_date_{{$doctorinfo->doctor_id}}" name="doctor_tests_date" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Notes</label>
@@ -301,6 +307,27 @@ _________________________________________________________ -->
 
             inputs.change(updatePrice);
         });
+    </script>
+
+    <script>
+        function bookDoctorAppointment(schedule_id , schedule_doctor , schedule_hospital , schedule_date , schedule_from_time , schedule_to_time , schedule_cost)
+        {
+            //alert(schedule_id+' :: '+schedule_doctor+' :: '+schedule_hospital+' :: '+schedule_date+' :: '+schedule_from_time+' :: '+schedule_to_time+' :: '+schedule_cost);
+
+            var form_id = "form_"+schedule_doctor;
+            document.getElementById(form_id).elements.namedItem("doctor_appointment_cost").value=schedule_cost;
+            document.getElementById(form_id).elements.namedItem("doctor_appointment_cost_display").value=schedule_cost;
+
+            document.getElementById(form_id).elements.namedItem("doctor_tests_date").value=schedule_date;
+
+            /*
+            var form_id = "form_"+schedule_doctor;
+            //alert(form_id);
+
+            document('#'+form_id+' .price').html(value);
+            $('#'+form_id+' #doctor_appointment_cost').val(value);
+            */
+        }
     </script>
 
 
