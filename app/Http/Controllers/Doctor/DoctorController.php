@@ -12,6 +12,8 @@ use App\prescription\model\entities\Countries;
 use App\prescription\model\entities\States;
 use App\prescription\model\entities\Cities;
 use App\prescription\model\entities\Areas;
+use App\prescription\model\entities\DoctorAppointments;
+
 
 use App\prescription\common\ResponseJson;
 use App\prescription\common\UserSession;
@@ -225,17 +227,47 @@ class DoctorController extends Controller
 
     }
 
-/*
-    public function laboratoryAddToCart(Request $laboratoryCart)
+
+    public function doctorAddToCart(Request $doctorCart)
     {
         $status =  true;
-        //dd($laboratoryCart->all());
-        $laboratoryCartInfo = $laboratoryCart->all();
+        //dd($doctorCart->all());
+        $doctorCartInfo = $doctorCart->all();
         //return view('portal.laboratory',compact('laboratory'));
 
         try
         {
-            $status = $this->labService->laboratoryAddToCart($laboratoryCartInfo);
+
+        $customerId = Auth::user()->id;
+
+        $DoctorAppointments = new DoctorAppointments;
+
+        $DoctorAppointments->doctor_id = $doctorCartInfo['schedule_doctor_id'];
+        $DoctorAppointments->hospital_id = $doctorCartInfo['schedule_hospital_id'];
+        $DoctorAppointments->customer_id = $customerId;
+        $DoctorAppointments->schedule_id = $doctorCartInfo['schedule_id'];
+        $DoctorAppointments->appointment_date_time = $doctorCartInfo['doctor_tests_date'];
+        $DoctorAppointments->appointment_note = $doctorCartInfo['doctor_tests_notes'];
+        $DoctorAppointments->appointment_cost = $doctorCartInfo['doctor_appointment_cost'];
+        $DoctorAppointments->appointment_status = "1";
+        $DoctorAppointments->created_by = "Admin";
+        $DoctorAppointments->updated_by = "Admin";
+        $DoctorAppointments->created_at = date("Y-m-d H:i:s");
+        $DoctorAppointments->updated_at = date("Y-m-d H:i:s");
+        $DoctorAppointments->save();
+
+            $appointmentId = $DoctorAppointments->id;
+
+            if($appointmentId>0)
+            {
+                $msg="Appointment Added Successfully";
+                return redirect('doctor/appointment/'.$appointmentId)->with('message',$msg);
+            }
+
+
+            //dd($DoctorAppointments->id);
+            /*
+            $status = $this->labService->laboratoryAddToCart($doctorCartInfo);
             if($status)
             {
                 $laboratory = $this->labService->laboratoryList();
@@ -244,7 +276,7 @@ class DoctorController extends Controller
                 return redirect('laboratory/cart')->with('message',$msg);
 
                 //return view('portal.laboratory',compact('laboratory'));
-            }
+            }*/
             //dd($laboratory);
         }
         catch(LabException $profileExc)
@@ -261,12 +293,22 @@ class DoctorController extends Controller
             Log::error($msg);
         }
 
-        return view('portal.laboratory',compact('laboratory'));
+        //return view('portal.doctor',compact('laboratory'));
 
         //return $patients;
     }
 
 
+    public function doctorAppointmentConfirm($appointmentId)
+    {
+        //dd($appointmentId);
+        $doctorAppointmentInfo = DoctorAppointments::where('id','=',$appointmentId)->first();
+        //dd($doctorAppointmentInfo);
+        return view('portal.doctor-cart',compact('doctorAppointmentInfo'));
+    }
+
+
+/*
     public function laboratoryCart()
     {
 

@@ -195,6 +195,9 @@ _________________________________________________________ -->
                                         <textarea class="form-control" id="doctor_tests_notes" name="doctor_tests_notes"></textarea>
                                     </div>
                                     <div class="text-center">
+                                        <input type="hidden" class="form-control" id="schedule_id" name="schedule_id" required="required" readonly="readonly" />
+                                        <input type="hidden" class="form-control" id="schedule_doctor_id" name="schedule_doctor_id" required="required" readonly="readonly" />
+                                        <input type="hidden" class="form-control" id="schedule_hospital_id" name="schedule_hospital_id" required="required" readonly="readonly" />
                                         <button type="submit" class="btn btn-template-main"><i class="fa fa-flask"></i> Book </button>
                                     </div>
 
@@ -315,10 +318,15 @@ _________________________________________________________ -->
             //alert(schedule_id+' :: '+schedule_doctor+' :: '+schedule_hospital+' :: '+schedule_date+' :: '+schedule_from_time+' :: '+schedule_to_time+' :: '+schedule_cost);
 
             var form_id = "form_"+schedule_doctor;
+
+            document.getElementById(form_id).elements.namedItem("schedule_id").value=schedule_id;
+            document.getElementById(form_id).elements.namedItem("schedule_doctor_id").value=schedule_doctor;
+            document.getElementById(form_id).elements.namedItem("schedule_hospital_id").value=schedule_hospital;
+
             document.getElementById(form_id).elements.namedItem("doctor_appointment_cost").value=schedule_cost;
             document.getElementById(form_id).elements.namedItem("doctor_appointment_cost_display").value=schedule_cost;
 
-            document.getElementById(form_id).elements.namedItem("doctor_tests_date").value=schedule_date;
+            document.getElementById(form_id).elements.namedItem("doctor_tests_date").value=schedule_date+' '+schedule_from_time;
 
             /*
             var form_id = "form_"+schedule_doctor;

@@ -96,6 +96,10 @@ Route::group(['prefix' => 'doctor'], function()
     Route::group(['namespace' => 'Doctor'], function()
     {
         Route::any('/', array('as' => 'doctor.list', 'uses' => 'DoctorController@doctorList'));
+
+        Route::any('/addtocart', array('as' => 'doctor.addtocart', 'uses' => 'DoctorController@doctorAddToCart'));
+        Route::any('/appointment/{appointmentId}', array('as' => 'doctor.confirm', 'uses' => 'DoctorController@doctorAppointmentConfirm'));
+
         /*
         Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'LabController@laboratoryAddToCart'));
         Route::any('/cart', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryCart'));
@@ -195,6 +199,9 @@ Route::group(['prefix' => 'doctor'], function()
             Route::any('/schedule/add', array('as' => 'doctor.schedule.add', 'uses' => 'HospitalController@scheduleAddDoctor'));
             Route::any('/schedule/save', array('as' => 'doctor.schedule.save', 'uses' => 'HospitalController@scheduleSaveDoctor'));
             Route::any('/schedule/remove/{scheduleId}', array('as' => 'doctor.schedule.remove', 'uses' => 'HospitalController@scheduleRemoveDoctor'));
+
+
+
 
         });
 
