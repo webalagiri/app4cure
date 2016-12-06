@@ -408,7 +408,7 @@ class DoctorController extends Controller
     }
 
 
-    public function doctorSaveAdmin(Request $doctorRequest)
+    public function doctorSaveAdmin(DoctorRegisterRequest $doctorRequest)
     {
         $doctorInfo = $doctorRequest->all();
         //dd($doctorRequest->all());
