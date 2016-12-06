@@ -593,6 +593,22 @@ class HospitalController extends Controller
 
             $hospitalInfo = $this->hospitalService->hospitalList();
 
+            $doctorId = Auth::user()->id;
+            $query = DB::table('hospital as h')->join('users as u', 'u.id', '=', 'h.hospital_id');
+            $query->join('hospital_type as ht', 'ht.id', '=', 'h.hospital_type_id');
+            $query->join('countries as hc', 'hc.id', '=', 'h.country');
+            $query->join('states as hs', 'hs.id', '=', 'h.state');
+            $query->join('cities as hct', 'hct.id', '=', 'h.city');
+            $query->join('areas as ha', 'ha.id', '=', 'h.area');
+            $query->join('doctor_hospital_link as dhl', 'dhl.hospital_id', '=', 'h.hospital_id');
+            $query->where('dhl.doctor_id', '=', $doctorId);
+            $query->select('h.*', 'ht.name as hospital_type',
+                'ha.area_name as hospital_area','hct.city_name as hospital_city',
+                'hs.name as hospital_state','hc.name as hospital_country',
+                'u.name as user_name', 'u.email as user_email');
+
+            //dd($query->toSql());
+            $hospitalInfo = $query->get();
 
             $countryInfo = $this->getCountry();
             $stateInfo = $this->getState();
@@ -636,6 +652,7 @@ class HospitalController extends Controller
             $DoctorHospitalSchedule->schedule_date = $hospitalInfo['schedule_date'];
             $DoctorHospitalSchedule->schedule_from_time = $hospitalInfo['schedule_from_time'];
             $DoctorHospitalSchedule->schedule_to_time = $hospitalInfo['schedule_to_time'];
+            $DoctorHospitalSchedule->schedule_cost = $hospitalInfo['schedule_cost'];
             $DoctorHospitalSchedule->schedule_count = "100";
             $DoctorHospitalSchedule->schedule_status = "1";
             $DoctorHospitalSchedule->save();

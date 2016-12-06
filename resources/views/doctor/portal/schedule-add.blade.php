@@ -89,6 +89,11 @@ $appointment_menu="0";
                                 <input type="text" class="form-control" id="doctor_schedule_to_time" name="schedule_to_time" required="required" />
                             </div>
 
+                            <div class="form-group">
+                                <label for="name-login">Schedule Cost</label>
+                                <input type="number" class="form-control" id="doctor_schedule_cost" name="schedule_cost" required="required" />
+                            </div>
+
                             <div class="text-center">
                                 <button type="submit" class="btn btn-template-main"><i class="fa fa-user-md"></i> Add </button>
                             </div>
