@@ -345,7 +345,7 @@ class CommonController extends Controller
 
 
             $status = HospitalServiceFacade::registerNewPatient($patientInfo);
-            $status = true;
+            //$status = true;
             if($status)
             {
 
