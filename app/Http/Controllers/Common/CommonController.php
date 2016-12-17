@@ -345,6 +345,7 @@ class CommonController extends Controller
 
 
             $status = HospitalServiceFacade::registerNewPatient($patientInfo);
+            $status = true;
             if($status)
             {
 
@@ -360,6 +361,7 @@ class CommonController extends Controller
                 $url  = URL::to('/').'/common/activation/'.$userId.'/'.md5($email);
                 $link  = '<a href="'.$url.'">'.$url.'</a>';
 
+                /*
                 // recipients
                 $to  = $patientInfo['email'];
                 // subject
@@ -399,7 +401,7 @@ class CommonController extends Controller
                 //echo "<h1>Email Server Issues</h1>";
                 //echo $message;
                 //exit;
-
+                */
 
                 Mail::send('emails.welcome',array('name'=>$name,'email'=>$email,'password'=>$password,'url'=>$link), function($message) use($email,$name,$subject) {
                     $message->from('noreply@app4cure.co.in', 'App4Cure');
@@ -448,7 +450,7 @@ class CommonController extends Controller
         } catch (Exception $ex) {
             //throw $ex;
             //$msg = AppendMessage::appendGeneralException($ex);
-            $msg="Register Details Invalid! Try Again.";
+            $msg="Catch :: Register Details Invalid! Try Again.";
             Log::error($msg);
             //return redirect('exception')->with('message',trans('messages.SupportTeam'));
         }
