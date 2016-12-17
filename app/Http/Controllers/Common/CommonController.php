@@ -41,6 +41,8 @@ use Session;
 //use Illuminate\Contracts\Mail;
 use Illuminate\Support\Facades\URL;
 
+use Mail;
+
 class CommonController extends Controller
 {
     protected $hospitalService;
@@ -49,6 +51,34 @@ class CommonController extends Controller
     {
         $this->hospitalService = $hospitalService;
     }
+
+
+    public function sendEmail()
+    {
+        //dd($mailRequest);
+
+        $name = "Alagirivimal";
+        $url = "http://www.app4cure.co.in/";
+        $content = "HI";
+
+        $data = array('name' => $name, 'url' => $url, 'content' => $content );
+
+        try
+        {
+
+            Mail::send('emails.welcome', $data, function ($m) {
+                $m->from('prescriptionapp1@gmail.com', 'Learning Laravel');
+                $m->to('alagirivimal@gmail.com')->subject('Learning laravel test mail');
+            });
+        }
+        catch(Exception $exc)
+        {
+            dd($exc);
+        }
+
+        dd('Request completed');
+    }
+
 
     /**
      * Get list of hospitals by keyword
@@ -370,12 +400,13 @@ class CommonController extends Controller
                 //echo $message;
                 //exit;
 
-                /*
+
                 Mail::send('emails.welcome',array('name'=>$name,'email'=>$email,'password'=>$password,'url'=>$link), function($message) use($email,$name,$subject) {
                     $message->from('noreply@app4cure.co.in', 'App4Cure');
                     $message->to( $email, $name)->subject($subject);
                 });
-                */
+
+                /*
                 // Mail it
                 if(mail($to, $subject, $message, $headers))
                 {
@@ -390,6 +421,7 @@ class CommonController extends Controller
                     echo $message;
                     exit;
                 }
+                */
 
                 // dd("Saved successfully");
                 $sucmsg="Registration Done Successfully! We send Activation Mail. Please Check your Email.";

@@ -9,6 +9,7 @@
         "laravel/framework": "5.2.*",
         "zizaco/entrust": "5.2.x-dev",
         "laravelcollective/html": "^5.2.0",
+        "guzzlehttp/guzzle": "~5.3|~6.0",
         "myclabs/php-enum": "^1.5"
     },
     "require-dev": {
