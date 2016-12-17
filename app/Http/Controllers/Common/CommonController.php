@@ -360,6 +360,7 @@ class CommonController extends Controller
                 $userId = $userInfo['id'];
                 $url  = URL::to('/').'/common/activation/'.$userId.'/'.md5($email);
                 $link  = '<a href="'.$url.'">'.$url.'</a>';
+                $subject = 'App4Cure - New Account Email Verification';
 
                 /*
                 // recipients
