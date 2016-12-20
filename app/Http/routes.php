@@ -212,6 +212,58 @@ Route::group(['prefix' => 'doctor'], function()
 });
 
 
+Route::group(['prefix' => 'laboratory'], function()
+{
+
+    Route::group(array('middleware' => ['auth']), function()
+    {
+        Route::group(['namespace' => 'Lab'], function()
+        {
+
+            Route::any('dashboard', array('as' => 'laboratory.dashboard', 'uses' => 'LabController@dashboard'));
+
+        });
+
+        Route::group(['namespace' => 'Lab'], function()
+        {
+
+            Route::any('/labtest', array('as' => 'laboratory.labtest.list', 'uses' => 'LabController@labtestListLab'));
+            Route::any('/labtest/add', array('as' => 'laboratory.labtest.add', 'uses' => 'LabController@labtestAddLab'));
+            Route::any('/labtest/save', array('as' => 'laboratory.labtest.save', 'uses' => 'LabController@labtestSaveLab'));
+            Route::any('/labtest/remove/{labtestId}', array('as' => 'doctor.labtest.remove', 'uses' => 'LabController@labtestRemoveLab'));
+
+        });
+
+
+        /*
+        Route::group(['namespace' => 'Doctor'], function()
+        {
+
+            Route::any('dashboard', array('as' => 'doctor.dashboard', 'uses' => 'DoctorController@dashboard'));
+
+        });
+        */
+        /*
+        Route::group(['namespace' => 'Hospital'], function()
+        {
+
+            Route::any('/hospital', array('as' => 'doctor.hospital.list', 'uses' => 'HospitalController@hospitalListDoctor'));
+            Route::any('/hospital/add', array('as' => 'doctor.hospital.add', 'uses' => 'HospitalController@hospitalAddDoctor'));
+            Route::any('/hospital/save', array('as' => 'doctor.hospital.save', 'uses' => 'HospitalController@hospitalSaveDoctor'));
+            Route::any('/hospital/remove/{hospitalId}', array('as' => 'doctor.hospital.remove', 'uses' => 'HospitalController@hospitalRemoveDoctor'));
+
+            Route::any('/schedule', array('as' => 'doctor.schedule.list', 'uses' => 'HospitalController@scheduleListDoctor'));
+            Route::any('/schedule/add', array('as' => 'doctor.schedule.add', 'uses' => 'HospitalController@scheduleAddDoctor'));
+            Route::any('/schedule/save', array('as' => 'doctor.schedule.save', 'uses' => 'HospitalController@scheduleSaveDoctor'));
+            Route::any('/schedule/remove/{scheduleId}', array('as' => 'doctor.schedule.remove', 'uses' => 'HospitalController@scheduleRemoveDoctor'));
+
+        });
+        */
+
+    });
+
+});
+
 /*
 Route::get('/adm', function () {
     return view('adm.portal.login');

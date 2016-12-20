@@ -88,43 +88,6 @@ _________________________________________________________ -->
 
                 <div class="navbar-collapse collapse" id="navigation">
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#">Product Management</a>
-
-                        </li>
-                        <li class="dropdown use-yamm yamm-fw">
-                            <a href="#">Administration</a>
-
-                        </li>
-                        <li class="dropdown use-yamm yamm-fw">
-                            <a href="#">Payments</a>
-
-                        </li>
-                        <li class="dropdown use-yamm yamm-fw">
-                            <a href="#">Approvals</a>
-
-                        </li>
-                        <li class="dropdown use-yamm yamm-fw">
-                            <a href="#">Reports</a>
-
-                        </li>
-                        <!-- ========== FULL WIDTH MEGAMENU END ================== -->
-
-                        <li class="dropdown">
-                            <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Contact <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#contact.html">Contact option 1</a>
-                                </li>
-                                <li><a href="#contact2.html">Contact option 2</a>
-                                </li>
-                                <li><a href="#contact3.html">Contact option 3</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                    </ul>
-
                 </div>
                 <!--/.nav-collapse -->
 

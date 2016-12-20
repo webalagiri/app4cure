@@ -1,13 +1,12 @@
-@extends('doctor.layout.master')
+@extends('laboratory.layout.master')
 
-@section('title', 'Doctor Dashboard')
+@section('title', 'Laboratory LabTest Add')
 
 @section('styles')
 
 @stop
 <?php
 $dashboard_menu="0";
-$hospital_menu="0";
 $schedule_menu="1";
 $appointment_menu="0";
 ?>
@@ -25,8 +24,8 @@ $appointment_menu="0";
                 <!-- *** MENUS AND FILTERS ***-->
 
                 <div class="panel panel-default sidebar-menu">
-                    <p>Home > Schedule > Add </p>
-                    @include('doctor.portal.sidebar')
+                    <p>Home > LabTest > Add </p>
+                    @include('laboratory.portal.sidebar')
                 </div>
             </div>
 
@@ -44,7 +43,7 @@ $appointment_menu="0";
                 <div class="row">
                     <div class="col-md-6">
                         <div class="box">
-                            <h2 class="text-uppercase">Schedule Hospital</h2>
+                            <h2 class="text-uppercase">Laboratory LabTest</h2>
 
                             @if (session()->has('message'))
                                 <div class="col_full login-title">
@@ -62,36 +61,21 @@ $appointment_menu="0";
                                 </div>
                             @endif
 
-                            {!! Form::open( array( 'route' => array('doctor.schedule.save') ,'role' => 'form' ,'method'=>'POST', 'files'=>true,'class'=>'') ) !!}
+                            {!! Form::open( array( 'route' => array('laboratory.labtest.save') ,'role' => 'form' ,'method'=>'POST', 'files'=>true,'class'=>'') ) !!}
 
                             <div class="form-group">
-                                <label for="name-login">Choose Hospitals</label>
-                                <select name="hospital" data-placeholder="Choose Hospitals" class="chosen-select" >
+                                <label for="name-login">Choose LabTest</label>
+                                <select name="laboratory_tests_id" data-placeholder="Choose LabTest" class="chosen-select" >
                                     <option value=""></option>
-                                    @foreach($hospitalInfo as $hospitalInfoValue)
-                                    <option value="{{$hospitalInfoValue->hospital_id}}">{{$hospitalInfoValue->hospital_name}}</option>
+                                    @foreach($labInfo as $labInfoValue)
+                                    <option value="{{$labInfoValue->lab_test_id}}">{{$labInfoValue->lab_test_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="name-login">Choose Schedule Date</label>
-                                <input type="text" class="form-control" id="doctor_schedule_date" name="schedule_date" required="required" />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="name-login">Choose Schedule From Time</label>
-                                <input type="text" class="form-control" id="doctor_schedule_from_time" name="schedule_from_time" required="required" />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="name-login">Choose Schedule To Time</label>
-                                <input type="text" class="form-control" id="doctor_schedule_to_time" name="schedule_to_time" required="required" />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="name-login">Schedule Cost</label>
-                                <input type="number" class="form-control" id="doctor_schedule_cost" name="schedule_cost" required="required" />
+                                <label for="name-login">LabTest Cost</label>
+                                <input type="number" class="form-control" id="laboratory_tests_price" name="laboratory_tests_price" required="required" />
                             </div>
 
                             <div class="text-center">

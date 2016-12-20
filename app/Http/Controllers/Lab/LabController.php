@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Lab;
 
 use App\prescription\model\entities\Lab;
 use App\prescription\model\entities\LabTest;
+use App\prescription\model\entities\LabTestLink;
 use App\prescription\model\entities\Patient;
 use App\prescription\model\entities\Countries;
 use App\prescription\model\entities\States;
@@ -22,13 +23,16 @@ use App\prescription\utilities\Exception\LabException;
 use App\prescription\utilities\Exception\AppendMessage;
 use Illuminate\Http\Request;
 
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 use App\Http\Requests;
 use App\Http\Requests\LabRegisterRequest;
 
 use App\Http\Controllers\Controller;
 
+use Auth;
+use Session;
 use Exception;
 use Log;
 
@@ -774,6 +778,176 @@ class LabController extends Controller
 
         return redirect('admin/laboratory');
         //return view('portal.customer-update-profile',compact('patientInfo','countryInfo','stateInfo','cityInfo','areaInfo'));
+    }
+
+    public function dashboard()
+    {
+        return view('laboratory.portal.dashboard');
+    }
+
+    public function labtestListLab()
+    {
+
+        $labInfo = null;
+
+        try
+        {
+            $labId = Auth::user()->id;
+            $query = DB::table('laboratory_tests as lt');
+            $query->join('laboratory_tests_link as ltl', 'ltl.laboratory_tests_id', '=', 'lt.id');
+            $query->where('ltl.laboratory_id', '=', $labId);
+            $query->select('lt.name as lab_test_name',
+                'ltl.laboratory_tests_price as lab_test_price','ltl.id as lab_test_id');
+
+            //dd($query->toSql());
+            $labInfo = $query->get();
+
+
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return view('laboratory.portal.labtest',compact('labInfo'));
+
+    }
+
+
+    public function labtestAddLab()
+    {
+
+        $labInfoAdded = null;
+        $labInfoAddedArray = array();
+        $labInfo = null;
+
+        try
+        {
+            $labId = Auth::user()->id;
+            $query = DB::table('laboratory_tests as lt');
+            $query->join('laboratory_tests_link as ltl', 'ltl.laboratory_tests_id', '=', 'lt.id');
+            $query->where('ltl.laboratory_id', '=', $labId);
+            $query->select('lt.id as lab_test_added_id');
+
+            //dd($query->toSql());
+            $labInfoAdded = $query->get();
+
+            //dd($labInfoAdded);
+
+            if(count($labInfoAdded)>0)
+            {
+                foreach($labInfoAdded as $labInfoAddedValue)
+                {
+                    $labInfoAddedArray[] = $labInfoAddedValue->lab_test_added_id;
+                }
+            }
+
+            //dd($labInfoAddedArray);
+
+            $query = DB::table('laboratory_tests as lt');
+            $query->whereNotIn('lt.id', $labInfoAddedArray);
+            $query->select('lt.name as lab_test_name','lt.id as lab_test_id');
+
+            //dd($query->toSql());
+            $labInfo = $query->get();
+
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return view('laboratory.portal.labtest-add',compact('labInfo'));
+
+    }
+
+
+    public function labtestSaveLab(Request $labRequest)
+    {
+        $labId = Auth::user()->id;
+        $labInfo = $labRequest->all();
+        //$hospitalInfo = $hospitalRequest->get('hospital');
+        //dd($hospitalInfo['hospital']);
+
+        try
+        {
+
+            $DoctorHospitalSchedule = new LabTestLink();
+            $DoctorHospitalSchedule->laboratory_id = $labId;
+            $DoctorHospitalSchedule->laboratory_tests_id = $labInfo['laboratory_tests_id'];
+            $DoctorHospitalSchedule->laboratory_tests_price = $labInfo['laboratory_tests_price'];
+            $DoctorHospitalSchedule->save();
+
+            //$status = HospitalServiceFacade::registerNewHospital($hospitalInfo);
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        $msg="LabTest Added Successfully";
+        return redirect('laboratory/labtest')->with('message',$msg);
+
+    }
+
+    public function labtestRemoveLab($labtestId)
+    {
+        $status =  true;
+        $labId = Auth::user()->id;
+
+        try
+        {
+
+            //$DoctorHospitalSchedule = DoctorSchedule::where('doctor_id','=',$doctorId)->where('id','=',$scheduleId)->delete();
+
+            $Lablabtest = LabTestLink::where('laboratory_id','=',$labId)->where('id','=',$labtestId)->delete();
+
+        }
+        catch(HospitalException $hospitalExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $hospitalExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($hospitalExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+
+        $msg="LabTest Removed Successfully";
+        return redirect('laboratory/labtest')->with('message',$msg);
+
     }
 
 }

@@ -7,7 +7,6 @@
 @stop
 <?php
 $dashboard_menu="1";
-$hospital_menu="0";
 $schedule_menu="0";
 $appointment_menu="0";
 ?>
@@ -42,7 +41,7 @@ $appointment_menu="0";
             <div class="col-sm-10 main-content">
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="body-heading"><strong>Welcome to Doctor Panel</strong></p>
+                        <p class="body-heading"><strong>Welcome to Laboratory Panel</strong></p>
                     </div>
                 </div>
                 <div class="row hidden">
