@@ -508,12 +508,29 @@ class LabController extends Controller
     {
 
         $laboratory = null;
+        $labtestInfo = null;
+        $laboratoryTest = null;
         //return view('portal.laboratory',compact('laboratory'));
 
         try
         {
             $laboratory = $this->labService->laboratoryList();
-            //dd($laboratory);
+            foreach($laboratory as $lab)
+            {
+                //dd($lab->laboratory_id);
+
+                $labId = $lab->laboratory_id;
+                $query = DB::table('laboratory_tests as lt');
+                $query->join('laboratory_tests_link as ltl', 'ltl.laboratory_tests_id', '=', 'lt.id');
+                $query->where('ltl.laboratory_id', '=', $labId);
+                $query->select('lt.id as lab_test_name_id','lt.name as lab_test_name',
+                    'ltl.laboratory_tests_price as lab_test_price','ltl.id as lab_test_id');
+
+                //dd($query->toSql());
+                $labtestInfo = $query->get();
+                $laboratoryTest[$labId] = $labtestInfo;
+
+            }
         }
         catch(LabException $profileExc)
         {
@@ -529,7 +546,7 @@ class LabController extends Controller
             Log::error($msg);
         }
 
-        return view('portal.laboratory',compact('laboratory'));
+        return view('portal.laboratory',compact('laboratory','laboratoryTest'));
 
         //return $patients;
     }

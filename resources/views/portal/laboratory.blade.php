@@ -151,11 +151,15 @@ _________________________________________________________ -->
                                         <th>Choose</th>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>BLOOD TESTS</td>
-                                        <td>1000 INR</td>
-                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="1" data-src="1000" /></td>
+
+                                    @foreach($laboratoryTest[$labinfo->laboratory_id] as $laboratoryTestValue)
+                                        <tr>
+                                        <td>{{$laboratoryTestValue->lab_test_name}}</td>
+                                        <td>{{$laboratoryTestValue->lab_test_price}} INR</td>
+                                        <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="{{$laboratoryTestValue->lab_test_name_id}}" data-src="{{$laboratoryTestValue->lab_test_price}}" /></td>
                                     </tr>
+                                    @endforeach
+                                    <!--
                                     <tr>
                                         <td>LIVER FUNCTION TESTS</td>
                                         <td>1000 INR</td>
@@ -186,6 +190,7 @@ _________________________________________________________ -->
                                         <td>1000 INR</td>
                                         <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="7" data-src="1000" /></td>
                                     </tr>
+                                    -->
                                     </tbody>
                                     </table>
 
@@ -281,9 +286,6 @@ _________________________________________________________ -->
         <!-- /.container -->
     </div>
     <!-- /#content -->
-
-
-
 
 @endsection
 
