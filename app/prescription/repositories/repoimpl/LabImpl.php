@@ -251,10 +251,12 @@ dd($laboratoryTestList);
             //dd($laboratoryCartInfo['laboratory_tests']);
             foreach($laboratoryCartInfo['laboratory_tests'] as $laboratoryCartInfo_laboratory_tests_id)
             {
+                //print_r($laboratoryCartInfo_laboratory_tests_id);
                 $LabTestLinkInfo = LabTestLink::find($laboratoryCartInfo_laboratory_tests_id);
-
+                //print_r($LabTestLinkInfo);
                 //$LabTestLinkInfo = LabTestLink::where($laboratoryCartInfo_laboratory_tests_id);
                 //dd($LabTestLinkInfo['laboratory_tests_price']);
+
 
                 $newLabCart = new LabCart();
                 $newLabCart->customer_id = Auth::user()->id;
@@ -271,8 +273,9 @@ dd($laboratoryTestList);
                 $newLabCart->updated_at = date("Y-m-d H:i:s");
                 $newLabCart->save();
 
-            }
 
+            }
+//dd('HI');
             //dd($newLabCart);
         }
         catch (QueryException $queryEx)
