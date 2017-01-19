@@ -685,7 +685,7 @@ class CommonController extends Controller
                     {
                         $img = "public/img/dummy.jpg";
                     }
-
+                    $img = "public/img/dummy.jpg";
 
 
                     $patientInfo = Patient::where('customer_id','=',Auth::user()->id)->first();
