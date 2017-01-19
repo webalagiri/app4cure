@@ -683,7 +683,7 @@ class CommonController extends Controller
                     }
                     else
                     {
-                        $img = "";
+                        $img = "/img/dummy.jpg";
                     }
 
 
@@ -703,6 +703,7 @@ class CommonController extends Controller
                         $loginDetails['customer']['id'] = Auth::user()->id;
                         $loginDetails['customer']['type'] = 'patient';
                         $loginDetails['customer']['name'] = ucfirst(Auth::user()->name);
+                        $loginDetails['customer']['email'] = ucfirst(Auth::user()->email);
                         $loginDetails['customer']['photo'] = str_replace('public',$img, URL::to('/'));
 
 
