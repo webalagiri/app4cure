@@ -54,6 +54,7 @@ class ErrorEnum extends Enum{
     //User Login 160 - 170
 
     const USER_LOGIN_SUCCESS = 160;
+    const USER_LOGIN_FAILURE = 161;
 
     //Pharmacy Profile constants 171 to 190
 

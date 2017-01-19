@@ -644,6 +644,114 @@ class CommonController extends Controller
     }
 
 
+    public function mobileloginPatient(PatientLoginRequest $patientRequest)
+    {
+        $status =  true;
+        $patientInfo = $patientRequest->all();
+
+        try
+        {
+
+            if (Auth::attempt(['email' => $patientInfo['email'], 'password' => $patientInfo['password']])) {
+                // Authentication passed...
+
+
+                if(Auth::user()->verification==0)
+                {
+                    //dd(Auth::user());
+                    Auth::logout();
+                    Session::flush();
+                    $msg="Email Verification Pending! Try Again.";
+                    return redirect('customer-login')->with('message',$msg);
+                }
+
+
+                if(Auth::user()->hasRole('customer'))
+                {
+
+                    $LoginUserId=Session::put('LoginUserId', Auth::user()->id);
+                    $LoginUserType=Session::put('LoginUserType', 'patient');
+                    $DisplayName=Session::put('DisplayName', ucfirst(Auth::user()->name));
+                    $AuthDisplayName=Session::put('AuthDisplayName', ucfirst(Auth::user()->name));
+
+                    $id = Auth::user()->id;
+                    //$photo = DB::table('patient_info') -> select('photo') -> where('patient_id',$id)->get();
+                    $photo = "";
+                    if(!empty($photo[0] -> photo)){
+                        $img = str_replace('../public','public', $photo[0] -> photo);
+                        $AuthDisplayPhoto=Session::put('AuthDisplayPhoto', str_replace('public',$img, URL::to('/')));
+                    }
+                    else
+                    {
+                        $img = "";
+                    }
+
+
+
+                    $patientInfo = Patient::where('customer_id','=',Auth::user()->id)->first();
+                    if($patientInfo->pincode=="")
+                    {
+                        $msg="Please Enter Contact Details to Complete Registration";
+
+                        //return redirect('patient/'.Auth::user()->id.'/updateprofile')->with('message',$msg);;
+                        $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+                    }
+                    else{
+
+                        //return redirect('patient/'.Auth::user()->id.'/dashboard');
+
+                        $loginDetails['customer']['id'] = Auth::user()->id;
+                        $loginDetails['customer']['type'] = 'patient';
+                        $loginDetails['customer']['name'] = ucfirst(Auth::user()->name);
+                        $loginDetails['customer']['photo'] = str_replace('public',$img, URL::to('/'));
+
+
+                        $msg="Login Success";
+                        $jsonResponse = new ResponseJson(ErrorEnum::SUCCESS, $msg);
+                        $jsonResponse->setObj($loginDetails);
+
+
+                    }
+
+                    //return back();
+                }
+
+            }
+            else
+            {
+                Auth::logout();
+                Session::flush();
+                $msg="Login Details Incorrect! Try Again.";
+                //return redirect('customer-login')->with('message',$msg);
+                $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+            }
+
+        }
+        catch (PatientUserException $userExc) {
+            //dd($userExc);
+            $errorMsg = $userExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($userExc);
+            Log::error($msg);
+            //return redirect('exception')->with('message',$errorMsg." ".trans('messages.SupportTeam'));
+            /*return Response::json(array(
+                        'success' => false,
+                        'data' => $errorMsg), '200'
+            );*/
+            $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+        } catch (Exception $ex) {
+            //dd($ex);
+            //throw $ex;
+            $msg = AppendMessage::appendGeneralException($ex);
+            Log::error($msg);
+            //return redirect('exception')->with('message',trans('messages.SupportTeam'));
+            $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+        }
+
+        return $jsonResponse;
+    }
+
+
+
     public function dashboardPatient()
     {
         return view('portal.customer-dashboard');
