@@ -683,7 +683,7 @@ class CommonController extends Controller
                     }
                     else
                     {
-                        $img = "/img/dummy.jpg";
+                        $img = "public/img/dummy.jpg";
                     }
 
 
