@@ -19,6 +19,7 @@ use App\prescription\services\HospitalService;
 use App\prescription\facades\HospitalServiceFacade;
 use App\prescription\services\LabService;
 use App\prescription\services\CommonService;
+use App\prescription\common\ResponseJson;
 use App\prescription\utilities\Exception\LabException;
 use App\prescription\utilities\Exception\AppendMessage;
 use Illuminate\Http\Request;
