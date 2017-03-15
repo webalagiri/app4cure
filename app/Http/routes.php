@@ -428,4 +428,14 @@ Route::group(['prefix' => 'api'], function()
         Route::any('/logout', array('as' => 'customer.mobile_logout', 'uses' => 'CommonController@mobilelogoutPatient'));
     });
 
+
+    Route::group(['namespace' => 'Lab'], function()
+    {
+        Route::any('/lablist', array('as' => 'laboratory.list', 'uses' => 'LabController@mobilelaboratoryList'));
+        Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'LabController@laboratoryAddToCart'));
+        Route::any('/cart', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryCart'));
+        Route::any('/confirm', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryConfirm'));
+    });
+
 });
+

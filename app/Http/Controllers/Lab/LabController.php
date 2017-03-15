@@ -173,6 +173,39 @@ class LabController extends Controller
         return $labtest;
     }
 
+
+    public function mobilegetLabTest()
+    {
+        $labtest = null;
+
+        try
+        {
+            //$cities = $helperService->getCities();
+            $labtest = LabTest::get();
+
+            $msg="Get Lab Test Success";
+            $jsonResponse = new ResponseJson(ErrorEnum::SUCCESS, $msg);
+            $jsonResponse->setObj($labtest);
+
+
+        }
+        catch(HelperException $cityExc)
+        {
+            $errorMsg = $cityExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($cityExc);
+            Log::error($msg);
+            $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+        }
+        catch(Exception $exc)
+        {
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+            $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+        }
+
+        return $jsonResponse;
+    }
+
     /**
      * Get the profile of the lab
      * @param $labId
@@ -551,6 +584,61 @@ class LabController extends Controller
         //return $patients;
     }
 
+
+    public function mobilelaboratoryList()
+    {
+
+        $laboratory = null;
+        $labtestInfo = null;
+        $laboratoryTest = null;
+        //return view('portal.laboratory',compact('laboratory'));
+
+        try
+        {
+            $laboratory = $this->labService->laboratoryList();
+            foreach($laboratory as $lab)
+            {
+                //dd($lab->laboratory_id);
+
+                $labId = $lab->laboratory_id;
+                $query = DB::table('laboratory_tests as lt');
+                $query->join('laboratory_tests_link as ltl', 'ltl.laboratory_tests_id', '=', 'lt.id');
+                $query->where('ltl.laboratory_id', '=', $labId);
+                $query->select('lt.id as lab_test_name_id','lt.name as lab_test_name',
+                    'ltl.laboratory_tests_price as lab_test_price','ltl.id as lab_test_id');
+
+                //dd($query->toSql());
+                $labtestInfo = $query->get();
+                $laboratoryTest[$labId] = $labtestInfo;
+
+            }
+
+            $msg="Fetch Laboratory Lists Success";
+            $jsonResponse = new ResponseJson(ErrorEnum::SUCCESS, $msg);
+            $jsonResponse->setObj($laboratoryTest);
+
+        }
+        catch(LabException $profileExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $profileExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($profileExc);
+            Log::error($msg);
+            $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+            $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+        }
+
+        return $jsonResponse;
+        //return view('portal.laboratory',compact('laboratory','laboratoryTest'));
+
+        //return $patients;
+    }
 
     public function laboratoryAddToCart(Request $laboratoryCart)
     {
