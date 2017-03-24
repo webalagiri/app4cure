@@ -130,6 +130,25 @@ _________________________________________________________ -->
                                     <!-- /.team-member -->
                                 </div>
 
+
+                                <div class="col-md-3 col-sm-3" data-animate="fadeInUp">
+                                    <div class="team-member">
+                                        <div class="image">
+                                            <a href="{{ URL::to('/') }}/bloodbank">
+                                                <img src="http://www.tngovbloodbank.in/homepages/images/2.jpg" style="height: 150px;width: 265px;" alt="" class="img-responsive img-circle">
+                                            </a>
+                                        </div>
+                                        <h3><a href="{{ URL::to('/') }}/bloodbank">Blood Bank Online</a></h3>
+
+                                    </div>
+                                    <!-- /.team-member -->
+                                </div>
+
+                            </div>
+
+                            <div>
+
+
                                 <div class="col-md-3 col-sm-3" data-animate="fadeInUp">
                                     <div class="team-member">
                                         <div class="image">
@@ -142,7 +161,6 @@ _________________________________________________________ -->
                                     </div>
                                     <!-- /.team-member -->
                                 </div>
-
                             </div>
                             <!-- /.row -->
                             <!-- See All Team Members -->

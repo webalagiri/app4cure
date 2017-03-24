@@ -33,5 +33,7 @@ class HospitalRepoServiceProvider extends ServiceProvider
             'App\prescription\repositories\repoimpl\DoctorImpl');
         $this->app->bind('App\prescription\repositories\repointerface\HelperInterface',
             'App\prescription\repositories\repoimpl\HelperImpl');
+        $this->app->bind('App\prescription\repositories\repointerface\BloodBankInterface',
+            'App\prescription\repositories\repoimpl\BloodBankImpl');
     }
 }

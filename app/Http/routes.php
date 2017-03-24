@@ -111,6 +111,17 @@ Route::group(['prefix' => 'doctor'], function()
 });
 
 
+Route::group(['prefix' => 'bloodbank'], function()
+{
+    Route::group(['namespace' => 'BloodBank'], function()
+    {
+        Route::any('/', array('as' => 'laboratory.list', 'uses' => 'BloodBankController@bloodBankList'));
+        Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'BloodBankController@laboratoryAddToCart'));
+        Route::any('/cart', array('as' => 'laboratory.cart', 'uses' => 'BloodBankController@laboratoryCart'));
+        Route::any('/confirm', array('as' => 'laboratory.cart', 'uses' => 'BloodBankController@laboratoryConfirm'));
+    });
+});
+
 Route::group(['prefix' => 'admin'], function()
 {
     Route::group(['namespace' => 'Common'], function() {
