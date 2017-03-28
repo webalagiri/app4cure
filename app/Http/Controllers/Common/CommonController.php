@@ -360,6 +360,7 @@ class CommonController extends Controller
                 $userId = $userInfo['id'];
                 $url  = URL::to('/').'/common/activation/'.$userId.'/'.md5($email);
                 $link  = '<a href="'.$url.'">'.$url.'</a>';
+                //$link  = $url;
                 $subject = 'App4Cure - New Account Email Verification';
 
                 /*
@@ -402,11 +403,13 @@ class CommonController extends Controller
                 //echo "<h1>Email Server Issues</h1>";
                 //echo $message;
                 //exit;
+                ['html' => 'emails.newinvoice']
                 */
 
-                Mail::send('emails.welcome',array('name'=>$name,'email'=>$email,'password'=>$password,'url'=>$link), function($message) use($email,$name,$subject) {
+                Mail::send(['html' => 'emails.welcome'],array('name'=>$name,'email'=>$email,'password'=>$password,'url'=>$link), function($message) use($email,$name,$subject) {
                     $message->from('noreply@app4cure.co.in', 'App4Cure');
                     $message->to( $email, $name)->subject($subject);
+
                 });
 
                 /*
