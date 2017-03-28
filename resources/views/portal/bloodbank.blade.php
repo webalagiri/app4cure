@@ -144,9 +144,9 @@ _________________________________________________________ -->
                                 </div>
                                 <div class="col-md-3 col-sm-3">
                                     @if(isset(Auth::user()->id))
-                                    <button id="book_{{$bloodBankinfo->bloodbank_id}}" onclick="javascript:ajax_book('{{$bloodBankinfo->bloodbank_id}}');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">View Services</button>
+                                    <button id="book_{{$bloodBankinfo->bloodbank_id}}" onclick="ajax_book('{{$bloodBankinfo->bloodbank_id}}');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">View Services</button>
                                     @else
-                                        <button onclick="javascript:alert('Please Login to Book Order');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">View Service</button>
+                                        <button onclick="alert('Please Login to Book Order');" type="button" class="btn btn-primary btn-block" style="margin-top: 130px;">View Service</button>
                                     @endif
 
                                 </div>
@@ -238,6 +238,7 @@ _________________________________________________________ -->
                                 </div>
 
                                 </form>
+
 
 
                                 <script>
