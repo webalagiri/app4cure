@@ -113,12 +113,12 @@ Route::group(['prefix' => 'doctor'], function()
 
 Route::group(['prefix' => 'bloodbank'], function()
 {
-    Route::group(['namespace' => 'BloodBank'], function()
+    Route::group(['namespace' => 'Bloodbank'], function()
     {
-        Route::any('/', array('as' => 'laboratory.list', 'uses' => 'BloodBankController@bloodBankList'));
-        Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'BloodBankController@laboratoryAddToCart'));
-        Route::any('/cart', array('as' => 'laboratory.cart', 'uses' => 'BloodBankController@laboratoryCart'));
-        Route::any('/confirm', array('as' => 'laboratory.cart', 'uses' => 'BloodBankController@laboratoryConfirm'));
+        Route::any('/', array('as' => 'laboratory.list', 'uses' => 'BloodbankController@bloodBankList'));
+        Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'BloodbankController@laboratoryAddToCart'));
+        Route::any('/cart', array('as' => 'laboratory.cart', 'uses' => 'BloodbankController@laboratoryCart'));
+        Route::any('/confirm', array('as' => 'laboratory.cart', 'uses' => 'BloodbankController@laboratoryConfirm'));
     });
 });
 

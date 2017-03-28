@@ -66,7 +66,7 @@ class CommonController extends Controller
         try
         {
 
-            Mail::send('emails.welcome', $data, function ($m) {
+            Mail::send(['html' =>'emails.welcome'], $data, function ($m) {
                 $m->from('prescriptionapp1@gmail.com', 'Learning Laravel');
                 $m->to('alagirivimal@gmail.com')->subject('Learning laravel test mail');
             });
@@ -1005,7 +1005,7 @@ class CommonController extends Controller
                 $url = 'http://www.app4cure.co.in/';
                 $subject = 'Forgot Login - App4Cure';
 
-                Mail::send('emails.welcomemail',array('name'=>$name,'email'=>$email,'password'=>$password,'url'=>$url), function($message) use($email,$name,$subject) {
+                Mail::send(['html' =>'emails.welcomemail'],array('name'=>$name,'email'=>$email,'password'=>$password,'url'=>$url), function($message) use($email,$name,$subject) {
                     $message->from('hello@app.com', 'Your Application');
                     $message->to( $email, $name)->subject($subject);
                 });

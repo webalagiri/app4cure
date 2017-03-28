@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Lab;
+namespace App\Http\Controllers\BloodBank;
 
-use App\prescription\model\entities\Lab;
-use App\prescription\model\entities\LabTest;
-use App\prescription\model\entities\LabTestLink;
+
+use App\prescription\model\entities\BloodBank;
+use App\prescription\model\entities\BloodBankServices;
+use App\prescription\model\entities\BloodBankServiceLink;
 use App\prescription\model\entities\Patient;
 use App\prescription\model\entities\Countries;
 use App\prescription\model\entities\States;
@@ -18,10 +19,12 @@ use App\prescription\services\HelperService;
 use App\prescription\services\HospitalService;
 use App\prescription\facades\HospitalServiceFacade;
 use App\prescription\services\LabService;
+use App\prescription\services\BloodBankService;
 use App\prescription\services\CommonService;
 use App\prescription\common\ResponseJson;
 use App\prescription\utilities\ErrorEnum\ErrorEnum;
 use App\prescription\utilities\Exception\LabException;
+use App\prescription\utilities\Exception\BloodBankException;
 use App\prescription\utilities\Exception\AppendMessage;
 use Illuminate\Http\Request;
 
@@ -38,13 +41,13 @@ use Session;
 use Exception;
 use Log;
 
-class LabController extends Controller
+class BloodbankController extends Controller
 {
-    protected $labService;
+    protected $bloodBankService;
 
-    public function __construct(LabService $labService)
+    public function __construct(BloodBankService $bloodBankService)
     {
-        $this->labService = $labService;
+        $this->bloodBankService = $bloodBankService;
     }
 
 
@@ -539,35 +542,38 @@ class LabController extends Controller
     //VIMAL
 
 
-    public function laboratoryList()
+    public function bloodBankList()
     {
-
-        $laboratory = null;
-        $labtestInfo = null;
-        $laboratoryTest = null;
+        //dd('HI');
+        $bloodBank = null;
+        $bloodBankServiceInfo = null;
+        $bloodBankServiceList = null;
         //return view('portal.laboratory',compact('laboratory'));
 
         try
         {
-            $laboratory = $this->labService->laboratoryList();
-            foreach($laboratory as $lab)
+            $bloodBank = $this->bloodBankService->bloodBankList();
+            //dd('HI');
+            //dd($bloodBank);
+            foreach($bloodBank as $bb)
             {
                 //dd($lab->laboratory_id);
 
-                $labId = $lab->laboratory_id;
-                $query = DB::table('laboratory_tests as lt');
-                $query->join('laboratory_tests_link as ltl', 'ltl.laboratory_tests_id', '=', 'lt.id');
-                $query->where('ltl.laboratory_id', '=', $labId);
-                $query->select('lt.id as lab_test_name_id','lt.name as lab_test_name',
-                    'ltl.laboratory_tests_price as lab_test_price','ltl.id as lab_test_id');
+                $bbId = $bb->bloodbank_id;
+                $query = DB::table('bloodbank_service as bbs');
+                $query->join('bloodbank_service_link as bbsl', 'bbsl.bloodbank_service_id', '=', 'bbs.id');
+                $query->where('bbsl.bloodbank_id', '=', $bbId);
+                $query->select('bbs.id as bloodbank_service_name_id','bbs.name as bloodbank_service_name',
+                    'bbsl.bloodbank_service_price as bloodbank_service_price','bbsl.id as bloobank_service_id');
 
                 //dd($query->toSql());
-                $labtestInfo = $query->get();
-                $laboratoryTest[$labId] = $labtestInfo;
+                $bloodBankServiceInfo = $query->get();
+                $bloodBankServiceList[$bbId] = $bloodBankServiceInfo;
 
             }
+
         }
-        catch(LabException $profileExc)
+        catch(BloodBankException $profileExc)
         {
             //dd($hospitalExc);
             $errorMsg = $profileExc->getMessageForCode();
@@ -581,7 +587,7 @@ class LabController extends Controller
             Log::error($msg);
         }
 
-        return view('portal.laboratory',compact('laboratory','laboratoryTest'));
+        return view('portal.bloodbank',compact('bloodBank','bloodBankServiceList'));
 
         //return $patients;
     }
