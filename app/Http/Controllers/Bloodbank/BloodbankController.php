@@ -28,6 +28,8 @@ use App\prescription\utilities\Exception\BloodBankException;
 use App\prescription\utilities\Exception\AppendMessage;
 use Illuminate\Http\Request;
 
+
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
@@ -50,7 +52,10 @@ class BloodbankController extends Controller
         $this->bloodBankService = $bloodBankService;
     }
 
-
+/*
+ *
+ *
+ */
 
     public function getCountry()
     {
