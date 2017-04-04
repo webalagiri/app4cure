@@ -166,7 +166,9 @@ _________________________________________________________ -->
                                     <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Group</th>
                                         <th>Price</th>
+                                        <th>Unit</th>
                                         <th>Choose</th>
                                     </thead>
                                     <tbody>
@@ -174,7 +176,34 @@ _________________________________________________________ -->
                                     @foreach($bloodBankServiceList[$bloodBankinfo->bloodbank_id] as $bloodBankServiceValue)
                                         <tr>
                                         <td>{{$bloodBankServiceValue->bloodbank_service_name}}</td>
-                                        <td>{{$bloodBankServiceValue->bloodbank_service_price}} INR</td>
+                                            <td>
+                                                <select name="group[]" id="group">
+                                                    <option>A+ Group</option>
+                                                    <option>A- unit</option>
+                                                    <option>B+ unit</option>
+                                                    <option>B- unit</option>
+                                                    <option>O+ unit</option>
+                                                    <option>O- unit</option>
+                                                    <option>AB+ unit</option>
+                                                    <option>AB- unit</option>
+
+                                                </select>
+                                            </td>
+                                            <td>{{$bloodBankServiceValue->bloodbank_service_price}} INR</td>
+                                            <td>
+                                                <select name="unit[]" id="unit">
+                                                    <option value="1">1 unit</option>
+                                                    <option value="2">2 unit</option>
+                                                    <option value="3">3 unit</option>
+                                                    <option value="4">4 unit</option>
+                                                    <option value="5">5 unit</option>
+                                                    <option value="6">6 unit</option>
+                                                    <option value="7">7 unit</option>
+                                                    <option value="8">8 unit</option>
+                                                    <option value="9">9 unit</option>
+                                                    <option value="10">10 unit</option>
+                                                </select>
+                                            </td>
                                         <td><input type="checkbox" name="laboratory_tests[]" id="laboratory_tests" value="{{$bloodBankServiceValue->bloodbank_service_name_id}}" data-src="{{$bloodBankServiceValue->bloodbank_service_price}}" /></td>
                                     </tr>
                                     @endforeach
@@ -324,16 +353,17 @@ _________________________________________________________ -->
 
         $( document ).ready(function() {
             var inputs = $('form input:checkbox');
-
+            var selects = $('form select');
             function updatePrice(){
                 //alert('HI');
                 //alert($(this).parent('form'));
+                //alert($(this).closest('tr').find('#unit').val());
                 var form_id = $(this).closest("form").prop("id");
                 //alert(form_id);
                 var value = 0;
                 inputs.filter('#'+form_id+' :checked').each(function(){
 
-                    value += parseInt($(this).data('src'), 10);
+                    value += parseInt($(this).data('src'), 10)*parseInt($(this).closest('tr').find('#unit').val());
 
                 });
                 $('#'+form_id+' .price').html(value);
@@ -341,6 +371,7 @@ _________________________________________________________ -->
             }
 
             inputs.change(updatePrice);
+            selects.change(updatePrice);
         });
     </script>
 
