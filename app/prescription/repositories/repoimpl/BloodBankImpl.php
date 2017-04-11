@@ -192,10 +192,10 @@ class BloodBankImpl implements BloodBankInterface
         return $status;
     }
     */
-    public function bloodBankList()
+    public function bloodBankList($requestValue)
     {
         $bloodBankList = null;
-
+        //dd($requestValue);
         try
         {
             $query = DB::table('bloodbank as b')->join('users as u', 'u.id', '=', 'b.bloodbank_id');
@@ -204,10 +204,26 @@ class BloodBankImpl implements BloodBankInterface
             $query->join('states as bs', 'bs.id', '=', 'b.state');
             $query->join('cities as bct', 'bct.id', '=', 'b.city');
             $query->join('areas as ba', 'ba.id', '=', 'b.area');
+            if(isset($requestValue['filter'])) {
+                if ($requestValue['filter'] == "type") {
+                    $query->where('b.bloodbank_type_id', '=', $requestValue['value']);
+                }
+            }
+
+            /*
+            if(isset($requestValue['filter'])) {
+                if ($requestValue['filter'] == "service") {
+                    $query->join('bloodbank_service_link as bbsl', 'bbsl.bloodbank_id', '=', 'b.id');
+                    $query->where('bbsl.bloodbank_service_id', '=', $requestValue['value']);
+                }
+            }
+            */
+
             $query->select('b.*', 'bt.name as bloodbank_type',
                 'ba.area_name as bloodbank_area','bct.city_name as bloodbank_city',
                 'bs.name as bloodbank_state','bc.name as bloodbank_country',
                 'u.name as user_name', 'u.email as user_email');
+
 
             //dd($query->toSql());
             $bloodBankList = $query->get();

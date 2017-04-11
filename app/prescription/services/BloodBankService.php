@@ -138,13 +138,13 @@ class BloodBankService
     }
 */
 
-    public function bloodBankList()
+    public function bloodBankList($requestValue)
     {
         $bloodBankList = null;
 
         try
         {
-            $bloodBankList = $this->bloodBankRepo->bloodBankList();
+            $bloodBankList = $this->bloodBankRepo->bloodBankList($requestValue);
             //dd($bloodBankList);
         }
         catch(BloodBankException $profileExc)

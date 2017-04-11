@@ -54,11 +54,11 @@ _________________________________________________________ -->
                                 <li class="active">
 
                                     <ul>
-                                        <li><a href="{{ URL::to('/') }}/bloodbank">PRIVATE</a>
+                                        <li><a href="{{ URL::to('/') }}/bloodbank?filter=type&value=1">GOVERNMENT</a>
                                         </li>
-                                        <li><a href="{{ URL::to('/') }}/bloodbank">GOVERNMENT</a>
+                                        <li><a href="{{ URL::to('/') }}/bloodbank?filter=type&value=2">PRIVATE</a>
                                         </li>
-                                        <li><a href="{{ URL::to('/') }}/bloodbank">TRUST</a>
+                                        <li><a href="{{ URL::to('/') }}/bloodbank?filter=type&value=3">TRUST</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -80,11 +80,11 @@ _________________________________________________________ -->
                                 <li class="active">
 
                                     <ul>
-                                        <li><a href="{{ URL::to('/') }}/bloodbank">Whole Blood</a>
+                                        <li><a href="{{ URL::to('/') }}/bloodbank?filter=service&value=1">Whole Blood</a>
                                         </li>
-                                        <li><a href="{{ URL::to('/') }}/bloodbank">Platelets</a>
+                                        <li><a href="{{ URL::to('/') }}/bloodbank?filter=service&value=2">Platelets</a>
                                         </li>
-                                        <li><a href="{{ URL::to('/') }}/bloodbank">Special Plasma</a>
+                                        <li><a href="{{ URL::to('/') }}/bloodbank?filter=service&value=3">Special Plasma</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -18,7 +18,7 @@ interface BloodBankInterface
     //public function getTestsForLab($labId, $hospitalId);
     //public function getLabTestsByLid($lid);
     //public function editLab(BloodBankViewModel $labVM);
-    public function bloodBankList();
+    public function bloodBankList($requestValue);
     public function bloodBankAddToCart($laboratoryCartInfo);
 
     public function bloodBankCart();

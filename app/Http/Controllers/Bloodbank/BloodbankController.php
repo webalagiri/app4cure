@@ -549,7 +549,7 @@ class BloodbankController extends Controller
 
     public function bloodBankList(Request $requestValue = null)
     {
-        dd($requestValue);
+        //dd($requestValue['filter']);
         //dd('HI');
         $bloodBank = null;
         $bloodBankServiceInfo = null;
@@ -558,12 +558,10 @@ class BloodbankController extends Controller
 
         try
         {
-            $bloodBank = $this->bloodBankService->bloodBankList();
-            //dd('HI');
-            //dd($bloodBank);
+            $bloodBank = $this->bloodBankService->bloodBankList($requestValue);
+
             foreach($bloodBank as $bb)
             {
-                //dd($lab->laboratory_id);
 
                 $bbId = $bb->bloodbank_id;
                 $query = DB::table('bloodbank_service as bbs');
