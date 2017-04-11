@@ -547,8 +547,9 @@ class BloodbankController extends Controller
     //VIMAL
 
 
-    public function bloodBankList()
+    public function bloodBankList(Request $requestValue = null)
     {
+        dd($requestValue);
         //dd('HI');
         $bloodBank = null;
         $bloodBankServiceInfo = null;
