@@ -13,7 +13,7 @@ namespace App\prescription\repositories\repointerface;
 
 interface DoctorInterface
 {
-    public function doctorList();
+    public function doctorList($requestValue);
 /*
     public function laboratoryAddToCart($laboratoryCartInfo);
 

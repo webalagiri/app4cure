@@ -54,7 +54,7 @@ _________________________________________________________ -->
                                 <li class="active">
                                     <ul>
                                         @foreach($hospitalInfo as $hospitalInfoValue)
-                                            <li><a href="{{ URL::to('/') }}/doctor?hid={{$hospitalInfoValue->id}}">{{$hospitalInfoValue->hospital_name}}</a></li>
+                                            <li><a href="{{ URL::to('/') }}/doctor?filter=hospital&hid={{$hospitalInfoValue->hospital_id}}">{{$hospitalInfoValue->hospital_name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </li>
@@ -75,7 +75,7 @@ _________________________________________________________ -->
                                 <li class="active">
                                     <ul>
                                     @foreach($specialityInfo as $doctorSpecialtyInfoValue)
-                                    <li><a href="{{ URL::to('/') }}/doctor?sid={{$doctorSpecialtyInfoValue->id}}">{{$doctorSpecialtyInfoValue->name}}</a></li>
+                                    <li><a href="{{ URL::to('/') }}/doctor?filter=speciality&sid={{$doctorSpecialtyInfoValue->id}}">{{$doctorSpecialtyInfoValue->name}}</a></li>
                                     @endforeach
                                     </ul>
                                 </li>

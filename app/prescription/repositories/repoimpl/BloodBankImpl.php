@@ -210,14 +210,14 @@ class BloodBankImpl implements BloodBankInterface
                 }
             }
 
-            /*
+
             if(isset($requestValue['filter'])) {
                 if ($requestValue['filter'] == "service") {
-                    $query->join('bloodbank_service_link as bbsl', 'bbsl.bloodbank_id', '=', 'b.id');
+                    $query->join('bloodbank_service_link as bbsl', 'bbsl.bloodbank_id', '=', 'b.bloodbank_id');
                     $query->where('bbsl.bloodbank_service_id', '=', $requestValue['value']);
                 }
             }
-            */
+
 
             $query->select('b.*', 'bt.name as bloodbank_type',
                 'ba.area_name as bloodbank_area','bct.city_name as bloodbank_city',

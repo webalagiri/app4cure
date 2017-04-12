@@ -24,13 +24,13 @@ class DoctorService
         $this->doctorRepo = $doctorRepo;
     }
 
-    public function doctorList()
+    public function doctorList($requestValue)
     {
         $doctorList = null;
 
         try
         {
-            $doctorList = $this->doctorRepo->doctorList();
+            $doctorList = $this->doctorRepo->doctorList($requestValue);
             //dd($doctorList);
         }
         catch(DoctorException $profileExc)

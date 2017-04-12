@@ -31,7 +31,7 @@ class DoctorImpl implements DoctorInterface
 {
 
 
-    public function doctorList()
+    public function doctorList($requestValue)
     {
         $doctorList = null;
 
@@ -43,6 +43,21 @@ class DoctorImpl implements DoctorInterface
             $query->join('states as ds', 'ds.id', '=', 'd.state');
             $query->join('cities as dct', 'dct.id', '=', 'd.city');
             $query->join('areas as da', 'da.id', '=', 'd.area');
+
+            if(isset($requestValue['filter'])) {
+                if ($requestValue['filter'] == "speciality") {
+                    $query->where('d.doctor_specialty_id', '=', $requestValue['sid']);
+                }
+            }
+
+            if(isset($requestValue['filter'])) {
+                if ($requestValue['filter'] == "hospital") {
+
+                    $query->join('doctor_hospital_link as dhl', 'dhl.doctor_id', '=', 'd.doctor_id');
+                    $query->where('dhl.hospital_id', '=', $requestValue['hid']);
+                }
+            }
+
             $query->select('d.*', 'dst.name as doctor_speciality_type',
                 'da.area_name as doctor_area','dct.city_name as doctor_city',
                 'ds.name as doctor_state','dc.name as doctor_country',

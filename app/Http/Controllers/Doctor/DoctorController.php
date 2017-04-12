@@ -197,14 +197,14 @@ class DoctorController extends Controller
         return $doctorSpecialty;
     }
 
-    public function doctorList()
+    public function doctorList(Request $requestValue = null)
     {
 
         $doctor = null;
 
         try
         {
-            $doctor = $this->doctorService->doctorList();
+            $doctor = $this->doctorService->doctorList($requestValue);
             $specialityInfo = $this->getDoctorSpecialty();
             $hospitalInfo = $this->getHospital();
             //dd($doctor);
