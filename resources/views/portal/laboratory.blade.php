@@ -54,19 +54,19 @@ _________________________________________________________ -->
                                 <li class="active">
 
                                     <ul>
-                                        <li><a href="{{ URL::to('/') }}/laboratory">BLOOD TESTS</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory?filter=test&tid=1">BLOOD TESTS</a>
                                         </li>
-                                        <li><a href="{{ URL::to('/') }}/laboratory">LIVER FUNCTION TESTS</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory?filter=test&tid=2">LIVER FUNCTION TESTS</a>
                                         </li>
-                                        <li><a href="{{ URL::to('/') }}/laboratory">RAPID PLASMA REAGIN TEST</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory?filter=test&tid=3">RAPID PLASMA REAGIN TEST</a>
                                         </li>
-                                        <li><a href="{{ URL::to('/') }}/laboratory">INFECTIOUS MONONUCLEOSIS TEST</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory?filter=test&tid=4">INFECTIOUS MONONUCLEOSIS TEST</a>
                                         </li>
-                                        <li><a href="{{ URL::to('/') }}/laboratory">TOTAL TESTOSTERONE</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory?filter=test&tid=5">TOTAL TESTOSTERONE</a>
                                         </li>
-                                        <li><a href="{{ URL::to('/') }}/laboratory">FREE TESTOSTERONE</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory?filter=test&tid=6">FREE TESTOSTERONE</a>
                                         </li>
-                                        <li><a href="{{ URL::to('/') }}/laboratory">WIDAL TEST</a>
+                                        <li><a href="{{ URL::to('/') }}/laboratory?filter=test&tid=7">WIDAL TEST</a>
                                         </li>
                                     </ul>
                                 </li>

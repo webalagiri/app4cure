@@ -18,7 +18,7 @@ interface LabInterface
     public function getTestsForLab($labId, $hospitalId);
     public function getLabTestsByLid($lid);
     public function editLab(LabViewModel $labVM);
-    public function laboratoryList();
+    public function laboratoryList($requestValue);
     public function laboratoryAddToCart($laboratoryCartInfo);
 
     public function laboratoryCart();

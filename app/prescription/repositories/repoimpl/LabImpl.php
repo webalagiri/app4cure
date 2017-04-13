@@ -197,8 +197,9 @@ class LabImpl implements LabInterface
         return $status;
     }
 
-    public function laboratoryList()
+    public function laboratoryList($requestValue)
     {
+        //dd($requestValue);
         $laboratoryList = null;
 
         try
@@ -209,6 +210,15 @@ class LabImpl implements LabInterface
             $query->join('states as ls', 'ls.id', '=', 'l.state');
             $query->join('cities as lct', 'lct.id', '=', 'l.city');
             $query->join('areas as la', 'la.id', '=', 'l.area');
+
+            if(isset($requestValue['filter'])) {
+                if ($requestValue['filter'] == "test") {
+
+                    $query->join('laboratory_tests_link as ltl', 'ltl.laboratory_id', '=', 'l.laboratory_id');
+                    $query->where('ltl.laboratory_tests_id', '=', $requestValue['tid']);
+                }
+            }
+
             $query->select('l.*', 'lt.name as lab_type',
                 'la.area_name as lab_area','lct.city_name as lab_city',
                 'ls.name as lab_state','lc.name as lab_country',

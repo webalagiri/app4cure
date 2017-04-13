@@ -173,13 +173,13 @@ class LabService
     }
 
 
-    public function laboratoryList()
+    public function laboratoryList($requestValue)
     {
         $laboratoryList = null;
 
         try
         {
-            $laboratoryList = $this->labRepo->laboratoryList();
+            $laboratoryList = $this->labRepo->laboratoryList($requestValue);
             //dd($laboratoryList);
         }
         catch(LabException $profileExc)

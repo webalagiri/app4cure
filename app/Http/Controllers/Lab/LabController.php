@@ -539,7 +539,7 @@ class LabController extends Controller
     //VIMAL
 
 
-    public function laboratoryList()
+    public function laboratoryList(Request $requestValue = null)
     {
 
         $laboratory = null;
@@ -549,7 +549,7 @@ class LabController extends Controller
 
         try
         {
-            $laboratory = $this->labService->laboratoryList();
+            $laboratory = $this->labService->laboratoryList($requestValue);
             foreach($laboratory as $lab)
             {
                 //dd($lab->laboratory_id);
