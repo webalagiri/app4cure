@@ -587,7 +587,7 @@ class LabController extends Controller
     }
 
 
-    public function mobilelaboratoryList()
+    public function mobilelaboratoryList(Request $requestValue = null)
     {
 
         $laboratory = null;
@@ -597,7 +597,7 @@ class LabController extends Controller
 
         try
         {
-            $laboratory = $this->labService->laboratoryList();
+            $laboratory = $this->labService->laboratoryList($requestValue);
             foreach($laboratory as $lab)
             {
                 //dd($lab->laboratory_id);
