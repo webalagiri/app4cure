@@ -611,7 +611,8 @@ class LabController extends Controller
 
                 //dd($query->toSql());
                 $labtestInfo = $query->get();
-                $laboratoryTest[$labId] = $labtestInfo;
+                $laboratoryTest[$labId]['info'] = $laboratory;
+                $laboratoryTest[$labId]['service'] = $labtestInfo;
 
             }
 
