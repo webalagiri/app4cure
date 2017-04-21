@@ -443,10 +443,19 @@ Route::group(['prefix' => 'api'], function()
 
     Route::group(['namespace' => 'Lab'], function()
     {
-        Route::any('/lablist', array('as' => 'laboratory.list', 'uses' => 'LabController@mobilelaboratoryList'));
-        Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'LabController@laboratoryAddToCart'));
-        Route::any('/cart', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryCart'));
-        Route::any('/confirm', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryConfirm'));
+        Route::any('/lablist', array('as' => 'laboratory.list', 'uses' => 'LabController@mobileLaboratoryList'));
+        //Route::any('/addtocart', array('as' => 'laboratory.addtocart', 'uses' => 'LabController@laboratoryAddToCart'));
+        //Route::any('/cart', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryCart'));
+        //Route::any('/confirm', array('as' => 'laboratory.cart', 'uses' => 'LabController@laboratoryConfirm'));
+    });
+
+
+    Route::group(['namespace' => 'Doctor'], function()
+    {
+        Route::any('/doctorlist', array('as' => 'doctor.list', 'uses' => 'DoctorController@mobileDoctorList'));
+        //Route::any('/addtocart', array('as' => 'doctor.addtocart', 'uses' => 'DoctorController@doctorAddToCart'));
+        //Route::any('/appointment/{appointmentId}', array('as' => 'doctor.confirm', 'uses' => 'DoctorController@doctorAppointmentConfirm'));
+
     });
 
 });

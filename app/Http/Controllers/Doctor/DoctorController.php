@@ -228,6 +228,48 @@ class DoctorController extends Controller
     }
 
 
+    public function mobileDoctorList(Request $requestValue = null)
+    {
+
+        $doctor = null;
+
+        try
+        {
+            $doctor = $this->doctorService->doctorList($requestValue);
+            $specialityInfo = $this->getDoctorSpecialty();
+            $hospitalInfo = $this->getHospital();
+            //dd($doctor);
+
+
+            $doctorList['doctorInfo'] = $doctor;
+            $doctorList['specialityInfo'] = $specialityInfo;
+            $doctorList['hospitalInfo'] = $hospitalInfo;
+
+            $msg="Fetch Doctor Lists Success";
+            $jsonResponse = new ResponseJson(ErrorEnum::SUCCESS, $msg);
+            $jsonResponse->setObj($doctorList);
+
+        }
+        catch(DoctorException $profileExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $profileExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($profileExc);
+            Log::error($msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+        }
+
+        return $jsonResponse;
+        //return view('portal.doctor',compact('doctor','specialityInfo','hospitalInfo'));
+
+    }
+
+
     public function doctorAddToCart(Request $doctorCart)
     {
         $status =  true;
@@ -373,14 +415,14 @@ class DoctorController extends Controller
     }
 */
 
-    public function doctorListAdmin()
+    public function doctorListAdmin(Request $requestValue = null)
     {
 
         $doctorInfo = null;
 
         try
         {
-            $doctorInfo = $this->doctorService->doctorList();
+            $doctorInfo = $this->doctorService->doctorList($requestValue);
             $specialityInfo = $this->getDoctorSpecialty();
             $countryInfo = $this->getCountry();
             $stateInfo = $this->getState();

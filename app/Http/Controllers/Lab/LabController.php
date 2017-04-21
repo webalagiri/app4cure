@@ -587,7 +587,7 @@ class LabController extends Controller
     }
 
 
-    public function mobilelaboratoryList(Request $requestValue = null)
+    public function mobileLaboratoryList(Request $requestValue = null)
     {
 
         $laboratory = null;
@@ -748,7 +748,7 @@ class LabController extends Controller
     }
 
 
-    public function laboratoryListAdmin()
+    public function laboratoryListAdmin(Request $requestValue = null)
     {
 
         $laboratoryInfo = null;
@@ -756,7 +756,7 @@ class LabController extends Controller
 
         try
         {
-            $laboratoryInfo = $this->labService->laboratoryList();
+            $laboratoryInfo = $this->labService->laboratoryList($requestValue);
 
             $countryInfo = $this->getCountry();
             $stateInfo = $this->getState();
