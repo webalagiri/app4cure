@@ -434,7 +434,7 @@ Route::group(['prefix' => 'api'], function()
 
     Route::group(['namespace' => 'Common'], function()
     {
-        Route::any('/register', array('as' => 'customer.mobile_register', 'uses' => 'CommonController@registerNewPatient'));
+        Route::any('/register', array('as' => 'customer.mobile_register', 'uses' => 'CommonController@mobileRegisterNewPatient'));
         Route::any('/activation/{id}/{string}', array('as' => 'customer.mobile_activation', 'uses' => 'CommonController@activationNewPatient'));
         Route::any('/login', array('as' => 'customer.mobile_login', 'uses' => 'CommonController@mobileloginPatient'));
         Route::any('/logout', array('as' => 'customer.mobile_logout', 'uses' => 'CommonController@mobilelogoutPatient'));

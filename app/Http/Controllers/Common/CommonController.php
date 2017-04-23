@@ -460,6 +460,166 @@ class CommonController extends Controller
         }
     }
 
+
+    public function mobileRegisterNewPatient(PatientRegisterRequest $patientRequest)
+    {
+
+
+        $status =  true;
+        $patientInfo = $patientRequest->all();
+        //dd($patientInfo);
+
+        /*
+        $email  = $patientInfo['email'];
+        $userInfo = User::where('email','=',$email)->first();
+        dd($userInfo['id']);
+        */
+        try
+        {
+            //$status =  true;
+            // $patientInfo = $patientRequest->all();
+
+
+            $status = HospitalServiceFacade::registerNewPatient($patientInfo);
+            //$status = true;
+            if($status)
+            {
+
+
+
+                $email  = $patientInfo['email'];
+                $name  = $patientInfo['name'];
+                $password  = $patientInfo['password'];
+
+                $userInfo = User::where('email','=',$email)->first();
+                //dd($userInfo['id']);
+                $userId = $userInfo['id'];
+
+                /*
+                $url  = URL::to('/').'/common/activation/'.$userId.'/'.md5($email);
+                $link  = '<a href="'.$url.'">'.$url.'</a>';
+                //$link  = $url;
+                $subject = 'App4Cure - New Account Email Verification';
+                */
+
+
+                $userInfoActivate = User::find($userId);
+                $userInfoActivate->id = $userId;
+                $userInfoActivate->verification = "1";
+                $userInfoActivate->save();
+
+                //$url  = URL::to('/').'/common/activation/'.$userId.'/'.md5($email);
+                $url  = URL::to('/').'/';
+                $link  = '<a href="'.$url.'">'.$url.'</a>';
+                $subject = 'App4Cure - New Account';
+
+                /*
+                // recipients
+                $to  = $patientInfo['email'];
+                // subject
+                $subject = 'App4Cure - New Account Email Verification';
+                // message
+                $message = '<html>
+                            <head>
+                              <title>App4Cure - New Account Email Verification</title>
+                            </head>
+                            <body>
+                              <p>App4Cure - New Account Email Verification</p>
+                              <table>
+                                <tr>
+                                  <th>Dear '.$name.'</th>
+                                </tr>
+                                <tr>
+                                  <td>Thanks for register with us. Please verify your email account with below link</td>
+                                </tr>
+                                <tr>
+                                  <td>Click :: '.$link.'</td>
+                                </tr>
+                                <tr>
+                                  <td>Thanks, <br/> App4Cure Team</td>
+                                </tr>
+                              </table>
+                            </body>
+                            </html>';
+
+                // To send HTML mail, the Content-type header must be set
+                $headers  = 'MIME-Version: 1.0' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                // Additional headers
+                $headers .= 'To: '.$patientInfo['name'].'<'.$patientInfo['email'].'>' . "\r\n";
+                $headers .= 'From: App4Cure <noreply@app4cure.co.in>' . "\r\n";
+
+                //echo $sucmsg="Registration Done Successfully! We send Activation Mail. Please Check your Email.";
+                //echo "<h1>Email Server Issues</h1>";
+                //echo $message;
+                //exit;
+                ['html' => 'emails.newinvoice']
+                */
+
+
+                Mail::send(['html' => 'emails.welcome-mobile'],array('name'=>$name,'email'=>$email,'password'=>$password,'url'=>$link), function($message) use($email,$name,$subject) {
+                    $message->from('noreply@app4cure.co.in', 'App4Cure');
+                    $message->to( $email, $name)->subject($subject);
+                });
+
+                /*
+                // Mail it
+                if(mail($to, $subject, $message, $headers))
+                {
+
+                    $sucmsg="Registration Done Successfully! We send Activation Mail. Please Check your Email.";
+                    return redirect('customer-login')->with('success',$sucmsg);
+                }
+                else
+                {
+                    echo $sucmsg="Registration Done Successfully! We send Activation Mail. Please Check your Email.";
+                    echo "<h1>Email Server Issues</h1>";
+                    echo $message;
+                    exit;
+                }
+                */
+
+                // dd("Saved successfully");
+                //$sucmsg="Registration Done Successfully! We send Activation Mail. Please Check your Email.";
+                $sucmsg="Registration Done Successfully!";
+
+                $msg="Registration Done Successfully!";
+                $jsonResponse = new ResponseJson(ErrorEnum::SUCCESS, $msg);
+                $jsonResponse->setObj($userInfo);
+
+                //return redirect('customer-login')->with('success',$sucmsg);
+                /*$msg = trans('messages.'.ErrorEnum::NEW_PATIENT_ADD_SUCCESS);
+                $savesuccess = Config::get('toastr.savesuccess');
+                Toastr::success($msg, $title = 'PROFILE', $savesuccess);*/
+            }
+            /*
+            $msg="Register Details Invalid! Try Again.";
+            return redirect('customer-login')->with('message',$msg);
+            */
+        }
+        catch (HospitalException $userExc) {
+            $errorMsg = $userExc->getMessageForCode();
+            //$msg = AppendMessage::appendMessage($userExc);
+            Log::error($msg);
+            $msg="Register Details Invalid! Try Again.";
+            $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+            //return redirect('customer-login')->with('message',$msg);
+            //return redirect('exception')->with('message',$errorMsg." ".trans('messages.SupportTeam'));
+            /*return Response::json(array(
+                        'success' => false,
+                        'data' => $errorMsg), '200'
+            );*/
+        } catch (Exception $ex) {
+            //throw $ex;
+            //$msg = AppendMessage::appendGeneralException($ex);
+            $msg="Catch :: Register Details Invalid! Try Again.";
+            Log::error($msg);
+            $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+            //return redirect('exception')->with('message',trans('messages.SupportTeam'));
+        }
+        return $jsonResponse;
+    }
+
     public function activationNewPatient($id, $code)
     {
         $status =  true;
@@ -665,7 +825,11 @@ class CommonController extends Controller
                     Auth::logout();
                     Session::flush();
                     $msg="Email Verification Pending! Try Again.";
-                    return redirect('customer-login')->with('message',$msg);
+                    //return redirect('customer-login')->with('message',$msg);
+
+                    $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+                    //$jsonResponse->setObj($loginDetails);
+
                 }
 
 
