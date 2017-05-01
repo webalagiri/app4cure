@@ -597,6 +597,63 @@ class BloodbankController extends Controller
     }
 
 
+    public function mobileBloodBankList(Request $requestValue = null)
+    {
+        //dd($requestValue['filter']);
+        //dd('HI');
+        $bloodBank = null;
+        $bloodBankServiceInfo = null;
+        $bloodBankServiceList = null;
+        //return view('portal.laboratory',compact('laboratory'));
+
+        try
+        {
+            $bloodBank = $this->bloodBankService->bloodBankList($requestValue);
+
+            foreach($bloodBank as $bb)
+            {
+
+                $bbId = $bb->bloodbank_id;
+                $query = DB::table('bloodbank_service as bbs');
+                $query->join('bloodbank_service_link as bbsl', 'bbsl.bloodbank_service_id', '=', 'bbs.id');
+                $query->where('bbsl.bloodbank_id', '=', $bbId);
+                $query->select('bbs.id as bloodbank_service_name_id','bbs.name as bloodbank_service_name',
+                    'bbsl.bloodbank_service_price as bloodbank_service_price','bbsl.id as bloobank_service_id');
+
+                //dd($query->toSql());
+                $bloodBankServiceInfo = $query->get();
+                $bloodBankServiceList[$bbId] = $bloodBankServiceInfo;
+
+            }
+
+            $msg="Fetch BloodBank Lists Success";
+            $jsonResponse = new ResponseJson(ErrorEnum::SUCCESS, $msg);
+            $jsonResponse->setObj($bloodBankServiceList);
+
+        }
+        catch(BloodBankException $profileExc)
+        {
+            //dd($hospitalExc);
+            $errorMsg = $profileExc->getMessageForCode();
+            $msg = AppendMessage::appendMessage($profileExc);
+            Log::error($msg);
+            $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+        }
+        catch(Exception $exc)
+        {
+            //dd($exc);
+            $msg = AppendMessage::appendGeneralException($exc);
+            Log::error($msg);
+            $jsonResponse = new ResponseJson(ErrorEnum::FAILURE, $msg);
+        }
+
+        return $jsonResponse;
+        //return view('portal.bloodbank',compact('bloodBank','bloodBankServiceList'));
+
+        //return $patients;
+    }
+
+
     public function mobilelaboratoryList()
     {
 
